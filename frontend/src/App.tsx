@@ -209,8 +209,8 @@ function AppContent() {
                 )}
 
                 {/* Footer */}
-                <footer className="mt-12 py-8 bg-slate-900 dark:bg-slate-950 border-t border-emerald-900/50 relative overflow-hidden">
-                    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] opacity-5"></div>
+                <footer className="mt-12 py-8 bg-white/50 dark:bg-[#0f172a] border-t border-gray-200 dark:border-emerald-900/30 relative overflow-hidden backdrop-blur-sm">
+                    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] opacity-[0.03] dark:opacity-[0.05]"></div>
                     <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
                         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                             <div className="text-center md:text-left">
