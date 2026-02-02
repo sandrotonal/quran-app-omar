@@ -66,7 +66,7 @@ function AppContent() {
                 <div className="fixed inset-0 opacity-[0.02] dark:opacity-[0.03] pointer-events-none islamic-pattern"></div>
 
                 {/* Header */}
-                <header className="sticky top-0 z-40 bg-gradient-to-r from-emerald-700 via-emerald-600 to-teal-600 dark:from-emerald-900 dark:via-emerald-800 dark:to-teal-900 shadow-2xl border-b-4 border-amber-400/30">
+                <header className="sticky top-0 z-40 bg-transparent backdrop-blur-md border-b border-white/10 transition-all duration-300">
                     <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDAgTCA2MCAwIEwgNjAgNjAgTCAwIDYwIFoiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMC41IiBvcGFjaXR5PSIwLjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-20"></div>
 
                     <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-5 relative">
@@ -75,7 +75,7 @@ function AppContent() {
                                 {/* Menu Button */}
                                 <button
                                     onClick={() => setIsMenuOpen(true)}
-                                    className="p-2 md:p-2.5 rounded-xl bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 transition-all duration-300 shadow-lg hover:shadow-xl text-white active:scale-95"
+                                    className="p-2 rounded-full hover:bg-white/10 transition-colors text-slate-800 dark:text-white"
                                     aria-label="Menü"
                                 >
                                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -86,9 +86,9 @@ function AppContent() {
                                 <div>
                                     <div className="flex items-center gap-2">
                                         {/* Header Logo */}
-                                        <Logo className="w-6 h-6 text-white drop-shadow-md hidden md:block" />
-                                        <h1 className="text-lg md:text-2xl font-bold text-white drop-shadow-lg tracking-tight">
-                                            Kur'an Anlam Haritası
+                                        <Logo className="w-8 h-8 text-emerald-600 dark:text-emerald-400 drop-shadow-sm" />
+                                        <h1 className="text-xl md:text-2xl font-bold text-slate-800 dark:text-white tracking-wide font-arabic">
+                                            Kur'an <span className="font-light opacity-80 text-sm md:text-lg font-sans">Anlam Haritası</span>
                                         </h1>
                                     </div>
                                     <p className="text-emerald-100 text-[10px] md:text-xs mt-0.5 hidden sm:block font-medium opacity-90">
@@ -99,7 +99,7 @@ function AppContent() {
 
                             <button
                                 onClick={toggleDarkMode}
-                                className="p-2 md:p-2.5 rounded-xl bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 transition-all duration-300 shadow-lg hover:shadow-xl text-white active:scale-95"
+                                className="p-2 rounded-full hover:bg-white/10 transition-colors text-slate-800 dark:text-white"
                                 aria-label={isDark ? 'Aydınlık Mod' : 'Karanlık Mod'}
                             >
                                 {isDark ? (
@@ -193,18 +193,34 @@ function AppContent() {
                     )}
 
                     {!searchParams && (
-                        <div className="text-center py-20 md:py-32 animate-fadeIn">
-                            <div className="inline-block p-8 md:p-10 bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-emerald-100 dark:border-emerald-800 transform hover:scale-105 transition-transform duration-500">
-                                <div className="w-16 h-16 mx-auto mb-6 bg-emerald-100 dark:bg-emerald-900/50 rounded-2xl flex items-center justify-center text-emerald-600 dark:text-emerald-400">
-                                    <Logo className="w-8 h-8" />
-                                </div>
-                                <p className="text-xl md:text-2xl text-gray-800 dark:text-white font-bold px-4 mb-3">
-                                    Anlamsal Yolculuğa Başlayın
-                                </p>
-                                <p className="text-sm md:text-base text-gray-500 dark:text-gray-400 px-4 max-w-md mx-auto leading-relaxed">
-                                    Kur'an ayetleri arasındaki derin anlamsal bağları yapay zeka teknolojisi ile keşfedin.
-                                </p>
+                        <div className="mt-12 md:mt-24 px-4">
+                            <h2 className="text-2xl font-bold text-slate-800 dark:text-white mb-6 font-arabic tracking-wide text-center">
+                                Hızlı Erişim
+                            </h2>
+                            <div className="flex flex-wrap justify-center gap-3 max-w-2xl mx-auto">
+                                {[
+                                    { label: 'Fatiha Suresi', action: () => handleSearch(1, 1) },
+                                    { label: 'Yasin Suresi', action: () => handleSearch(36, 1) },
+                                    { label: 'Mülk Suresi', action: () => handleSearch(67, 1) },
+                                    { label: 'Rahman Suresi', action: () => handleSearch(55, 1) },
+                                    { label: 'Ayetel Kürsi', action: () => handleSearch(2, 255) },
+                                    { label: 'Amenerrasulü', action: () => handleSearch(2, 285) },
+                                    { label: 'İhlas', action: () => handleSearch(112, 1) },
+                                    { label: 'Felak', action: () => handleSearch(113, 1) },
+                                    { label: 'Nas', action: () => handleSearch(114, 1) },
+                                ].map((item, index) => (
+                                    <button
+                                        key={index}
+                                        onClick={item.action}
+                                        className="px-5 py-3 rounded-2xl bg-white dark:bg-slate-800 border border-gray-100 dark:border-gray-700 hover:border-emerald-500 dark:hover:border-emerald-500 shadow-sm hover:shadow-md transition-all duration-300 text-gray-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 font-medium active:scale-95"
+                                    >
+                                        {item.label}
+                                    </button>
+                                ))}
                             </div>
+                            <p className="text-center text-gray-400 text-sm mt-8 opacity-60">
+                                Veya yukarıdaki menüden dilediğiniz ayeti seçin.
+                            </p>
                         </div>
                     )}
                 </main>
