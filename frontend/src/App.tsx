@@ -88,7 +88,7 @@ function AppContent() {
                                         {/* Header Logo */}
                                         <Logo className="w-8 h-8 text-emerald-600 dark:text-emerald-400 drop-shadow-sm" />
                                         <h1 className="text-xl md:text-2xl font-bold text-slate-800 dark:text-white tracking-wide font-arabic">
-                                            Kur'an <span className="font-light opacity-80 text-sm md:text-lg font-sans">Anlam Haritası</span>
+                                            Kur'an Anlam Haritası
                                         </h1>
                                     </div>
                                     <p className="text-emerald-100 text-[10px] md:text-xs mt-0.5 hidden sm:block font-medium opacity-90">

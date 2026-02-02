@@ -271,5 +271,19 @@
     "ayet_no": 1,
     "arabic_text": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ طه",
     "turkish_text": "Ta Ha."
+  },
+  {
+    "id": 40,
+    "sure_no": 55,
+    "ayet_no": 4,
+    "arabic_text": "عَلَّمَهُ ٱلْبَيَانَ",
+    "turkish_text": "Ona beyanı (düşünüp ifade etmeyi) öğretti."
+  },
+  {
+    "id": 41,
+    "sure_no": 55,
+    "ayet_no": 12,
+    "arabic_text": "وَٱلْحَبُّ ذُو ٱلْعَصْفِ وَٱلرَّيْحَانُ",
+    "turkish_text": "Yapraklı taneler, hoş kokulu bitkiler vardır."
   }
 ]
