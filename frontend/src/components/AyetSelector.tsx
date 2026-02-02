@@ -1,13 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface AyetSelectorProps {
     onSearch: (sure: number, ayet: number) => void;
     isLoading: boolean;
+    activeSure?: number;
+    activeAyet?: number;
 }
 
-export function AyetSelector({ onSearch, isLoading }: AyetSelectorProps) {
-    const [sure, setSure] = useState('2');
-    const [ayet, setAyet] = useState('286');
+export function AyetSelector({ onSearch, isLoading, activeSure, activeAyet }: AyetSelectorProps) {
+    const [sure, setSure] = useState('1');
+    const [ayet, setAyet] = useState('1');
+
+    // Sync active state from parent
+    useEffect(() => {
+        if (activeSure) setSure(activeSure.toString());
+        if (activeAyet) setAyet(activeAyet.toString());
+    }, [activeSure, activeAyet]);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { SurePicker } from './SurePicker';
 import { AyetPicker } from './AyetPicker';
 import { SURAHS, hapticFeedback } from '../lib/constants';
@@ -6,13 +6,21 @@ import { SURAHS, hapticFeedback } from '../lib/constants';
 interface MobileAyetSelectorProps {
     onSearch: (sure: number, ayet: number) => void;
     isLoading: boolean;
+    activeSure?: number;
+    activeAyet?: number;
 }
 
-export function MobileAyetSelector({ onSearch, isLoading }: MobileAyetSelectorProps) {
-    const [selectedSure, setSelectedSure] = useState(2);
-    const [selectedAyet, setSelectedAyet] = useState(286);
+export function MobileAyetSelector({ onSearch, isLoading, activeSure, activeAyet }: MobileAyetSelectorProps) {
+    const [selectedSure, setSelectedSure] = useState(1);
+    const [selectedAyet, setSelectedAyet] = useState(1);
     const [showSurePicker, setShowSurePicker] = useState(false);
     const [showAyetPicker, setShowAyetPicker] = useState(false);
+
+    // Sync state with props
+    useEffect(() => {
+        if (activeSure) setSelectedSure(activeSure);
+        if (activeAyet) setSelectedAyet(activeAyet);
+    }, [activeSure, activeAyet]);
 
     const selectedSurah = SURAHS.find((s) => s.id === selectedSure);
 

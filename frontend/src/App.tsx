@@ -119,9 +119,19 @@ function AppContent() {
                 <main className="max-w-7xl mx-auto px-4 md:px-6 py-6 md:py-8 relative z-10 min-h-[calc(100vh-200px)]">
                     {/* Conditional Selector */}
                     {isMobile ? (
-                        <MobileAyetSelector onSearch={handleSearch} isLoading={isLoading} />
+                        <MobileAyetSelector
+                            onSearch={handleSearch}
+                            isLoading={isLoading}
+                            activeSure={searchParams?.sure}
+                            activeAyet={searchParams?.ayet}
+                        />
                     ) : (
-                        <AyetSelector onSearch={handleSearch} isLoading={isLoading} />
+                        <AyetSelector
+                            onSearch={handleSearch}
+                            isLoading={isLoading}
+                            activeSure={searchParams?.sure}
+                            activeAyet={searchParams?.ayet}
+                        />
                     )}
 
                     {isError && (
@@ -193,34 +203,54 @@ function AppContent() {
                     )}
 
                     {!searchParams && (
-                        <div className="mt-12 md:mt-24 px-4">
-                            <h2 className="text-2xl font-bold text-slate-800 dark:text-white mb-6 font-arabic tracking-wide text-center">
-                                Hızlı Erişim
-                            </h2>
-                            <div className="flex flex-wrap justify-center gap-3 max-w-2xl mx-auto">
+                        <div className="mt-8 md:mt-20 px-4 max-w-5xl mx-auto">
+                            <div className="text-center mb-10">
+                                <h2 className="text-3xl md:text-4xl font-bold text-slate-800 dark:text-white mb-3 font-arabic tracking-tight">
+                                    Önerilen Okumalar
+                                </h2>
+                                <p className="text-gray-500 dark:text-gray-400 text-sm md:text-base">
+                                    Sık okunan surelere ve ayetlere hızlıca ulaşın
+                                </p>
+                            </div>
+
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                                 {[
-                                    { label: 'Fatiha Suresi', action: () => handleSearch(1, 1) },
-                                    { label: 'Yasin Suresi', action: () => handleSearch(36, 1) },
-                                    { label: 'Mülk Suresi', action: () => handleSearch(67, 1) },
-                                    { label: 'Rahman Suresi', action: () => handleSearch(55, 1) },
-                                    { label: 'Ayetel Kürsi', action: () => handleSearch(2, 255) },
-                                    { label: 'Amenerrasulü', action: () => handleSearch(2, 285) },
-                                    { label: 'İhlas', action: () => handleSearch(112, 1) },
-                                    { label: 'Felak', action: () => handleSearch(113, 1) },
-                                    { label: 'Nas', action: () => handleSearch(114, 1) },
+                                    { label: 'Fatiha Suresi', desc: 'Mekki • 7 Ayet', arabic: 'الفاتحة', action: () => handleSearch(1, 1) },
+                                    { label: 'Yasin Suresi', desc: 'Mekki • 83 Ayet', arabic: 'يس', action: () => handleSearch(36, 1) },
+                                    { label: 'Mülk Suresi', desc: 'Mekki • 30 Ayet', arabic: 'الملك', action: () => handleSearch(67, 1) },
+                                    { label: 'Rahman Suresi', desc: 'Medine • 78 Ayet', arabic: 'الرحمن', action: () => handleSearch(55, 1) },
+                                    { label: 'Ayetel Kürsi', desc: 'Bakara Suresi • 255. Ayet', arabic: 'آية الكرسي', action: () => handleSearch(2, 255) },
+                                    { label: 'Amenerrasulü', desc: 'Bakara Suresi • Son 2 Ayet', arabic: 'آمن الرسول', action: () => handleSearch(2, 285) },
+                                    { label: 'İhlas Suresi', desc: 'Mekki • 4 Ayet', arabic: 'الإخلاص', action: () => handleSearch(112, 1) },
+                                    { label: 'Felak Suresi', desc: 'Medine • 5 Ayet', arabic: 'الفلق', action: () => handleSearch(113, 1) },
+                                    { label: 'Nas Suresi', desc: 'Medine • 6 Ayet', arabic: 'الناس', action: () => handleSearch(114, 1) },
                                 ].map((item, index) => (
                                     <button
                                         key={index}
                                         onClick={item.action}
-                                        className="px-5 py-3 rounded-2xl bg-white dark:bg-slate-800 border border-gray-100 dark:border-gray-700 hover:border-emerald-500 dark:hover:border-emerald-500 shadow-sm hover:shadow-md transition-all duration-300 text-gray-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 font-medium active:scale-95"
+                                        className="group relative flex flex-col items-start p-6 rounded-3xl bg-white/40 dark:bg-slate-800/40 border border-white/20 dark:border-white/5 hover:bg-white/60 dark:hover:bg-slate-800/60 transition-all duration-300 backdrop-blur-sm text-left hover:scale-[1.02] hover:shadow-xl hover:shadow-emerald-900/10 hover:border-emerald-500/30 overflow-hidden"
                                     >
-                                        {item.label}
+                                        <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
+                                            <span className="text-6xl font-arabic text-emerald-900 dark:text-emerald-100">{item.arabic}</span>
+                                        </div>
+
+                                        <div className="relative z-10 w-full">
+                                            <div className="w-10 h-10 mb-4 rounded-2xl bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/50 dark:to-teal-900/50 flex items-center justify-center text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform duration-500 shadow-sm">
+                                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                                </svg>
+                                            </div>
+
+                                            <h3 className="text-lg font-bold text-slate-800 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                                                {item.label}
+                                            </h3>
+                                            <p className="text-xs font-medium text-gray-500 dark:text-gray-400 mt-1 uppercase tracking-wider opacity-80 decoration-emerald-500/30">
+                                                {item.desc}
+                                            </p>
+                                        </div>
                                     </button>
                                 ))}
                             </div>
-                            <p className="text-center text-gray-400 text-sm mt-8 opacity-60">
-                                Veya yukarıdaki menüden dilediğiniz ayeti seçin.
-                            </p>
                         </div>
                     )}
                 </main>
@@ -239,11 +269,11 @@ function AppContent() {
                     <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
                         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                             <div className="text-center md:text-left">
-                                <h3 className="text-lg font-bold text-white mb-1 flex items-center justify-center md:justify-start gap-2">
-                                    <Logo className="w-5 h-5 text-emerald-500" />
+                                <h3 className="text-lg font-bold text-slate-800 dark:text-white mb-1 flex items-center justify-center md:justify-start gap-2">
+                                    <Logo className="w-5 h-5 text-emerald-600 dark:text-emerald-500" />
                                     Kur'an Anlam Haritası
                                 </h3>
-                                <p className="text-sm text-gray-400">
+                                <p className="text-sm text-gray-600 dark:text-gray-400">
                                     Diyanet İşleri Başkanlığı Meali & NLP Teknolojisi
                                 </p>
                             </div>
