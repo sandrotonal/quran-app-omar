@@ -61,21 +61,19 @@ function AppContent() {
 
     return (
         <div className={isDark ? 'dark' : ''}>
-            <div className="min-h-screen bg-gradient-to-br from-slate-50 via-emerald-50/30 to-amber-50/20 dark:from-slate-950 dark:via-emerald-950/20 dark:to-slate-900 transition-all duration-500 animate-fadeIn">
-                {/* Islamic Pattern Overlay */}
-                <div className="fixed inset-0 opacity-[0.02] dark:opacity-[0.03] pointer-events-none islamic-pattern"></div>
+            <div className="min-h-screen bg-theme-bg text-theme-text transition-colors duration-500 animate-fadeIn relative overflow-x-hidden">
+                {/* Islamic Pattern Overlay - Subtle Texture */}
+                <div className="fixed inset-0 opacity-[0.03] pointer-events-none islamic-pattern mix-blend-overlay"></div>
 
                 {/* Header */}
-                <header className="sticky top-0 z-40 bg-transparent backdrop-blur-md border-b border-white/10 transition-all duration-300">
-                    <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDAgTCA2MCAwIEwgNjAgNjAgTCAwIDYwIFoiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMC41IiBvcGFjaXR5PSIwLjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-20"></div>
-
+                <header className="sticky top-0 z-40 bg-theme-bg/80 backdrop-blur-md border-b border-theme-border/50 transition-all duration-300 supports-[backdrop-filter]:bg-theme-bg/60">
                     <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-5 relative">
                         <div className="flex justify-between items-center">
                             <div className="flex items-center gap-3 md:gap-4">
                                 {/* Menu Button */}
                                 <button
                                     onClick={() => setIsMenuOpen(true)}
-                                    className="p-2 rounded-full hover:bg-white/10 transition-colors text-slate-800 dark:text-white"
+                                    className="p-2 rounded-full hover:bg-theme-surface transition-colors text-theme-text"
                                     aria-label="Menü"
                                 >
                                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -86,20 +84,20 @@ function AppContent() {
                                 <div>
                                     <div className="flex items-center gap-2">
                                         {/* Header Logo */}
-                                        <Logo className="w-8 h-8 text-emerald-600 dark:text-emerald-400 drop-shadow-sm" />
-                                        <h1 className="text-xl md:text-2xl font-bold text-slate-800 dark:text-white tracking-wide font-arabic">
+                                        <Logo className="w-8 h-8 text-emerald-600 dark:text-emerald-500 drop-shadow-sm" />
+                                        <h1 className="text-xl md:text-2xl font-bold tracking-wide font-arabic text-theme-text">
                                             Kur'an Anlam Haritası
                                         </h1>
                                     </div>
-                                    <p className="text-emerald-100 text-[10px] md:text-xs mt-0.5 hidden sm:block font-medium opacity-90">
-                                        Ayetler Arası Anlamsal Benzerlik Keşfi
+                                    <p className="text-theme-muted text-[10px] md:text-xs mt-0.5 hidden sm:block font-medium opacity-80 pl-1">
+                                        Ayetler Arası Anlamsal Bağlantılar
                                     </p>
                                 </div>
                             </div>
 
                             <button
                                 onClick={toggleDarkMode}
-                                className="p-2 rounded-full hover:bg-white/10 transition-colors text-slate-800 dark:text-white"
+                                className="p-2 rounded-full hover:bg-theme-surface transition-colors text-theme-text"
                                 aria-label={isDark ? 'Aydınlık Mod' : 'Karanlık Mod'}
                             >
                                 {isDark ? (
@@ -135,80 +133,68 @@ function AppContent() {
                     )}
 
                     {isError && (
-                        <div className="bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 text-red-700 dark:text-red-100 px-4 md:px-6 py-4 rounded-r-lg mb-6 shadow-lg flex items-center gap-3 animate-fadeIn">
-                            <svg className="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
+                        <div className="mt-8 p-4 bg-red-100 dark:bg-red-900/20 text-red-700 dark:text-red-400 rounded-xl text-center">
+                            Bir hata oluştu. Lütfen daha sonra tekrar deneyin.
+                        </div>
+                    )}
+
+                    {isLoading ? (
+                        <div className="flex justify-center mt-20">
+                            <div className="animate-spin rounded-full h-12 w-12 border-4 border-emerald-500 border-t-transparent"></div>
+                        </div>
+                    ) : searchParams ? (
+                        <div className="mt-8 transition-opacity duration-500 animate-fadeIn">
+                            {/* Main Ayet Card */}
+                            {data?.center && (
+                                <AyetCard
+                                    sure={data.center.sure}
+                                    ayet={data.center.ayet}
+                                    arabicText={data.center.arabic}
+                                    turkishText={data.center.text}
+                                    isMain={true}
+                                />
+                            )}
+
+                            {/* Semantic Graph Visualization - Desktop Only */}
+                            <div className="my-12 hidden md:block">
+                                <SemanticGraph
+                                    nodes={graphData.nodes}
+                                    edges={graphData.edges}
+                                    onNodeClick={setSelectedNode}
+                                />
+                            </div>
+
+                            {/* Similar Ayets List */}
+                            <h3 className="text-xl font-bold text-theme-text mb-6 flex items-center gap-2">
+                                <span className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg text-emerald-600 dark:text-emerald-400">
+                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                                    </svg>
+                                </span>
+                                İlgili Bağlantılar
+                            </h3>
+
                             <div>
-                                <p className="font-bold">Bir hata oluştu</p>
-                                <p className="text-sm mt-0.5 opacity-90">Lütfen tekrar deneyin veya farklı bir ayet seçin.</p>
+                                {data?.similar?.map((item: any, index: number) => (
+                                    <AyetCard
+                                        key={index}
+                                        sure={item.sure}
+                                        ayet={item.ayet}
+                                        arabicText={item.arabic}
+                                        turkishText={item.text}
+                                        similarityScore={item.score}
+                                        onClick={() => handleSearch(item.sure, item.ayet)}
+                                    />
+                                ))}
                             </div>
                         </div>
-                    )}
-
-                    {/* Results */}
-                    {data && (
-                        <div className="animate-fadeIn">
-                            {isMobile ? (
-                                <div className="space-y-6">
-                                    {/* Main Ayet Card */}
-                                    <AyetCard
-                                        sure={data.center.sure}
-                                        ayet={data.center.ayet}
-                                        arabicText={data.center.arabic}
-                                        turkishText={data.center.text}
-                                        isMain={true}
-                                    />
-
-                                    {/* Similar Ayets Section */}
-                                    {data.similar.length > 0 && (
-                                        <>
-                                            <div className="flex items-center gap-4 mt-8 mb-6">
-                                                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent"></div>
-                                                <div className="flex items-center gap-2 px-4 py-1.5 bg-emerald-50 dark:bg-emerald-900/20 rounded-full border border-emerald-200/50 dark:border-emerald-700/50">
-                                                    <span className="text-lg">✨</span>
-                                                    <h3 className="text-sm font-bold text-emerald-800 dark:text-emerald-200 uppercase tracking-wide">
-                                                        Benzer Ayetler
-                                                    </h3>
-                                                </div>
-                                                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent"></div>
-                                            </div>
-
-                                            <div className="space-y-4">
-                                                {data.similar.map((ayet) => (
-                                                    <AyetCard
-                                                        key={`${ayet.sure}-${ayet.ayet}`}
-                                                        sure={ayet.sure}
-                                                        ayet={ayet.ayet}
-                                                        arabicText={ayet.arabic}
-                                                        turkishText={ayet.text}
-                                                        similarityScore={ayet.similarityScore}
-                                                        isMain={false}
-                                                    />
-                                                ))}
-                                            </div>
-                                        </>
-                                    )}
-                                </div>
-                            ) : (
-                                <div className="mb-8 p-1 bg-white dark:bg-slate-800 rounded-3xl shadow-2xl border border-gray-100 dark:border-gray-700">
-                                    <SemanticGraph
-                                        nodes={graphData.nodes}
-                                        edges={graphData.edges}
-                                        onNodeClick={setSelectedNode}
-                                    />
-                                </div>
-                            )}
-                        </div>
-                    )}
-
-                    {!searchParams && (
+                    ) : (
                         <div className="mt-8 md:mt-20 px-4 max-w-5xl mx-auto">
                             <div className="text-center mb-10">
-                                <h2 className="text-3xl md:text-4xl font-bold text-slate-800 dark:text-white mb-3 font-arabic tracking-tight">
+                                <h2 className="text-3xl md:text-4xl font-bold text-theme-text mb-3 font-arabic tracking-tight">
                                     Önerilen Okumalar
                                 </h2>
-                                <p className="text-gray-500 dark:text-gray-400 text-sm md:text-base">
+                                <p className="text-theme-muted text-sm md:text-base">
                                     Sık okunan surelere ve ayetlere hızlıca ulaşın
                                 </p>
                             </div>
@@ -228,23 +214,23 @@ function AppContent() {
                                     <button
                                         key={index}
                                         onClick={item.action}
-                                        className="group relative flex flex-col items-start p-6 rounded-3xl bg-white/40 dark:bg-slate-800/40 border border-white/20 dark:border-white/5 hover:bg-white/60 dark:hover:bg-slate-800/60 transition-all duration-300 backdrop-blur-sm text-left hover:scale-[1.02] hover:shadow-xl hover:shadow-emerald-900/10 hover:border-emerald-500/30 overflow-hidden"
+                                        className="group relative flex flex-col items-start p-6 md:p-8 rounded-[2rem] bg-theme-surface border border-theme-border/20 hover:border-emerald-500/30 hover:bg-theme-surface/90 transition-all duration-300 backdrop-blur-sm text-left hover:scale-[1.02] hover:shadow-xl hover:shadow-emerald-900/5 overflow-hidden ring-1 ring-white/5"
                                     >
-                                        <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
-                                            <span className="text-6xl font-arabic text-emerald-900 dark:text-emerald-100">{item.arabic}</span>
+                                        <div className="absolute top-0 right-0 p-6 opacity-[0.04] group-hover:opacity-10 transition-opacity">
+                                            <span className="text-7xl font-arabic text-theme-text">{item.arabic}</span>
                                         </div>
 
                                         <div className="relative z-10 w-full">
-                                            <div className="w-10 h-10 mb-4 rounded-2xl bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/50 dark:to-teal-900/50 flex items-center justify-center text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform duration-500 shadow-sm">
-                                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <div className="w-12 h-12 mb-5 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform duration-500">
+                                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                                                 </svg>
                                             </div>
 
-                                            <h3 className="text-lg font-bold text-slate-800 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                                            <h3 className="text-xl font-bold text-theme-text group-hover:text-emerald-500 transition-colors mb-2">
                                                 {item.label}
                                             </h3>
-                                            <p className="text-xs font-medium text-gray-500 dark:text-gray-400 mt-1 uppercase tracking-wider opacity-80 decoration-emerald-500/30">
+                                            <p className="text-sm font-medium text-theme-muted uppercase tracking-wider opacity-90">
                                                 {item.desc}
                                             </p>
                                         </div>

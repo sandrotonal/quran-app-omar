@@ -30,7 +30,7 @@ export function SemanticGraph({ nodes, edges, onNodeClick }: SemanticGraphProps)
     }, [onNodeClick]);
 
     return (
-        <div className="h-[400px] md:h-[600px] w-full bg-white dark:bg-slate-800 rounded-lg shadow-lg overflow-hidden">
+        <div className="h-[400px] md:h-[600px] w-full bg-theme-surface rounded-lg shadow-lg overflow-hidden border border-theme-border/20">
             <ReactFlow
                 nodes={nodes}
                 edges={edges}

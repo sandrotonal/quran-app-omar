@@ -285,5 +285,61 @@
     "ayet_no": 12,
     "arabic_text": "وَٱلْحَبُّ ذُو ٱلْعَصْفِ وَٱلرَّيْحَانُ",
     "turkish_text": "Yapraklı taneler, hoş kokulu bitkiler vardır."
+  },
+  {
+    "id": 42,
+    "sure_no": 2,
+    "ayet_no": 36,
+    "arabic_text": "فَأَزَلَّهُمَا ٱلشَّيْطَٰنُ عَنْهَا فَأَخْرَجَهُمَا مِمَّا كَانَا فِيهِ ۖ وَقُلْنَا ٱهْبِطُوا۟ بَعْضُكُمْ لِبَعْضٍ عَدُوٌّۭ ۖ وَلَكُمْ فِى ٱلْأَرْضِ مُسْتَقَرٌّۭ وَمَتَٰعٌ إِلَىٰ حِينٍۢ",
+    "turkish_text": "Derken, şeytan ayaklarını oradan kaydırdı. Onları içinde bulundukları konumdan çıkardı. Bunun üzerine biz de, \"Birbirinize düşman olarak inin. Sizin için yeryüzünde belli bir süre barınak ve yararlanma vardır\" dedik."
+  },
+  {
+    "id": 43,
+    "sure_no": 2,
+    "ayet_no": 39,
+    "arabic_text": "وَٱلَّذِينَ كَفَرُوا۟ وَكَذَّبُوا۟ بِـَٔايَٰتِنَآ أُو۟لَٰٓئِكَ أَصْحَٰبُ ٱلنَّارِ ۖ هُمْ فِيهَا خَٰلِدُونَ",
+    "turkish_text": "İnkar edenler ve ayetlerimizi yalanlayanlara gelince, işte bunlar cehennemliktir. Onlar orada ebedi kalacaklardır."
+  },
+  {
+    "id": 44,
+    "sure_no": 112,
+    "ayet_no": 3,
+    "arabic_text": "لَمْ يَلِدْ وَلَمْ يُولَدْ",
+    "turkish_text": "O'ndan çocuk olmamıştır (Kimsenin babası değildir). Kendisi de doğmamıştır (kimsenin çocuğu değildir).\""
+  },
+  {
+    "id": 45,
+    "sure_no": 101,
+    "ayet_no": 2,
+    "arabic_text": "مَا ٱلْقَارِعَةُ",
+    "turkish_text": "Nedir o yürekleri hoplatan büyük felaket?"
+  },
+  {
+    "id": 46,
+    "sure_no": 2,
+    "ayet_no": 12,
+    "arabic_text": "أَلَآ إِنَّهُمْ هُمُ ٱلْمُفْسِدُونَ وَلَٰكِن لَّا يَشْعُرُونَ",
+    "turkish_text": "İyi bilin ki, onlar bozguncuların ta kendileridir. Fakat farkında değillerdir."
+  },
+  {
+    "id": 47,
+    "sure_no": 36,
+    "ayet_no": 2,
+    "arabic_text": "وَٱلْقُرْءَانِ ٱلْحَكِيمِ",
+    "turkish_text": "(2-4) (Ey Muhammed!) Hikmet dolu Kur'an'a andolsun ki, sen elbette dosdoğru bir yol üzere (peygamber) gönderilenlerdensin."
+  },
+  {
+    "id": 48,
+    "sure_no": 3,
+    "ayet_no": 3,
+    "arabic_text": "نَزَّلَ عَلَيْكَ ٱلْكِتَٰبَ بِٱلْحَقِّ مُصَدِّقًۭا لِّمَا بَيْنَ يَدَيْهِ وَأَنزَلَ ٱلتَّوْرَىٰةَ وَٱلْإِنجِيلَ",
+    "turkish_text": "(3-4) O, sana Kitab'ı hak ve kendisinden öncekileri doğrulayıcı olarak indirdi. O, daha önce Tevrat'ı ve İncil'i insanlar için birer hidayet olarak indirmişti. Furkan'ı da indirdi. Şüphesiz, Allah'ın ayetlerini inkar edenler için şiddetli bir azap vardır. Allah, mutlak güç sahibidir, intikam sahibidir."
+  },
+  {
+    "id": 49,
+    "sure_no": 55,
+    "ayet_no": 5,
+    "arabic_text": "ٱلشَّمْسُ وَٱلْقَمَرُ بِحُسْبَانٍۢ",
+    "turkish_text": "Güneş ve ay bir hesaba göre hareket etmektedir."
   }
 ]
