@@ -341,5 +341,103 @@
     "ayet_no": 5,
     "arabic_text": "ٱلشَّمْسُ وَٱلْقَمَرُ بِحُسْبَانٍۢ",
     "turkish_text": "Güneş ve ay bir hesaba göre hareket etmektedir."
+  },
+  {
+    "id": 50,
+    "sure_no": 3,
+    "ayet_no": 1,
+    "arabic_text": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ الٓمٓ",
+    "turkish_text": "Elif Lam Mim."
+  },
+  {
+    "id": 51,
+    "sure_no": 2,
+    "ayet_no": 3,
+    "arabic_text": "ٱلَّذِينَ يُؤْمِنُونَ بِٱلْغَيْبِ وَيُقِيمُونَ ٱلصَّلَوٰةَ وَمِمَّا رَزَقْنَٰهُمْ يُنفِقُونَ",
+    "turkish_text": "Onlar gaybe inanırlar, namazı dosdoğru kılarlar, kendilerine rızık olarak verdiğimizden de Allah yolunda harcarlar."
+  },
+  {
+    "id": 52,
+    "sure_no": 5,
+    "ayet_no": 1,
+    "arabic_text": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوٓا۟ أَوْفُوا۟ بِٱلْعُقُودِ ۚ أُحِلَّتْ لَكُم بَهِيمَةُ ٱلْأَنْعَٰمِ إِلَّا مَا يُتْلَىٰ عَلَيْكُمْ غَيْرَ مُحِلِّى ٱلصَّيْدِ وَأَنتُمْ حُرُمٌ ۗ إِنَّ ٱللَّهَ يَحْكُمُ مَا يُرِيدُ",
+    "turkish_text": "Ey iman edenler! Akitlerinizi yerine getirin. İhramlı iken avlanmayı helal saymamanız kaydıyla, okunacak (bildirilecek) olanlardan başka hayvanlar, size helal kılındı. Şüphesiz Allah istediği hükmü verir."
+  },
+  {
+    "id": 53,
+    "sure_no": 2,
+    "ayet_no": 256,
+    "arabic_text": "لَآ إِكْرَاهَ فِى ٱلدِّينِ ۖ قَد تَّبَيَّنَ ٱلرُّشْدُ مِنَ ٱلْغَىِّ ۚ فَمَن يَكْفُرْ بِٱلطَّٰغُوتِ وَيُؤْمِنۢ بِٱللَّهِ فَقَدِ ٱسْتَمْسَكَ بِٱلْعُرْوَةِ ٱلْوُثْقَىٰ لَا ٱنفِصَامَ لَهَا ۗ وَٱللَّهُ سَمِيعٌ عَلِيمٌ",
+    "turkish_text": "Dinde zorlama yoktur. Çünkü doğruluk sapıklıktan iyice ayrılmıştır. O halde, kim tağutu tanımayıp Allah'a inanırsa, kopmak bilmeyen sapasağlam bir kulpa yapışmıştır. Allah, hakkıyla işitendir, hakkıyla bilendir."
+  },
+  {
+    "id": 54,
+    "sure_no": 2,
+    "ayet_no": 257,
+    "arabic_text": "ٱللَّهُ وَلِىُّ ٱلَّذِينَ ءَامَنُوا۟ يُخْرِجُهُم مِّنَ ٱلظُّلُمَٰتِ إِلَى ٱلنُّورِ ۖ وَٱلَّذِينَ كَفَرُوٓا۟ أَوْلِيَآؤُهُمُ ٱلطَّٰغُوتُ يُخْرِجُونَهُم مِّنَ ٱلنُّورِ إِلَى ٱلظُّلُمَٰتِ ۗ أُو۟لَٰٓئِكَ أَصْحَٰبُ ٱلنَّارِ ۖ هُمْ فِيهَا خَٰلِدُونَ",
+    "turkish_text": "Allah, iman edenlerin dostudur. Onları karanlıklardan aydınlığa çıkarır. Kafirlerin velileri ise tağuttur. (O da) onları aydınlıktan karanlıklara (sürükleyip) çıkarır. Onlar cehennemliklerdir. Orada ebedi kalırlar."
+  },
+  {
+    "id": 55,
+    "sure_no": 90,
+    "ayet_no": 4,
+    "arabic_text": "لَقَدْ خَلَقْنَا ٱلْإِنسَٰنَ فِى كَبَدٍ",
+    "turkish_text": "(1-4) Sen bu beldedeyken bu beldeye (Mekke'ye), babaya ve ondan meydana gelen çocuğa yemin ederim ki, biz insanı bir sıkıntı ve zorluk içinde (olacak ve bunlara göğüs gerecek şekilde) yarattık."
+  },
+  {
+    "id": 56,
+    "sure_no": 90,
+    "ayet_no": 5,
+    "arabic_text": "أَيَحْسَبُ أَن لَّن يَقْدِرَ عَلَيْهِ أَحَدٌۭ",
+    "turkish_text": "İnsanoğlu, kendisine kimsenin güç yetiremeyeceğini mi sanıyor?"
+  },
+  {
+    "id": 57,
+    "sure_no": 90,
+    "ayet_no": 6,
+    "arabic_text": "يَقُولُ أَهْلَكْتُ مَالًۭا لُّبَدًا",
+    "turkish_text": "\"Yığınla mal harcadım\" diyor."
+  },
+  {
+    "id": 58,
+    "sure_no": 78,
+    "ayet_no": 1,
+    "arabic_text": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ عَمَّ يَتَسَآءَلُونَ",
+    "turkish_text": "Birbirlerine neyi soruyorlar?"
+  },
+  {
+    "id": 59,
+    "sure_no": 1,
+    "ayet_no": 4,
+    "arabic_text": "مَٰلِكِ يَوْمِ ٱلدِّينِ",
+    "turkish_text": "(2-4) Hamd, Alemlerin Rabbi, Rahman, Rahim, hesap ve ceza gününün (ahiret gününün) maliki Allah'a mahsustur."
+  },
+  {
+    "id": 60,
+    "sure_no": 4,
+    "ayet_no": 2,
+    "arabic_text": "وَءَاتُوا۟ ٱلْيَتَٰمَىٰٓ أَمْوَٰلَهُمْ ۖ وَلَا تَتَبَدَّلُوا۟ ٱلْخَبِيثَ بِٱلطَّيِّبِ ۖ وَلَا تَأْكُلُوٓا۟ أَمْوَٰلَهُمْ إِلَىٰٓ أَمْوَٰلِكُمْ ۚ إِنَّهُۥ كَانَ حُوبًۭا كَبِيرًۭا",
+    "turkish_text": "Yetimlere mallarını verin. Temizi pis olanla (helali haramla) değişmeyin. Onların mallarını kendi mallarınıza katıp yemeyin. Çünkü bu, büyük bir günahtır."
+  },
+  {
+    "id": 61,
+    "sure_no": 9,
+    "ayet_no": 1,
+    "arabic_text": "بَرَآءَةٌۭ مِّنَ ٱللَّهِ وَرَسُولِهِۦٓ إِلَى ٱلَّذِينَ عَٰهَدتُّم مِّنَ ٱلْمُشْرِكِينَ",
+    "turkish_text": "Allah ve Resulünden, kendileriyle antlaşma yapmış olduğunuz müşriklere kesin bir uyarıdır:"
+  },
+  {
+    "id": 62,
+    "sure_no": 12,
+    "ayet_no": 1,
+    "arabic_text": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ الٓر ۚ تِلْكَ ءَايَٰتُ ٱلْكِتَٰبِ ٱلْمُبِينِ",
+    "turkish_text": "Elif Lam Ra. Bunlar, apaçık Kitab'ın ayetleridir."
+  },
+  {
+    "id": 63,
+    "sure_no": 89,
+    "ayet_no": 1,
+    "arabic_text": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ وَٱلْفَجْرِ",
+    "turkish_text": "Tan yerinin ağarmasına andolsun,"
   }
 ]

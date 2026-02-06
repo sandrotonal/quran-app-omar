@@ -2,12 +2,22 @@ import axios from 'axios';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
+export interface AyetMetadata {
+    tags?: string[];
+    context?: string;
+    chain?: {
+        next: string;
+        nuance: string;
+    };
+}
+
 export interface Ayet {
     id: number;
     sure_no: number;
     ayet_no: number;
     arabic_text: string;
     turkish_text: string;
+    metadata?: AyetMetadata;
 }
 
 export interface SimilarAyet {
@@ -16,6 +26,7 @@ export interface SimilarAyet {
     similarityScore: number;
     text: string;
     arabic: string;
+    metadata?: AyetMetadata;
 }
 
 export interface SimilarResponse {
@@ -24,6 +35,7 @@ export interface SimilarResponse {
         ayet: number;
         text: string;
         arabic: string;
+        metadata?: AyetMetadata;
     };
     similar: SimilarAyet[];
 }

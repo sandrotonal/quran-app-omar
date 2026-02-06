@@ -47,6 +47,34 @@ export function AyetCard({
         togglePlay();
     };
 
+    const [isFavorite, setIsFavorite] = useState(false);
+
+    // Load favorite status
+    useEffect(() => {
+        try {
+            const favs = JSON.parse(localStorage.getItem('favorites') || '[]');
+            setIsFavorite(favs.some((f: any) => f.sure === sure && f.ayet === ayet));
+        } catch (e) { console.error(e); }
+    }, [sure, ayet]);
+
+    const handleToggleFavorite = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        hapticFeedback(15);
+        try {
+            const favs = JSON.parse(localStorage.getItem('favorites') || '[]');
+            let newFavs;
+            if (isFavorite) {
+                newFavs = favs.filter((f: any) => !(f.sure === sure && f.ayet === ayet));
+            } else {
+                newFavs = [...favs, { sure, ayet, date: Date.now() }];
+            }
+            localStorage.setItem('favorites', JSON.stringify(newFavs));
+            setIsFavorite(!isFavorite);
+        } catch (e) {
+            console.error("Fav toggle error", e);
+        }
+    };
+
     const percentage = similarityScore ? Math.round(similarityScore * 100) : 0;
 
     const getCardStyle = () => {
@@ -61,7 +89,8 @@ export function AyetCard({
     // Karaoke Mode Renderer
     const renderKaraokeText = () => {
         if (!segments || segments.length === 0) return arabicText;
-
+        // ... (existing code omitted for brevity in tool call, but context kept)
+        // Wait, replace requires exact context.
         return (
             <div className="flex flex-wrap flex-row-reverse gap-3 leading-[2.8] relative z-20">
                 {segments.map((segment: any, index: number) => {
@@ -72,8 +101,8 @@ export function AyetCard({
                             className={`
                                 transition-all duration-300 cursor-pointer rounded px-1.5
                                 ${isActive
-                                    ? 'text-emerald-400 scale-110 font-bold drop-shadow-[0_0_10px_rgba(52,211,153,0.5)]'
-                                    : 'text-slate-700 dark:text-slate-200 opacity-90 hover:opacity-100 hover:text-emerald-500'
+                                    ? 'text-emerald-600 dark:text-emerald-400 scale-110 font-bold drop-shadow-[0_0_10px_rgba(16,185,129,0.3)]'
+                                    : 'text-theme-text hover:text-emerald-600 transition-colors'
                                 }
                             `}
                         >
@@ -101,7 +130,6 @@ export function AyetCard({
             )}
 
             {/* Header: Verse Number & Similarity */}
-            {/* Header: Verse Number & Similarity */}
             <div className="flex justify-between items-start mb-6">
                 <div className="flex items-center gap-3">
                     <span className={`
@@ -115,14 +143,31 @@ export function AyetCard({
                     </span>
 
                     {!isMain && (
-                        <span className="text-xs font-medium text-theme-muted uppercase tracking-wider opacity-60">
+                        <span className="text-xs font-bold text-theme-muted uppercase tracking-wider">
                             {SURAHS[sure - 1]?.turkish || `${sure}. Sure`}
                         </span>
                     )}
                 </div>
 
-                {/* Actions: Audio & Score */}
+                {/* Actions: Audio & Score & Favorite */}
                 <div className="flex items-center gap-3">
+                    {/* Favorite Button (New) */}
+                    <button
+                        onClick={handleToggleFavorite}
+                        className={`
+                            p-2 rounded-full transition-all duration-300
+                            ${isFavorite
+                                ? 'text-red-500 bg-red-500/10 scale-110'
+                                : 'text-theme-muted hover:text-red-500 hover:bg-theme-surface'
+                            }
+                        `}
+                        aria-label="Favorilere Ekle"
+                    >
+                        <svg className="w-5 h-5" fill={isFavorite ? "currentColor" : "none"} stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                    </button>
+
                     {/* Audio Button */}
                     <button
                         onClick={handlePlay}
@@ -162,7 +207,8 @@ export function AyetCard({
                 className={`
                     text-right font-arabic leading-[2.2] tracking-wide
                     ${isExpanded ? 'text-4xl md:text-5xl mb-8' : 'text-3xl md:text-4xl mb-5'}
-                    ${isMain ? 'text-theme-text drop-shadow-md' : 'text-theme-text opacity-90'}
+                    ${isExpanded ? 'text-4xl md:text-5xl mb-8' : 'text-3xl md:text-4xl mb-5'}
+                    ${isMain ? 'text-theme-text drop-shadow-sm' : 'text-theme-text'}
                     transition-all duration-500 ease-out relative z-10 py-2
                 `}
                 dir="rtl"
@@ -175,8 +221,8 @@ export function AyetCard({
             {/* Turkish Text (The Support) */}
             <div className={`
                 font-serif leading-relaxed
-                ${isMain ? 'text-theme-text/90' : 'text-theme-muted'}
-                ${isExpanded ? 'text-lg md:text-xl' : 'text-base line-clamp-2'} 
+                ${isMain ? 'text-theme-text' : 'text-theme-muted'}
+                ${isExpanded ? 'text-lg md:text-xl font-medium' : 'text-base line-clamp-2'} 
                 transition-all duration-500
             `}>
                 {turkishText}

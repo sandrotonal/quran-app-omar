@@ -11,6 +11,8 @@ import { Logo } from './components/Logo';
 import { getSimilarAyets } from './lib/api';
 import { transformToGraphData } from './lib/graphUtils';
 import { useResponsive } from './hooks/useResponsive';
+import { AyetContextSection } from './components/AyetContextSection';
+import { PrayerTimesCard } from './components/spiritual/PrayerTimesCard';
 
 const queryClient = new QueryClient();
 
@@ -71,14 +73,17 @@ function AppContent() {
                         <div className="flex justify-between items-center">
                             <div className="flex items-center gap-3 md:gap-4">
                                 {/* Menu Button */}
+                                {/* Menu Button with Enhanced Hover */}
                                 <button
                                     onClick={() => setIsMenuOpen(true)}
-                                    className="p-2 rounded-full hover:bg-theme-surface transition-colors text-theme-text"
+                                    className="p-2.5 rounded-xl hover:bg-theme-surface text-theme-text transition-all duration-300 hover:scale-110 active:scale-95 hover:shadow-lg hover:shadow-emerald-500/10 group border border-transparent hover:border-theme-border/50"
                                     aria-label="Menü"
                                 >
-                                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                                    </svg>
+                                    <div className="w-6 h-5 flex flex-col justify-between group-hover:h-6 transition-all duration-300">
+                                        <span className="w-full h-0.5 bg-current rounded-full origin-left transition-all duration-300 group-hover:rotate-6 group-hover:translate-x-0.5"></span>
+                                        <span className="w-3/4 h-0.5 bg-current rounded-full transition-all duration-300 group-hover:w-full"></span>
+                                        <span className="w-1/2 h-0.5 bg-current rounded-full origin-left transition-all duration-300 group-hover:w-full group-hover:-rotate-6 group-hover:translate-x-0.5"></span>
+                                    </div>
                                 </button>
 
                                 <div>
@@ -144,19 +149,39 @@ function AppContent() {
                         </div>
                     ) : searchParams ? (
                         <div className="mt-8 transition-opacity duration-500 animate-fadeIn">
-                            {/* Main Ayet Card */}
+
+
+
+
+                            {/* Main Ayet Card & Content Wrapper with Key for Re-animation */}
                             {data?.center && (
-                                <AyetCard
-                                    sure={data.center.sure}
-                                    ayet={data.center.ayet}
-                                    arabicText={data.center.arabic}
-                                    turkishText={data.center.text}
-                                    isMain={true}
-                                />
+                                <div key={`main-${data.center.sure}-${data.center.ayet}`} className="animate-slideUp">
+                                    <AyetCard
+                                        sure={data.center.sure}
+                                        ayet={data.center.ayet}
+                                        arabicText={data.center.arabic}
+                                        turkishText={data.center.text}
+                                        isMain={true}
+                                    />
+                                    {/* Context & Notes Section (Visible on Mobile & Desktop Main View) */}
+                                    <div className="mb-12 px-2 md:px-0 opacity-0 animate-slideUp" style={{ animationDelay: '0.15s', animationFillMode: 'forwards' }}>
+                                        <p className="text-sm font-bold text-theme-muted uppercase tracking-widest mb-4 flex items-center gap-2">
+                                            <span className="w-8 h-px bg-theme-border"></span>
+                                            Derinlik & Notlar
+                                            <span className="w-full h-px bg-theme-border opacity-50"></span>
+                                        </p>
+                                        <AyetContextSection
+                                            sure={data.center.sure}
+                                            ayet={data.center.ayet}
+                                            metadata={data.center.metadata}
+                                            onNavigate={handleSearch}
+                                        />
+                                    </div>
+                                </div>
                             )}
 
                             {/* Semantic Graph Visualization - Desktop Only */}
-                            <div className="my-12 hidden md:block">
+                            <div className="my-12 hidden md:block opacity-0 animate-slideUp" style={{ animationDelay: '0.3s', animationFillMode: 'forwards' }}>
                                 <SemanticGraph
                                     nodes={graphData.nodes}
                                     edges={graphData.edges}
@@ -165,31 +190,43 @@ function AppContent() {
                             </div>
 
                             {/* Similar Ayets List */}
-                            <h3 className="text-xl font-bold text-theme-text mb-6 flex items-center gap-2">
-                                <span className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg text-emerald-600 dark:text-emerald-400">
-                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-                                    </svg>
-                                </span>
-                                İlgili Bağlantılar
-                            </h3>
+                            <div className="opacity-0 animate-slideUp" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
+                                <h3 className="text-xl font-bold text-theme-text mb-6 flex items-center gap-2">
+                                    <span className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg text-emerald-600 dark:text-emerald-400">
+                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                                        </svg>
+                                    </span>
+                                    İlgili Bağlantılar
+                                </h3>
 
-                            <div>
-                                {data?.similar?.map((item: any, index: number) => (
-                                    <AyetCard
-                                        key={index}
-                                        sure={item.sure}
-                                        ayet={item.ayet}
-                                        arabicText={item.arabic}
-                                        turkishText={item.text}
-                                        similarityScore={item.score}
-                                        onClick={() => handleSearch(item.sure, item.ayet)}
-                                    />
-                                ))}
+                                <div className="space-y-4">
+                                    {data?.similar?.map((item: any, index: number) => (
+                                        <div
+                                            key={index}
+                                            className="opacity-0 animate-slideUp"
+                                            style={{ animationDelay: `${0.5 + (index * 0.1)}s`, animationFillMode: 'forwards' }}
+                                        >
+                                            <AyetCard
+                                                sure={item.sure}
+                                                ayet={item.ayet}
+                                                arabicText={item.arabic}
+                                                turkishText={item.text}
+                                                similarityScore={item.score}
+                                                onClick={() => handleSearch(item.sure, item.ayet)}
+                                            />
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     ) : (
                         <div className="mt-8 md:mt-20 px-4 max-w-5xl mx-auto">
+                            {/* Dashboard Prayer Times */}
+                            <div className="mb-12 max-w-2xl mx-auto">
+                                <PrayerTimesCard onNavigate={handleSearch} />
+                            </div>
+
                             <div className="text-center mb-10">
                                 <h2 className="text-3xl md:text-4xl font-bold text-theme-text mb-3 font-arabic tracking-tight">
                                     Önerilen Okumalar
@@ -214,7 +251,7 @@ function AppContent() {
                                     <button
                                         key={index}
                                         onClick={item.action}
-                                        className="group relative flex flex-col items-start p-6 md:p-8 rounded-[2rem] bg-theme-surface border border-theme-border/20 hover:border-emerald-500/30 hover:bg-theme-surface/90 transition-all duration-300 backdrop-blur-sm text-left hover:scale-[1.02] hover:shadow-xl hover:shadow-emerald-900/5 overflow-hidden ring-1 ring-white/5"
+                                        className="group relative flex flex-col items-start p-6 md:p-8 rounded-[2rem] bg-theme-surface border border-theme-border/40 hover:border-accent/40 hover:bg-theme-surface/90 transition-all duration-300 backdrop-blur-sm text-left hover:scale-[1.02] hover:shadow-lg hover:shadow-accent/5 overflow-hidden ring-1 ring-white/5"
                                     >
                                         <div className="absolute top-0 right-0 p-6 opacity-[0.04] group-hover:opacity-10 transition-opacity">
                                             <span className="text-7xl font-arabic text-theme-text">{item.arabic}</span>
@@ -246,6 +283,7 @@ function AppContent() {
                     <AyetDetailPanel
                         data={selectedNode}
                         onClose={() => setSelectedNode(null)}
+                        onNavigate={handleSearch}
                     />
                 )}
 

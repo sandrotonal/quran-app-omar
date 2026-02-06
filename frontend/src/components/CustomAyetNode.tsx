@@ -1,14 +1,7 @@
-import { Handle, Position, NodeProps } from '@xyflow/react';
+import { Handle, Position } from '@xyflow/react';
 
-interface AyetNodeData {
-    label: string;
-    text: string;
-    arabic: string;
-    isCenter: boolean;
-    similarityScore?: number;
-}
-
-export function CustomAyetNode({ data }: NodeProps<AyetNodeData>) {
+// Relaxing the type here to avoid strict NodeProps mismatch with NodeTypes
+export function CustomAyetNode({ data }: any) {
     const { label, text, arabic, isCenter, similarityScore } = data;
 
     return (

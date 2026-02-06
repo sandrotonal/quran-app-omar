@@ -1,0 +1,108 @@
+{
+    "1:1": {
+        "tags": [
+            "Başlangıç",
+            "Rahmet",
+            "Anahtar"
+        ],
+        "context": "Kur'an'ın özü ve açılışı olan Fatiha'nın ilk ayeti.",
+        "chain": {
+            "next": "1:2",
+            "nuance": "Bu rahmetin sahibi kim?"
+        }
+    },
+    "1:2": {
+        "tags": [
+            "Hamd",
+            "Şükür",
+            "Rab"
+        ],
+        "context": "Evrenin tek sahibine övgü.",
+        "chain": {
+            "next": "1:3",
+            "nuance": "O Rab nasıl biridir?"
+        }
+    },
+    "1:3": {
+        "tags": [
+            "Merhamet",
+            "Sevgi"
+        ],
+        "context": "Yaratıcının kullarına şefkati.",
+        "chain": {
+            "next": "1:4",
+            "nuance": "Peki ya adalet?"
+        }
+    },
+    "1:4": {
+        "tags": [
+            "Adalet",
+            "Hesap Günü",
+            "Umut/Korku"
+        ],
+        "context": "Dünya hayatının bir sonu ve hesabı olduğunu hatırlatır.",
+        "chain": {
+            "next": "1:5",
+            "nuance": "O halde ne yapmalıyız?"
+        }
+    },
+    "1:5": {
+        "tags": [
+            "Kulluk",
+            "İstiane",
+            "Tevhid"
+        ],
+        "context": "Sadece O'na yönelmenin ilanı.",
+        "chain": {
+            "next": "1:6",
+            "nuance": "O'ndan ne istiyoruz?"
+        }
+    },
+    "1:6": {
+        "tags": [
+            "Hidayet",
+            "Dua",
+            "İstikamet"
+        ],
+        "context": "En büyük istek: Doğru yol.",
+        "chain": {
+            "next": "1:7",
+            "nuance": "Hangi yol?"
+        }
+    },
+    "1:7": {
+        "tags": [
+            "Nimet",
+            "Örnekler",
+            "Uyarı"
+        ],
+        "context": "Tarihteki olumlu ve olumsuz örnekler üzerinden yol tarifi.",
+        "chain": {
+            "next": "2:1",
+            "nuance": "Bu yolun rehberi nerede?"
+        }
+    },
+    "2:1": {
+        "tags": [
+            "Huruf-u Mukatta",
+            "Gizem"
+        ],
+        "context": "Kur'an'ın meydan okuyan harfleri.",
+        "chain": {
+            "next": "2:2",
+            "nuance": "Bu kitap nedir?"
+        }
+    },
+    "2:2": {
+        "tags": [
+            "Kitap",
+            "Şüphe Yok",
+            "Rehber"
+        ],
+        "context": "Muttakiler için kesin rehber.",
+        "chain": {
+            "next": "2:3",
+            "nuance": "Muttakiler kimdir?"
+        }
+    }
+}

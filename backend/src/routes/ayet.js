@@ -1,6 +1,7 @@
 import express from 'express';
 import { fetchOrCacheAyet } from '../services/quranService.js';
 import { findSimilarAyets } from '../services/similarityService.js';
+import { getAyetMetadata } from '../db/index.js';
 
 const router = express.Router();
 
@@ -20,7 +21,12 @@ router.get('/:sure/:ayet', async (req, res) => {
             return res.status(404).json({ error: 'Ayet not found' });
         }
 
-        res.json(ayetData);
+        const metadata = getAyetMetadata(sureNo, ayetNo);
+
+        res.json({
+            ...ayetData,
+            metadata
+        });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -56,12 +62,15 @@ router.post('/similar', async (req, res) => {
             console.log(`   Top similarity: ${similarAyets[0].similarityScore.toFixed(3)}`);
         }
 
+        const centerMetadata = getAyetMetadata(sure, ayet);
+
         res.json({
             center: {
                 sure: centerAyet.sure_no,
                 ayet: centerAyet.ayet_no,
                 text: centerAyet.turkish_text,
-                arabic: centerAyet.arabic_text
+                arabic: centerAyet.arabic_text,
+                metadata: centerMetadata
             },
             similar: similarAyets.map(a => ({
                 sure: a.sure_no,

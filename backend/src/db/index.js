@@ -8,6 +8,7 @@ const __dirname = dirname(__filename);
 const DB_DIR = join(__dirname, '../../data');
 const AYAT_FILE = join(DB_DIR, 'ayetler.json');
 const EMBEDDINGS_FILE = join(DB_DIR, 'embeddings.json');
+const AYAT_METADATA_FILE = join(DB_DIR, 'ayet_metadata.json');
 
 import { mkdirSync } from 'fs';
 if (!existsSync(DB_DIR)) {
@@ -16,6 +17,10 @@ if (!existsSync(DB_DIR)) {
 
 function loadJSON(filepath) {
   if (!existsSync(filepath)) {
+    if (filepath === AYAT_METADATA_FILE) {
+      writeFileSync(filepath, JSON.stringify({})); // Object for metadata
+      return {};
+    }
     writeFileSync(filepath, JSON.stringify([]));
     return [];
   }
@@ -29,6 +34,12 @@ function saveJSON(filepath, data) {
 export function getAyet(sureNo, ayetNo) {
   const ayetler = loadJSON(AYAT_FILE);
   return ayetler.find(a => a.sure_no === sureNo && a.ayet_no === ayetNo);
+}
+
+export function getAyetMetadata(sureNo, ayetNo) {
+  const metadata = loadJSON(AYAT_METADATA_FILE);
+  const key = `${sureNo}:${ayetNo}`;
+  return metadata[key] || null;
 }
 
 export function insertAyet(sureNo, ayetNo, arabicText, turkishText) {

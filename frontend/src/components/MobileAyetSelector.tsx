@@ -62,7 +62,7 @@ export function MobileAyetSelector({ onSearch, isLoading, activeSure, activeAyet
                             disabled={isLoading}
                             className="flex-1 flex flex-col justify-center px-5 hover:bg-theme-bg/50 active:bg-theme-bg/80 transition-colors text-left"
                         >
-                            <span className="text-[10px] font-bold tracking-widest text-emerald-500 uppercase mb-0.5">Sure</span>
+                            <span className="text-[10px] font-bold tracking-widest text-accent uppercase mb-0.5">Sure</span>
                             <div className="flex items-baseline gap-2 truncate">
                                 <span className="text-lg font-bold text-theme-text font-serif">{selectedSure}.</span>
                                 <span className="text-base font-medium text-theme-text/90 truncate">{selectedSurah?.turkish}</span>
@@ -78,44 +78,44 @@ export function MobileAyetSelector({ onSearch, isLoading, activeSure, activeAyet
                             disabled={isLoading}
                             className="w-24 flex flex-col justify-center px-4 hover:bg-theme-bg/50 active:bg-theme-bg/80 transition-colors text-center border-l border-theme-border/30"
                         >
-                            <span className="text-[10px] font-bold tracking-widest text-emerald-500 uppercase mb-0.5">Ayet</span>
+                            <span className="text-[10px] font-bold tracking-widest text-accent uppercase mb-0.5">Ayet</span>
                             <span className="text-xl font-bold text-theme-text font-serif">{selectedAyet}</span>
                         </button>
                     </div>
 
-                    {/* Bottom Row: Action Button */}
+                    {/* Bottom Row: Action Button - Refined Outline Style */}
                     <button
                         onClick={handleSearch}
                         disabled={isLoading}
-                        className="h-12 w-full relative overflow-hidden bg-theme-bg/30 hover:bg-emerald-500/5 border-t border-theme-border/30 flex items-center justify-center gap-2.5 transition-all duration-300 group"
+                        className="h-12 w-full relative overflow-hidden bg-transparent hover:bg-accent/5 border-t border-theme-border/30 flex items-center justify-center gap-2.5 transition-all duration-300 group"
                     >
                         {isLoading ? (
                             <div className="flex items-center gap-2">
-                                <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-bounce"></span>
-                                <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-bounce [animation-delay:-0.15s]"></span>
-                                <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-bounce [animation-delay:-0.3s]"></span>
+                                <span className="w-1.5 h-1.5 bg-accent rounded-full animate-bounce"></span>
+                                <span className="w-1.5 h-1.5 bg-accent rounded-full animate-bounce [animation-delay:-0.15s]"></span>
+                                <span className="w-1.5 h-1.5 bg-accent rounded-full animate-bounce [animation-delay:-0.3s]"></span>
                             </div>
                         ) : (
                             <>
-                                <span className="text-sm font-bold text-theme-text/90 group-hover:text-emerald-500 transition-colors uppercase tracking-widest font-serif relative z-10">KEŞFET & OKU</span>
+                                <span className="text-xs font-bold text-accent group-hover:tracking-[0.2em] transition-all duration-300 uppercase tracking-widest font-serif relative z-10">KEŞFET & OKU</span>
                                 <svg
-                                    className="w-4 h-4 text-theme-muted group-hover:text-emerald-500 group-hover:scale-110 transition-all duration-300 relative z-10"
+                                    className="w-4 h-4 text-accent/70 group-hover:translate-x-1 transition-all duration-300 relative z-10"
                                     fill="none"
                                     stroke="currentColor"
                                     viewBox="0 0 24 24"
                                 >
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                                 </svg>
 
                                 {/* Subtle Hover Shine Effect */}
-                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-emerald-500/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out" />
+                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-accent/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out" />
                             </>
                         )}
                     </button>
 
                     {/* Progress/Decorative Line */}
-                    <div className="h-0.5 w-full bg-theme-border/20">
-                        <div className="h-full bg-emerald-500/50 w-0 group-hover:w-full transition-all duration-700 ease-out"></div>
+                    <div className="h-[1px] w-full bg-theme-border/10">
+                        <div className="h-full bg-accent/30 w-0 group-hover:w-full transition-all duration-700 ease-out"></div>
                     </div>
                 </div>
             </div>

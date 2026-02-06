@@ -9,11 +9,10 @@ export function SplashScreen({ onFinish }: SplashScreenProps) {
     const [isVisible, setIsVisible] = useState(true);
 
     useEffect(() => {
-        // Start exit animation slightly before unmounting
         const timer = setTimeout(() => {
             setIsVisible(false);
-            setTimeout(onFinish, 700); // Wait for transition to finish
-        }, 2200);
+            setTimeout(onFinish, 1200);
+        }, 4000); // Longer duration for an ethereal experience
 
         return () => clearTimeout(timer);
     }, [onFinish]);
@@ -21,36 +20,63 @@ export function SplashScreen({ onFinish }: SplashScreenProps) {
     return (
         <div
             className={`
-                fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#0f172a] text-white
-                transition-opacity duration-700 ease-in-out
-                ${isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'}
+                fixed inset-0 z-[100] flex flex-col items-center justify-center bg-theme-bg text-theme-text
+                transition-all duration-[1200ms] ease-[cubic-bezier(0.25,1,0.5,1)]
+                ${isVisible ? 'opacity-100' : 'opacity-0 scale-100 pointer-events-none'}
             `}
         >
-            {/* Background Pattern */}
-            <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] opacity-[0.05] animate-pulse-slow"></div>
+            {/* Deep Space Backdrop */}
+            <div className="absolute inset-0 overflow-hidden">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[radial-gradient(circle_at_center,rgba(var(--accent),0.05)_0%,transparent_60%)]"></div>
+            </div>
 
-            {/* Logo Container */}
-            <div className={`relative flex flex-col items-center transition-all duration-1000 transform ${isVisible ? 'scale-100 translate-y-0' : 'scale-95 translate-y-10'}`}>
-                {/* Glow Effect */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-emerald-500/20 rounded-full blur-3xl animate-pulse"></div>
+            {/* Content Container */}
+            <div className="relative flex flex-col items-center justify-center">
 
-                {/* Icon/Logo using Component */}
-                <div className="relative mb-6">
-                    <Logo className="w-24 h-24 text-emerald-400" withGlow={true} />
+                {/* Pure Icon - White to Emerald subtle gradient */}
+                <div className="relative mb-20 opacity-0 animate-fadeIn [animation-delay:0.5s]">
+                    <div className="absolute inset-0 bg-accent/10 blur-[30px] rounded-full scale-125"></div>
+                    <Logo className="w-16 h-16 text-accent" withGlow={true} />
                 </div>
 
-                {/* Title */}
-                <h1 className="text-3xl font-bold bg-gradient-to-r from-emerald-200 via-white to-emerald-200 bg-clip-text text-transparent tracking-widest font-arabic mb-2">
-                    KUR'AN
-                </h1>
-                <p className="text-emerald-500/80 text-sm tracking-[0.3em] uppercase font-light">
-                    ANLAM HARİTASI
-                </p>
+                {/* Ultra-Luxury Typography */}
+                <div className="flex flex-col items-center gap-8">
+                    <h1
+                        className="text-3xl font-extralight font-serif text-theme-text opacity-0 animate-[title-reveal_2.5s_cubic-bezier(0.22,1,0.36,1)_forwards] [animation-delay:0.8s] pl-[1.2em]"
+                        style={{ textShadow: '0 0 40px rgba(var(--accent),0.1)' }}
+                    >
+                        KUR'AN
+                    </h1>
 
-                {/* Loading Bar */}
-                <div className="mt-12 w-32 h-1 bg-gray-800 rounded-full overflow-hidden">
-                    <div className="h-full bg-gradient-to-r from-emerald-600 to-teal-400 w-full origin-left animate-[grow_2s_ease-out_forwards]"></div>
+                    <div className="h-[0.5px] w-12 bg-accent/20 animate-[grow_1.5s_ease-out_forwards] opacity-0 [animation-delay:1.5s]"></div>
+
+                    <p className="text-theme-muted/50 text-[10px] tracking-[1.2em] uppercase font-light animate-fadeIn opacity-0 [animation-delay:2.2s] pl-[1.2em]">
+                        ANLAM HARİTASI
+                    </p>
                 </div>
+
+                {/* Minimalist Loading Step - Invisible Speed Line */}
+                <div className="mt-32 w-32 h-[0.5px] bg-white/[0.02] relative overflow-hidden opacity-40">
+                    <div className="absolute inset-0 bg-white/20 translate-x-[-100%] animate-[shimmer-gold_4s_infinite]"></div>
+                </div>
+            </div>
+
+            {/* Star Particles - Fewer and Smaller */}
+            <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                {[...Array(6)].map((_, i) => (
+                    <div
+                        key={i}
+                        className="absolute bg-white/20 rounded-full blur-[1px] animate-float"
+                        style={{
+                            width: `1px`,
+                            height: `1px`,
+                            left: `${Math.random() * 100}%`,
+                            top: `${Math.random() * 100}%`,
+                            animationDelay: `${Math.random() * 5}s`,
+                            animationDuration: `${Math.random() * 15 + 10}s`
+                        }}
+                    />
+                ))}
             </div>
         </div>
     );

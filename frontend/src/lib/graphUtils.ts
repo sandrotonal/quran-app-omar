@@ -13,7 +13,8 @@ export function transformToGraphData(data: SimilarResponse): { nodes: Node[]; ed
             label: `${data.center.sure}:${data.center.ayet}`,
             text: data.center.text,
             arabic: data.center.arabic,
-            isCenter: true
+            isCenter: true,
+            metadata: data.center.metadata
         }
     };
 
@@ -38,7 +39,8 @@ export function transformToGraphData(data: SimilarResponse): { nodes: Node[]; ed
                 text: ayet.text,
                 arabic: ayet.arabic,
                 similarityScore: ayet.similarityScore,
-                isCenter: false
+                isCenter: false,
+                metadata: ayet.metadata
             }
         });
 
