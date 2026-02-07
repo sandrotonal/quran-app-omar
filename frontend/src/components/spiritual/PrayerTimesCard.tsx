@@ -1,7 +1,8 @@
-
 import { useEffect, useState } from 'react';
 import { PrayerTimesService, PrayerTimeInfo } from '../../lib/PrayerTimesService';
+import { PrayerReminder } from './PrayerReminder';
 import { PrayerFocusMode } from './PrayerFocusMode';
+import { usePrayerReminder } from '../../hooks/usePrayerReminder';
 
 interface PrayerTimesCardProps {
     onNavigate?: (sure: number, ayet: number) => void;
@@ -10,24 +11,33 @@ interface PrayerTimesCardProps {
 export function PrayerTimesCard({ onNavigate }: PrayerTimesCardProps) {
     const [times, setTimes] = useState<PrayerTimeInfo[]>([]);
     const [loading, setLoading] = useState(true);
-    // const [locationName, setLocationName] = useState("İstanbul"); 
+
+    // 1. Manual Focus Mode State (User Initiated, Continuous)
+    const [isManualFocusActive, setIsManualFocusActive] = useState(false);
+
+    // 2. System Prayer Reminder Hook (Ephemeral, System Initiated)
+    const {
+        isActive: isReminderActive,
+        activate: triggerReminder,
+        dismiss: dismissReminder,
+        snooze,
+        toggleMute,
+        isMuted,
+        content: reminderContent,
+        currentTime
+    } = usePrayerReminder();
 
     // Contextual Suggestion & State
     const [suggestion, setSuggestion] = useState<{ topic: string; ayetLink?: string } | null>(null);
-    const [isFocusMode, setIsFocusMode] = useState(false);
     const [notifPermission, setNotifPermission] = useState(Notification.permission === 'granted');
 
     useEffect(() => {
         async function loadTimes() {
             try {
-                // 1. Get Location
                 const loc = await PrayerTimesService.getUserLocation();
-
-                // 2. Get Times
                 const todayTimes = PrayerTimesService.getTimes(loc.lat, loc.lng);
                 setTimes(todayTimes);
 
-                // 3. Get Suggestion for Next/Current Prayer
                 const next = todayTimes.find(t => t.isNext);
                 if (next) {
                     setSuggestion(PrayerTimesService.getContextualSuggestion(
@@ -50,16 +60,25 @@ export function PrayerTimesCard({ onNavigate }: PrayerTimesCardProps) {
     }, []);
 
     const handleEnableNotifications = async () => {
+        if (notifPermission) {
+            alert("Bildirimler zaten açık. Namaz vakitlerinde size haber vereceğiz.");
+            return;
+        }
+
         const granted = await PrayerTimesService.requestNotificationPermission();
         setNotifPermission(granted);
+
         if (granted) {
             PrayerTimesService.sendNotification("Bildirimler Açık", "Namaz vakitlerinde size huzur veren hatırlatmalar yapacağız.");
+            // Test trigger for the user to see the new screen
+            setTimeout(() => triggerReminder(), 2000);
+        } else {
+            alert("Bildirim izni verilmedi. Tarayıcı ayarlarından bildirimlere izin verip tekrar deneyebilirsiniz.");
         }
     };
 
     if (loading) return <div className="h-24 animate-pulse bg-theme-bg/50 rounded-xl my-4"></div>;
 
-    // Find next prayer for highlighting
     const nextPrayer = times.find(t => t.isNext);
 
     return (
@@ -75,29 +94,44 @@ export function PrayerTimesCard({ onNavigate }: PrayerTimesCardProps) {
                         Namaz Vakitleri
                     </h3>
                     <p className="text-xs text-theme-muted ml-3.5 mt-0.5">
-                        {/* {locationName} •  */}
                         Diyanet Takvimi ile uyumlu
                     </p>
                 </div>
 
-                {/* Controls (Focus Mode & Notifications) */}
+                {/* Controls */}
                 <div className="flex gap-2 justify-end relative z-10">
-                    {!notifPermission && (
-                        <button
-                            onClick={handleEnableNotifications}
-                            className="p-2 rounded-lg bg-theme-bg/50 hover:bg-emerald-500/10 text-theme-muted hover:text-emerald-500 transition-colors"
-                            title="Bildirimleri Aç"
-                        >
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
-                        </button>
-                    )}
-
+                    {/* Notification Toggle with Feedback */}
                     <button
-                        onClick={() => setIsFocusMode(true)}
+                        onClick={handleEnableNotifications}
+                        className={`p-2 rounded-lg transition-colors 
+                            ${notifPermission
+                                ? 'bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500/20'
+                                : 'bg-theme-bg/50 text-theme-muted hover:text-emerald-500 hover:bg-emerald-500/10'
+                            }`}
+                        title={notifPermission ? "Bildirimler Açık" : "Bildirimleri Aç"}
+                    >
+                        {notifPermission ? (
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
+                        ) : (
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 6L18 18" /></svg> // Slash icon for disabled
+                        )}
+                    </button>
+
+                    {/* Manual Focus Mode Toggle */}
+                    <button
+                        onClick={() => setIsManualFocusActive(true)}
                         className="p-2 rounded-lg bg-theme-bg/50 hover:bg-indigo-500/10 text-theme-muted hover:text-indigo-500 transition-colors"
                         title="Sessiz Mod / Odak Modu"
                     >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
+                    </button>
+                    {/* Dev Only: Trigger System Reminder manually for testing */}
+                    <button
+                        onClick={triggerReminder}
+                        className="p-2 rounded-lg bg-theme-bg/50 hover:bg-emerald-500/10 text-theme-muted hover:text-emerald-500 transition-colors opacity-50 hover:opacity-100"
+                        title="Test: Namaz Vakti Ekranını Tetikle"
+                    >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                     </button>
                 </div>
             </div>
@@ -134,7 +168,6 @@ export function PrayerTimesCard({ onNavigate }: PrayerTimesCardProps) {
                         </p>
                     </div>
 
-                    {/* Feature #3: Bağlamlı Ayet/Konu */}
                     {suggestion && (
                         <div className="flex items-center justify-between bg-theme-bg/30 rounded-lg p-2.5 border border-theme-border/20">
                             <div className="flex items-center gap-3">
@@ -167,12 +200,24 @@ export function PrayerTimesCard({ onNavigate }: PrayerTimesCardProps) {
                 </div>
             )}
 
-            {/* FULL SCREEN FOCUS MODE OVERLAY */}
+            {/* 1. MANUAL FOCUS MODE (Persistent, User Controlled) */}
             <PrayerFocusMode
-                isActive={isFocusMode}
-                onExit={() => setIsFocusMode(false)}
+                isActive={isManualFocusActive}
+                onExit={() => setIsManualFocusActive(false)}
                 currentPrayer={nextPrayer?.name}
                 suggestion={suggestion || undefined}
+            />
+
+            {/* 2. AUTOMATIC PRAYER REMINDER (Ephemeral, System Controlled) */}
+            <PrayerReminder
+                isActive={isReminderActive}
+                onDismiss={dismissReminder}
+                onSnooze={snooze}
+                onMute={toggleMute}
+                isMuted={isMuted}
+                content={reminderContent}
+                currentTime={currentTime}
+                prayerName={nextPrayer?.name}
             />
         </div>
     );

@@ -59,9 +59,9 @@ export function MenuDrawer({ isOpen, onClose, onNavigate }: MenuDrawerProps) {
         if (isOpen) {
             setRender(true);
             // Small delay to ensure browser paints initial state before animating in
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => setIsVisible(true));
-            });
+            // Small delay to ensure browser paints initial state before animating in
+            const timer = setTimeout(() => setIsVisible(true), 10);
+            return () => clearTimeout(timer);
         } else {
             setIsVisible(false);
             const timer = setTimeout(() => {

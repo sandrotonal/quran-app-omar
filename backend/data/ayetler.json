@@ -439,5 +439,33 @@
     "ayet_no": 1,
     "arabic_text": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ وَٱلْفَجْرِ",
     "turkish_text": "Tan yerinin ağarmasına andolsun,"
+  },
+  {
+    "id": 64,
+    "sure_no": 73,
+    "ayet_no": 6,
+    "arabic_text": "إِنَّ نَاشِئَةَ ٱلَّيْلِ هِىَ أَشَدُّ وَطْـًۭٔا وَأَقْوَمُ قِيلًا",
+    "turkish_text": "Şüphesiz gece ibadetinin etkisi daha fazla, (bu ibadetteki) sözler (Kur'an ve dua okuyuşlar) ise daha düzgün ve açıktır."
+  },
+  {
+    "id": 65,
+    "sure_no": 25,
+    "ayet_no": 47,
+    "arabic_text": "وَهُوَ ٱلَّذِى جَعَلَ لَكُمُ ٱلَّيْلَ لِبَاسًۭا وَٱلنَّوْمَ سُبَاتًۭا وَجَعَلَ ٱلنَّهَارَ نُشُورًۭا",
+    "turkish_text": "O, geceyi size bir örtü, uykuyu istirahat zamanı ve gündüzü de hareket ve çalışma vakti yapandır."
+  },
+  {
+    "id": 66,
+    "sure_no": 54,
+    "ayet_no": 11,
+    "arabic_text": "فَفَتَحْنَآ أَبْوَٰبَ ٱلسَّمَآءِ بِمَآءٍۢ مُّنْهَمِرٍۢ",
+    "turkish_text": "Biz de göğün kapılarını dökülürcesine yağan bir yağmurla açtık."
+  },
+  {
+    "id": 67,
+    "sure_no": 54,
+    "ayet_no": 1,
+    "arabic_text": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ ٱقْتَرَبَتِ ٱلسَّاعَةُ وَٱنشَقَّ ٱلْقَمَرُ",
+    "turkish_text": "Kıyamet yaklaştı ve ay yarıldı."
   }
 ]

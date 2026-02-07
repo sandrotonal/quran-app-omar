@@ -287,31 +287,35 @@ function AppContent() {
                     />
                 )}
 
-                {/* Footer */}
-                <footer className="mt-12 py-8 bg-white/50 dark:bg-[#0f172a] border-t border-gray-200 dark:border-emerald-900/30 relative overflow-hidden backdrop-blur-sm">
-                    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] opacity-[0.03] dark:opacity-[0.05]"></div>
-                    <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
-                        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-                            <div className="text-center md:text-left">
-                                <h3 className="text-lg font-bold text-slate-800 dark:text-white mb-1 flex items-center justify-center md:justify-start gap-2">
-                                    <Logo className="w-5 h-5 text-emerald-600 dark:text-emerald-500" />
-                                    Kur'an Anlam Haritası
-                                </h3>
-                                <p className="text-sm text-gray-600 dark:text-gray-400">
-                                    Diyanet İşleri Başkanlığı Meali & NLP Teknolojisi
-                                </p>
-                            </div>
+                {/* Footer - "Trust & Transparency" Area (Refined Proportions) */}
+                <footer className="mt-16 pb-8 pt-8 relative overflow-hidden border-t border-theme-border/40">
+                    {/* Subtle Background Pattern */}
+                    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] opacity-[0.02] dark:opacity-[0.04] pointer-events-none"></div>
 
-                            <div className="text-center">
-                                <div className="flex items-center justify-center gap-3 mb-2">
-                                    <div className="h-px w-10 bg-emerald-800"></div>
-                                    <span className="text-xs text-emerald-600 font-medium tracking-widest uppercase">Geliştirici</span>
-                                    <div className="h-px w-10 bg-emerald-800"></div>
-                                </div>
-                                <span className="text-xl font-bold bg-gradient-to-r from-amber-400 via-yellow-200 to-amber-500 bg-clip-text text-transparent drop-shadow-sm font-tracking-wide">
-                                    gucluyumhe
-                                </span>
-                            </div>
+                    <div className="max-w-md mx-auto px-6 relative z-10 text-center">
+
+                        {/* 1. Main Title & Academic Context */}
+                        <div className="flex flex-col items-center gap-1 mb-5">
+                            <h3 className="text-sm font-bold text-slate-700 dark:text-slate-300 flex items-center gap-2 tracking-wide">
+                                <Logo className="w-4 h-4 text-emerald-600/90 dark:text-emerald-500/90" />
+                                KUR'AN ANLAM HARİTASI
+                            </h3>
+                            <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">
+                                Resmî Mealler & Anlamsal Haritalama Teknolojisi
+                            </p>
+                        </div>
+
+                        {/* Divider - Subtle & Short */}
+                        <div className="w-12 h-px bg-emerald-500/20 mx-auto mb-5"></div>
+
+                        {/* 2. Developer Area (Balanced) */}
+                        <div className="flex flex-col items-center gap-1">
+                            <span className="text-[9px] tracking-[0.2em] text-slate-400 dark:text-slate-500 font-bold uppercase opacity-80">
+                                GELİŞTİRİCİ
+                            </span>
+                            <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400/90 tracking-widest font-serif hover:text-emerald-500 transition-colors cursor-default">
+                                gucluyumhe
+                            </span>
                         </div>
                     </div>
                 </footer>
