@@ -1,36 +1,42 @@
-# Quran Semantic Graph
+# Quran Semantic Graph & Spiritual Compass
 
-Modern NLP ve graph visualization kullanarak Kur'an ayetleri arasındaki anlamsal ilişkileri görselleştiren full-stack web uygulaması.
+Modern NLP ve graph visualization kullanarak Kur'an ayetleri arasındaki anlamsal ilişkileri görselleştiren, aynı zamanda manevi odak ve Esmaül Hüsna gibi özelliklerle zenginleştirilmiş full-stack web uygulaması.
 
-## Proje Yapısı
+## 🌟 Özellikler
+
+### 🔍 Anlamsal Analiz (Semantic Search)
+- **NLP Modeli**: Türkçe optimize edilmiş `sentence-transformers` modeli.
+- **Benzerlik**: Cosine similarity ile ayetler arası derin bağlam ilişkileri.
+- **Graph**: React Flow ile interaktif ağ haritası.
+
+### 🕌 Manevi Özellikler
+- **Esmaül Hüsna**: Allah'ın 99 isminin doğru sıralaması, anlamları ve ebced değerleri.
+- **Manevi Odak**: Namaz vakitlerine göre değişen, ayet ve hadis tabanlı manevi motivasyon kartları.
+- **Namaz Vakitleri**: Konum tabanlı, Diyanet uyumlu namaz vakitleri takibi.
+- **Karanlık Mod**: Göz yormayan, modern arayüz tasarımı.
+
+## 🛠️ Proje Yapısı
 
 ```
 kuran/
-├── embedding-service/   # Python Flask embedding microservice
-├── backend/             # Node.js Express API
-└── frontend/            # React + Vite frontend
+├── embedding-service/   # Python Flask embedding microservice (Port: 5000)
+├── backend/             # Node.js Express API (Port: 3001)
+└── frontend/            # React + Vite frontend (Port: 5173)
 ```
 
-## Özellikler
+## 🚀 Kurulum Adımları
 
-- Türkçe optimize NLP modeli (sentence-transformers)
-- Cosine similarity ile anlamsal benzerlik hesaplama
-- İnteraktif graph görselleştirme (React Flow)
-- Dark mode desteği
-- SQLite ile embedding cache
-- Responsive UI
+Sistemin tam çalışması için 3 servisin de ayağa kalkması gerekmektedir.
 
-## Kurulum
-
-### 1. Python Embedding Service
+### 1. Python Embedding Service (Zorunlu)
+Anlamsal arama özelliğinin çalışması için bu servis arkada açık olmalıdır.
 
 ```bash
 cd embedding-service
 pip install -r requirements.txt
 python app.py
 ```
-
-İlk çalıştırmada ~500MB model indirilecek. Port: `5000`
+*İlk çalıştırmada ~500MB boyutunda NLP modeli (BERT) indirilecektir.*
 
 ### 2. Backend (Node.js)
 
@@ -40,8 +46,6 @@ npm install
 npm run dev
 ```
 
-Port: `3001`
-
 ### 3. Frontend (React)
 
 ```bash
@@ -50,52 +54,36 @@ npm install
 npm run dev
 ```
 
-Port: `5173`
+## 🎨 Kullanım
 
-## Kullanım
+1.  Tüm servisleri sırasıyla başlatın.
+2.  `http://localhost:5173` adresine gidin.
+3.  **Arama**: Sure ve ayet numarası girerek veya konu aratarak benzer ayetleri keşfedin.
+4.  **Manevi Odak**: Ana sayfadaki kart üzerinden o anki vakte özel mesajı okuyun.
+5.  **Esmaül Hüsna**: Yan menüden Esmaül Hüsna listesine ulaşın.
 
-1. Tüm servisleri çalıştırın
-2. http://localhost:5173 adresini açın
-3. Sure ve ayet numarası girin (örn: Sure 2, Ayet 286)
-4. "Benzer Ayetleri Göster" butonuna tıklayın
-5. Graph üzerinde node'lara tıklayarak detay panelini açın
-
-## API Endpoints
-
-### Backend
-
-- `GET /api/ayet/:sure/:ayet` - Tek ayet getir
-- `POST /api/ayet/similar` - Benzer ayetler bul
-
-### Embedding Service
-
-- `GET /health` - Servis durumu
-- `POST /embed` - Tek metin embedding
-- `POST /embed/batch` - Toplu embedding
-
-## Teknolojiler
-
-**Backend:**
-- Node.js + Express
-- SQLite (better-sqlite3)
-- Axios
-
-**Embedding Service:**
-- Python + Flask
-- sentence-transformers
-- Model: emrecan/bert-base-turkish-cased-mean-nli-stsb-tr
+## 🔧 Teknolojiler
 
 **Frontend:**
-- React 18 + TypeScript
-- Vite
-- React Flow
+- React 18, TypeScript, Vite
+- Tailwind CSS (Modern UI)
+- React Flow (Graph Visualization)
 - TanStack Query
-- Tailwind CSS
 
-## Akademik Not
+**Backend:**
+- Node.js, Express
+- SQLite (Veritabanı & Cache)
+- Axios
 
-Bu uygulama NLP tabanlı otomatik hesaplama kullanır. Benzerlik skorları tefsir yerine geçmez, yalnızca anlamsal yakınlık gösterir.
+**AI / NLP Service:**
+- Python, Flask
+- sentence-transformers (BERT Model)
+- Model: `emrecan/bert-base-turkish-cased-mean-nli-stsb-tr`
 
-## Lisans
+## ⚠️ Akademik Not
+
+Bu uygulama NLP tabanlı otomatik hesaplama kullanır. Benzerlik skorları tefsir yerine geçmez, yalnızca matematiksel ve dilbilimsel yakınlığı gösterir.
+
+## 📜 Lisans
 
 MIT
