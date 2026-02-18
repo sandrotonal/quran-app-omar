@@ -10,6 +10,7 @@ interface MenuDrawerProps {
     onOpenMosqueFinder: () => void;
     onOpenPrayerDebt: () => void;
     onOpenReligiousDays: () => void;
+    onOpenZikirmatik: () => void;
 }
 
 type TabType = 'surah' | 'juz' | 'favorites' | 'discover';
@@ -17,7 +18,7 @@ type TabType = 'surah' | 'juz' | 'favorites' | 'discover';
 // Placeholder Juz Data (To be filled accurately later or by another service)
 const JUZ_LIST = Array.from({ length: 30 }, (_, i) => ({ id: i + 1, label: `${i + 1}. Cüz` }));
 
-export function MenuDrawer({ isOpen, onClose, onNavigate, onOpenQibla, onOpenEsmaulHusna, onOpenMosqueFinder, onOpenPrayerDebt, onOpenReligiousDays }: MenuDrawerProps) {
+export function MenuDrawer({ isOpen, onClose, onNavigate, onOpenQibla, onOpenEsmaulHusna, onOpenMosqueFinder, onOpenPrayerDebt, onOpenReligiousDays, onOpenZikirmatik }: MenuDrawerProps) {
     const [activeTab, setActiveTab] = useState<TabType>('surah');
     const [searchTerm, setSearchTerm] = useState('');
     const [favorites, setFavorites] = useState<{ sure: number, ayet: number, date: number }[]>([]);
@@ -378,6 +379,27 @@ export function MenuDrawer({ isOpen, onClose, onNavigate, onOpenQibla, onOpenEsm
                                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                                         </div>
 
+                                    </button>
+
+                                    {/* Zikirmatik */}
+                                    <button
+                                        onClick={() => {
+                                            hapticFeedback(10);
+                                            onClose();
+                                            onOpenZikirmatik();
+                                        }}
+                                        className="w-full group p-5 rounded-2xl bg-theme-surface border border-theme-border hover:border-emerald-500/30 transition-all duration-300 hover:shadow-md text-left flex items-center gap-4"
+                                    >
+                                        <div className="w-12 h-12 rounded-xl bg-theme-bg border border-theme-border flex items-center justify-center text-theme-muted group-hover:text-emerald-600 group-hover:scale-105 transition-transform">
+                                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                        </div>
+                                        <div className="flex-1">
+                                            <span className="font-bold text-base text-theme-text group-hover:text-emerald-600 transition-colors block">Zikirmatik</span>
+                                            <span className="text-xs text-theme-muted mt-0.5 block opacity-80">Online Tesbih</span>
+                                        </div>
+                                        <div className="text-theme-muted/30 group-hover:translate-x-1 transition-transform">
+                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                                        </div>
                                     </button>
                                 </div>
                             </div>

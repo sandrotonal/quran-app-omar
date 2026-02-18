@@ -18,6 +18,7 @@ import { EsmaulHusnaView } from './components/spiritual/EsmaulHusnaView';
 import { MosqueFinder } from './components/spiritual/MosqueFinder';
 import { PrayerDebtTracker } from './components/spiritual/PrayerDebtTracker';
 import { ReligiousDaysView } from './components/spiritual/ReligiousDaysView';
+import { ZikirmatikView } from './components/spiritual/ZikirmatikView';
 import { ReligiousDayAlert } from './components/spiritual/ReligiousDayAlert';
 
 const queryClient = new QueryClient();
@@ -33,6 +34,7 @@ function AppContent() {
     const [showMosqueFinder, setShowMosqueFinder] = useState(false);
     const [showPrayerDebt, setShowPrayerDebt] = useState(false);
     const [showReligiousDays, setShowReligiousDays] = useState(false);
+    const [showZikirmatik, setShowZikirmatik] = useState(false);
 
     const { isMobile } = useResponsive();
 
@@ -322,6 +324,7 @@ function AppContent() {
                 onOpenMosqueFinder={() => { setIsMenuOpen(false); setShowMosqueFinder(true); }}
                 onOpenPrayerDebt={() => { setIsMenuOpen(false); setShowPrayerDebt(true); }}
                 onOpenReligiousDays={() => { setIsMenuOpen(false); setShowReligiousDays(true); }}
+                onOpenZikirmatik={() => { setIsMenuOpen(false); setShowZikirmatik(true); }}
             />
 
             {/* Qibla Compass Overlay */}
@@ -347,6 +350,11 @@ function AppContent() {
             {/* Religious Days Overlay */}
             {showReligiousDays && (
                 <ReligiousDaysView onClose={() => setShowReligiousDays(false)} />
+            )}
+
+            {/* Zikirmatik Overlay */}
+            {showZikirmatik && (
+                <ZikirmatikView onClose={() => setShowZikirmatik(false)} />
             )}
         </div>
     );
