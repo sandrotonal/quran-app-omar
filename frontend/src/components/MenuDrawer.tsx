@@ -11,6 +11,15 @@ interface MenuDrawerProps {
     onOpenPrayerDebt: () => void;
     onOpenReligiousDays: () => void;
     onOpenZikirmatik: () => void;
+    onOpenKabeLive: () => void;
+    onOpenManeviAkis?: () => void;
+    onOpenNamazAsistani?: () => void;
+    onOpenRamadanKarti?: () => void;
+    onOpenHatimTakip?: () => void;
+    onOpenDuaDefteri?: () => void;
+    onOpenKuranDinleme?: () => void;
+    onOpenSessizZikir?: () => void;
+    onOpenIstatistik?: () => void;
 }
 
 type TabType = 'surah' | 'juz' | 'favorites' | 'discover';
@@ -80,6 +89,84 @@ const IconZikir = () => (
     </svg>
 );
 
+const IconKabe = () => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7">
+        {/* Body */}
+        <rect x="3" y="7" width="18" height="14" rx="1" />
+        {/* Kiswa line */}
+        <line x1="3" y1="12" x2="21" y2="12" strokeWidth={1} opacity="0.6" />
+        {/* Door */}
+        <rect x="9.5" y="14" width="5" height="7" rx="0.5" />
+        {/* Minarets */}
+        <line x1="3" y1="3" x2="3" y2="7" strokeWidth={2} strokeLinecap="round" />
+        <line x1="21" y1="3" x2="21" y2="7" strokeWidth={2} strokeLinecap="round" />
+        {/* Crescent top */}
+        <path d="M10.5 3.5a2 2 0 002 0" strokeWidth={1.2} />
+    </svg>
+);
+
+const IconManeviAkis = () => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7">
+        <circle cx="12" cy="12" r="4" />
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+    </svg>
+);
+
+const IconNamazAsistani = () => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7">
+        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z" />
+        <path d="M12 14c-4.42 0-8 1.79-8 4v2h16v-2c0-2.21-3.58-4-8-4z" />
+        <path d="M22 17h-4M2 17h4" />
+    </svg>
+);
+
+const IconRamadan = () => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        <circle cx="15" cy="8" r="1.5" fill="currentColor" opacity="0.5" stroke="none" />
+    </svg>
+);
+
+const IconHatim = () => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7">
+        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+        <path d="M16 8l-4 4-2-2" />
+    </svg>
+);
+
+const IconDua = () => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7">
+        <path d="M19 4v16H5V4h14M19 4a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2M15 9H9M15 13H9M11 17H9" />
+        <path d="M15 4h-4" />
+    </svg>
+);
+
+const IconKuranDinleme = () => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7">
+        <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
+        <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
+    </svg>
+);
+
+const IconSessizZikir = () => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7">
+        <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z" />
+        <path d="M8 12h8" />
+        <path d="M12 8v8" />
+        <circle cx="12" cy="12" r="3" fill="currentColor" opacity="0.3" stroke="none" />
+    </svg>
+);
+
+const IconIstatistik = () => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7">
+        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+        <path d="M3 9h18" />
+        <path d="M9 21V9" />
+        <path d="M14 13h4M14 17h2" />
+    </svg>
+);
+
 /* ─────────────────────────────── DISCOVER DATA ─────────────────────────────── */
 interface DiscoverItem {
     key: string;
@@ -109,15 +196,36 @@ interface DiscoverGridItem extends DiscoverItem {
 
 const DISCOVER_GRID: DiscoverGridItem[] = [
     {
-        key: 'mosque',
-        label: 'Yakın Camiler',
-        desc: 'GPS ile çevrendeki camileri keşfet',
-        icon: <IconMosque />,
+        key: 'manevi_akis',
+        label: 'Günün Akışı',
+        desc: 'Ayet, hadis, esma ve tefekkür planı',
+        icon: <IconManeviAkis />,
         gradient: '', glow: '',
-        badge: 'Harita',
-        arabic: 'مسجد',
+        badge: 'Her Gün',
+        arabic: 'يوم',
+        iconColor: 'text-amber-500',
+        iconBg: 'bg-amber-500/15 border-amber-500/30',
+    },
+    {
+        key: 'ramadan',
+        label: 'Ramazan Özel',
+        desc: 'İftar duası, teravih sayacı ve fitre',
+        icon: <IconRamadan />,
+        gradient: '', glow: '',
+        badge: 'Sezonluk',
+        arabic: 'رمضان',
         iconColor: 'text-emerald-400',
         iconBg: 'bg-emerald-500/15 border-emerald-500/30',
+    },
+    {
+        key: 'namaz_asistani',
+        label: 'Namaz Asistanı',
+        desc: 'Cemaat takibi, istatistik ve sessiz mod',
+        icon: <IconNamazAsistani />,
+        gradient: '', glow: '',
+        arabic: 'مساعد',
+        iconColor: 'text-blue-400',
+        iconBg: 'bg-blue-500/15 border-blue-500/30',
     },
     {
         key: 'debt',
@@ -128,6 +236,47 @@ const DISCOVER_GRID: DiscoverGridItem[] = [
         arabic: 'صلاة',
         iconColor: 'text-sky-400',
         iconBg: 'bg-sky-500/15 border-sky-500/30',
+    },
+    {
+        key: 'hatim',
+        label: 'Hatim Takip',
+        desc: 'Cüzleri işaretle, kalan hedefini gör',
+        icon: <IconHatim />,
+        gradient: '', glow: '',
+        arabic: 'ختم',
+        iconColor: 'text-teal-400',
+        iconBg: 'bg-teal-500/15 border-teal-500/30',
+    },
+    {
+        key: 'kuran_dinleme',
+        label: "Kur'an Dinle",
+        desc: 'Arka plan çalma, uyku ve tekrar modu',
+        icon: <IconKuranDinleme />,
+        gradient: '', glow: '',
+        arabic: 'استماع',
+        iconColor: 'text-fuchsia-400',
+        iconBg: 'bg-fuchsia-500/15 border-fuchsia-500/30',
+    },
+    {
+        key: 'zikir',
+        label: 'Zikirmatik',
+        desc: 'Dijital tesbih & zikir sayacı',
+        icon: <IconZikir />,
+        gradient: '', glow: '',
+        badge: 'Yeni',
+        arabic: 'ذكر',
+        iconColor: 'text-rose-400',
+        iconBg: 'bg-rose-500/15 border-rose-500/30',
+    },
+    {
+        key: 'sessiz_zikir',
+        label: 'Sessiz Zikir',
+        desc: 'Siyah ekran, telefonu çevirerek zikir',
+        icon: <IconSessizZikir />,
+        gradient: '', glow: '',
+        arabic: 'صامت',
+        iconColor: 'text-slate-400',
+        iconBg: 'bg-slate-500/15 border-slate-500/30',
     },
     {
         key: 'esma',
@@ -141,6 +290,16 @@ const DISCOVER_GRID: DiscoverGridItem[] = [
         iconBg: 'bg-amber-500/15 border-amber-500/30',
     },
     {
+        key: 'dua',
+        label: 'Dua Defteri',
+        desc: 'Manevi notlarını ve özel dualarını tut',
+        icon: <IconDua />,
+        gradient: '', glow: '',
+        arabic: 'دعاء',
+        iconColor: 'text-indigo-400',
+        iconBg: 'bg-indigo-500/15 border-indigo-500/30',
+    },
+    {
         key: 'religious',
         label: 'Dini Günler',
         desc: 'Kandiller ve mübarek takvim',
@@ -151,15 +310,36 @@ const DISCOVER_GRID: DiscoverGridItem[] = [
         iconBg: 'bg-violet-500/15 border-violet-500/30',
     },
     {
-        key: 'zikir',
-        label: 'Zikirmatik',
-        desc: 'Dijital tesbih & zikir sayacı',
-        icon: <IconZikir />,
+        key: 'mosque',
+        label: 'Yakın Camiler',
+        desc: 'GPS ile çevrendeki camileri keşfet',
+        icon: <IconMosque />,
         gradient: '', glow: '',
-        badge: 'Yeni',
-        arabic: 'ذكر',
-        iconColor: 'text-rose-400',
-        iconBg: 'bg-rose-500/15 border-rose-500/30',
+        badge: 'Harita',
+        arabic: 'مسجد',
+        iconColor: 'text-emerald-400',
+        iconBg: 'bg-emerald-500/15 border-emerald-500/30',
+    },
+    {
+        key: 'kabe',
+        label: 'Kabe Canlı Yayın',
+        desc: 'Mescid-i Haram\'dan 7/24 canlı',
+        icon: <IconKabe />,
+        gradient: '', glow: '',
+        badge: 'Canlı',
+        arabic: 'الكعبة',
+        iconColor: 'text-red-400',
+        iconBg: 'bg-red-500/15 border-red-500/30',
+    },
+    {
+        key: 'istatistik',
+        label: 'Manevi Pano',
+        desc: 'Ayet, namaz ve zikir analizi',
+        icon: <IconIstatistik />,
+        gradient: '', glow: '',
+        arabic: 'إحصاء',
+        iconColor: 'text-orange-400',
+        iconBg: 'bg-orange-500/15 border-orange-500/30',
     },
 ];
 
@@ -340,7 +520,8 @@ function ListCard({ item, onAction }: { item: DiscoverGridItem; onAction: (key: 
 export function MenuDrawer({
     isOpen, onClose, onNavigate,
     onOpenQibla, onOpenEsmaulHusna, onOpenMosqueFinder,
-    onOpenPrayerDebt, onOpenReligiousDays, onOpenZikirmatik
+    onOpenPrayerDebt, onOpenReligiousDays, onOpenZikirmatik, onOpenKabeLive,
+    onOpenManeviAkis, onOpenNamazAsistani, onOpenRamadanKarti, onOpenHatimTakip, onOpenDuaDefteri, onOpenKuranDinleme, onOpenSessizZikir, onOpenIstatistik
 }: MenuDrawerProps) {
     const [activeTab, setActiveTab] = useState<TabType>('surah');
     const [searchTerm, setSearchTerm] = useState('');
@@ -391,6 +572,15 @@ export function MenuDrawer({
         else if (key === 'esma') onOpenEsmaulHusna();
         else if (key === 'religious') onOpenReligiousDays();
         else if (key === 'zikir') onOpenZikirmatik();
+        else if (key === 'kabe') onOpenKabeLive();
+        else if (key === 'manevi_akis') onOpenManeviAkis?.();
+        else if (key === 'namaz_asistani') onOpenNamazAsistani?.();
+        else if (key === 'ramadan') onOpenRamadanKarti?.();
+        else if (key === 'hatim') onOpenHatimTakip?.();
+        else if (key === 'dua') onOpenDuaDefteri?.();
+        else if (key === 'kuran_dinleme') onOpenKuranDinleme?.();
+        else if (key === 'sessiz_zikir') onOpenSessizZikir?.();
+        else if (key === 'istatistik') onOpenIstatistik?.();
     };
 
     if (!render) return null;

@@ -22,6 +22,15 @@ import { ZikirmatikView } from './components/spiritual/ZikirmatikView';
 import { ReligiousDayAlert } from './components/spiritual/ReligiousDayAlert';
 import { NotificationManager } from './components/spiritual/NotificationManager';
 import { RamadanCountdown } from './components/spiritual/RamadanCountdown';
+import { KabeLiveStream } from './components/spiritual/KabeLiveStream';
+import { ManeviAkisView } from './components/spiritual/ManeviAkisView';
+import { NamazAsistaniView } from './components/spiritual/NamazAsistaniView';
+import { RamadanOzelView } from './components/spiritual/RamadanOzelView';
+import { HatimTakipView } from './components/spiritual/HatimTakipView';
+import { DuaDefteriView } from './components/spiritual/DuaDefteriView';
+import { KuranDinlemeView } from './components/spiritual/KuranDinlemeView';
+import { SessizZikirView } from './components/spiritual/SessizZikirView';
+import { IstatistikPaneliView } from './components/spiritual/IstatistikPaneliView';
 
 const queryClient = new QueryClient();
 
@@ -37,6 +46,15 @@ function AppContent() {
     const [showPrayerDebt, setShowPrayerDebt] = useState(false);
     const [showReligiousDays, setShowReligiousDays] = useState(false);
     const [showZikirmatik, setShowZikirmatik] = useState(false);
+    const [showKabeLive, setShowKabeLive] = useState(false);
+    const [showManeviAkis, setShowManeviAkis] = useState(false);
+    const [showNamazAsistani, setShowNamazAsistani] = useState(false);
+    const [showRamadanOzel, setShowRamadanOzel] = useState(false);
+    const [showHatimTakip, setShowHatimTakip] = useState(false);
+    const [showDuaDefteri, setShowDuaDefteri] = useState(false);
+    const [showKuranDinleme, setShowKuranDinleme] = useState(false);
+    const [showSessizZikir, setShowSessizZikir] = useState(false);
+    const [showIstatistik, setShowIstatistik] = useState(false);
 
     const { isMobile } = useResponsive();
 
@@ -284,11 +302,12 @@ function AppContent() {
                                         onClick={item.action}
                                         className="group relative flex flex-col items-start p-5 md:p-6 rounded-[1.5rem]
                                             bg-white dark:bg-[#141f35]
-                                            border border-slate-100 dark:border-white/[0.06]
-                                            hover:border-emerald-200 dark:hover:border-emerald-500/30
-                                            hover:shadow-xl hover:shadow-emerald-500/10 dark:hover:shadow-emerald-900/30
+                                            border border-slate-200/60 dark:border-white/[0.08]
+                                            shadow-md shadow-slate-200/40 dark:shadow-none
+                                            hover:border-emerald-300 dark:hover:border-emerald-500/40
+                                            hover:shadow-xl hover:shadow-emerald-500/15 dark:hover:shadow-emerald-900/40
                                             text-left overflow-hidden active:scale-[0.98]"
-                                        style={{ transition: 'transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s, border-color 0.25s' }}
+                                        style={{ transition: 'transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s, border-color 0.25s' }}
                                     >
                                         {/* Ambient emerald glow behind arabic — shown on hover */}
                                         <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/0 via-emerald-500/0 to-emerald-500/0 group-hover:from-emerald-500/[0.04] group-hover:to-emerald-400/[0.04] transition-all duration-500 pointer-events-none" />
@@ -345,26 +364,68 @@ function AppContent() {
                 )}
 
                 {/* Footer */}
-                <footer className="mt-16 pb-8 pt-8 relative overflow-hidden border-t border-theme-border/40">
-                    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] opacity-[0.02] dark:opacity-[0.04] pointer-events-none"></div>
-                    <div className="max-w-md mx-auto px-6 relative z-10 text-center">
-                        <div className="flex flex-col items-center gap-1 mb-5">
-                            <h3 className="text-sm font-bold text-slate-700 dark:text-slate-300 flex items-center gap-2 tracking-wide">
-                                <Logo className="w-4 h-4 text-emerald-600/90 dark:text-emerald-500/90" />
-                                KUR'AN ANLAM HARİTASI
-                            </h3>
-                            <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">
-                                Resmî Mealler & Anlamsal Haritalama Teknolojisi
-                            </p>
-                        </div>
-                        <div className="w-12 h-px bg-emerald-500/20 mx-auto mb-5"></div>
-                        <div className="flex flex-col items-center gap-1">
-                            <span className="text-[9px] tracking-[0.2em] text-slate-400 dark:text-slate-500 font-bold uppercase opacity-80">
-                                GELİŞTİRİCİ
-                            </span>
-                            <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400/90 tracking-widest font-serif hover:text-emerald-500 transition-colors cursor-default">
-                                gucluyumhe
-                            </span>
+                <footer className="mt-16 relative overflow-hidden">
+                    {/* Top gradient divider */}
+                    <div className="h-px bg-gradient-to-r from-transparent via-emerald-500/30 to-transparent" />
+
+                    {/* Main footer body */}
+                    <div className="relative py-10 px-6
+                        bg-gradient-to-b from-slate-50/80 to-white
+                        dark:from-[#060e18] dark:to-[#0a1524]">
+
+                        {/* Arabesque pattern overlay */}
+                        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] opacity-[0.03] dark:opacity-[0.05] pointer-events-none" />
+
+                        {/* Radial glow behind logo */}
+                        <div className="absolute top-6 left-1/2 -translate-x-1/2 w-48 h-32 rounded-full pointer-events-none
+                            bg-emerald-400/[0.08] dark:bg-emerald-500/[0.06] blur-3xl" />
+
+                        <div className="max-w-sm mx-auto relative z-10 text-center">
+                            {/* Logo + Title */}
+                            <div className="flex flex-col items-center gap-2 mb-4">
+                                <div className="w-10 h-10 rounded-xl flex items-center justify-center
+                                    bg-emerald-100 dark:bg-emerald-500/[0.12]
+                                    border border-emerald-200 dark:border-emerald-500/25
+                                    shadow-sm shadow-emerald-200/30 dark:shadow-none
+                                    mb-1">
+                                    <Logo className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+                                </div>
+                                <h3 className="text-[13px] font-bold tracking-[0.15em] uppercase
+                                    text-slate-700 dark:text-slate-200">
+                                    Kur'an Anlam Haritası
+                                </h3>
+                                <p className="text-[10px] font-medium max-w-[16rem] leading-relaxed
+                                    text-slate-400 dark:text-slate-500">
+                                    Resmî Mealler &amp; Anlamsal Haritalama Teknolojisi
+                                </p>
+                            </div>
+
+                            {/* Ornamental divider */}
+                            <div className="flex items-center justify-center gap-2 my-5">
+                                <div className="w-8 h-px bg-gradient-to-r from-transparent to-emerald-400/40" />
+                                <div className="w-1.5 h-1.5 rounded-full bg-emerald-500/30 dark:bg-emerald-400/25" />
+                                <div className="w-8 h-px bg-gradient-to-l from-transparent to-emerald-400/40" />
+                            </div>
+
+                            {/* Developer credit */}
+                            <div className="flex flex-col items-center gap-1.5">
+                                <span className="text-[8px] tracking-[0.3em] font-bold uppercase
+                                    text-slate-400/70 dark:text-slate-600">
+                                    Geliştirici
+                                </span>
+                                <span className="text-sm font-bold tracking-[0.08em] font-serif
+                                    text-emerald-600 dark:text-emerald-400
+                                    hover:text-emerald-500 dark:hover:text-emerald-300
+                                    transition-colors cursor-default">
+                                    gucluyumhe
+                                </span>
+                            </div>
+
+                            {/* Version & year */}
+                            <div className="mt-6 text-[9px] font-mono tracking-wider
+                                text-slate-300 dark:text-slate-700">
+                                v2.0 · 2026
+                            </div>
                         </div>
                     </div>
                 </footer>
@@ -381,6 +442,15 @@ function AppContent() {
                 onOpenPrayerDebt={() => { setIsMenuOpen(false); setShowPrayerDebt(true); }}
                 onOpenReligiousDays={() => { setIsMenuOpen(false); setShowReligiousDays(true); }}
                 onOpenZikirmatik={() => { setIsMenuOpen(false); setShowZikirmatik(true); }}
+                onOpenKabeLive={() => { setIsMenuOpen(false); setShowKabeLive(true); }}
+                onOpenManeviAkis={() => { setIsMenuOpen(false); setShowManeviAkis(true); }}
+                onOpenNamazAsistani={() => { setIsMenuOpen(false); setShowNamazAsistani(true); }}
+                onOpenRamadanKarti={() => { setIsMenuOpen(false); setShowRamadanOzel(true); }}
+                onOpenHatimTakip={() => { setIsMenuOpen(false); setShowHatimTakip(true); }}
+                onOpenDuaDefteri={() => { setIsMenuOpen(false); setShowDuaDefteri(true); }}
+                onOpenKuranDinleme={() => { setIsMenuOpen(false); setShowKuranDinleme(true); }}
+                onOpenSessizZikir={() => { setIsMenuOpen(false); setShowSessizZikir(true); }}
+                onOpenIstatistik={() => { setIsMenuOpen(false); setShowIstatistik(true); }}
             />
 
             {/* Qibla Compass Overlay */}
@@ -411,6 +481,51 @@ function AppContent() {
             {/* Zikirmatik Overlay */}
             {showZikirmatik && (
                 <ZikirmatikView onClose={() => setShowZikirmatik(false)} />
+            )}
+
+            {/* Kabe Canlı Yayın Overlay */}
+            {showKabeLive && (
+                <KabeLiveStream onClose={() => setShowKabeLive(false)} />
+            )}
+
+            {/* Manevi Akış Overlay */}
+            {showManeviAkis && (
+                <ManeviAkisView onClose={() => setShowManeviAkis(false)} />
+            )}
+
+            {/* Namaz Asistanı Overlay */}
+            {showNamazAsistani && (
+                <NamazAsistaniView onClose={() => setShowNamazAsistani(false)} />
+            )}
+
+            {/* Ramazan Özel Overlay */}
+            {showRamadanOzel && (
+                <RamadanOzelView onClose={() => setShowRamadanOzel(false)} />
+            )}
+
+            {/* Hatim Takip Overlay */}
+            {showHatimTakip && (
+                <HatimTakipView onClose={() => setShowHatimTakip(false)} />
+            )}
+
+            {/* Dua Defteri Overlay */}
+            {showDuaDefteri && (
+                <DuaDefteriView onClose={() => setShowDuaDefteri(false)} />
+            )}
+
+            {/* Kuran Dinleme Overlay */}
+            {showKuranDinleme && (
+                <KuranDinlemeView onClose={() => setShowKuranDinleme(false)} />
+            )}
+
+            {/* Sessiz Zikir Overlay */}
+            {showSessizZikir && (
+                <SessizZikirView onClose={() => setShowSessizZikir(false)} />
+            )}
+
+            {/* İstatistik Paneli Overlay */}
+            {showIstatistik && (
+                <IstatistikPaneliView onClose={() => setShowIstatistik(false)} />
             )}
         </div>
     );

@@ -64,29 +64,50 @@ export function NotificationManager() {
             if (currentPrayer) {
                 lastNotifiedTime.current = currentTime; // Mark as notified
 
-                const prayerName = currentPrayer.name;
+                let prayerName = currentPrayer.name;
+                let title = prayerName;
                 let body = currentPrayer.context; // Default context message
 
-                // Check for Debt Integration
-                const debtType = PRAYER_MAP[prayerName];
-                if (debtType) {
-                    const debts = PrayerDebtService.getDebts();
-                    const debt = debts.find(d => d.type === debtType);
+                // --- RAMADAN OVERRIDES ---
+                if (prayerName === 'Akşam' && localStorage.getItem('ramadan_notif_iftar') === '1') {
+                    title = 'İftar Vakti 🌙';
+                    body = 'Allah orucunuzu kabul etsin. Hayırlı iftarlar!';
+                } else if (prayerName === 'İmsak' && localStorage.getItem('ramadan_notif_sahur') === '1') {
+                    title = 'İmsak Vakti 🌙';
+                    body = 'Yeme-içme vakti sona erdi, niyet zamanı. Hayırlı ramazanlar!';
+                } else {
+                    // Check for Debt Integration (Only if not overridden by Ramadan context)
+                    const debtType = PRAYER_MAP[prayerName];
+                    if (debtType) {
+                        const debts = PrayerDebtService.getDebts();
+                        const debt = debts.find(d => d.type === debtType);
 
-                    if (debt && debt.count > 0) {
-                        body = `${prayerName} vakti girdi. ${debt.count} adet kaza borcunuz var. Bu vakti eda ederken niyet edebilirsiniz.`;
-                    } else {
-                        body = `${prayerName} vakti girdi. ${currentPrayer.context}`;
+                        if (debt && debt.count > 0) {
+                            body = `${prayerName} vakti girdi. ${debt.count} adet kaza borcunuz var. Bu vakti eda ederken niyet edebilirsiniz.`;
+                        } else {
+                            body = `${prayerName} vakti girdi. ${currentPrayer.context}`;
+                        }
+                    } else if (prayerName === 'Güneş') {
+                        body = "Güneş doğdu. İşrak vakti yaklaşıyor.";
                     }
-                } else if (prayerName === 'Güneş') {
-                    body = "Güneş doğdu. İşrak vakti yaklaşıyor.";
                 }
 
                 PrayerTimesService.sendNotification(
-                    prayerName,
+                    title,
                     body
                 );
             }
+        };
+
+        // --- TEST METHOD EXPOSED TO WINDOW ---
+        (window as any).testNotification = () => {
+            PrayerTimesService.requestNotificationPermission().then(granted => {
+                if (granted) {
+                    PrayerTimesService.sendNotification('Test Bildirimi 🔔', 'Uygulama bildirimleriniz sorunsuz çalışıyor!');
+                } else {
+                    alert('Bildirim izni verilmemiş. Tarayıcı ayarlarından izinleri kontrol edin.');
+                }
+            });
         };
 
         // Check every 20 seconds to be precise enough but not spammy

@@ -565,5 +565,33 @@
     "ayet_no": 3,
     "arabic_text": "ذُرِّيَّةَ مَنْ حَمَلْنَا مَعَ نُوحٍ ۚ إِنَّهُۥ كَانَ عَبْدًۭا شَكُورًۭا",
     "turkish_text": "Ey kendilerini Nuh ile birlikte (gemide) taşıdığımız kimselerin çocukları! Gerçek şu ki, o çok şükreden bir kuldu."
+  },
+  {
+    "id": 82,
+    "sure_no": 67,
+    "ayet_no": 2,
+    "arabic_text": "ٱلَّذِى خَلَقَ ٱلْمَوْتَ وَٱلْحَيَوٰةَ لِيَبْلُوَكُمْ أَيُّكُمْ أَحْسَنُ عَمَلًۭا ۚ وَهُوَ ٱلْعَزِيزُ ٱلْغَفُورُ",
+    "turkish_text": "O, hanginizin daha güzel amel yapacağını sınamak için ölümü ve hayatı yaratandır. O, mutlak güç sahibidir, çok bağışlayandır."
+  },
+  {
+    "id": 83,
+    "sure_no": 17,
+    "ayet_no": 7,
+    "arabic_text": "إِنْ أَحْسَنتُمْ أَحْسَنتُمْ لِأَنفُسِكُمْ ۖ وَإِنْ أَسَأْتُمْ فَلَهَا ۚ فَإِذَا جَآءَ وَعْدُ ٱلْءَاخِرَةِ لِيَسُۥٓـُٔوا۟ وُجُوهَكُمْ وَلِيَدْخُلُوا۟ ٱلْمَسْجِدَ كَمَا دَخَلُوهُ أَوَّلَ مَرَّةٍۢ وَلِيُتَبِّرُوا۟ مَا عَلَوْا۟ تَتْبِيرًا",
+    "turkish_text": "İyilik ederseniz kendinize iyilik etmiş olursunuz, kötülük yaparsanız yine kendinize yapmış olursunuz. İkinci bozgunculuğun zamanı gelince, yüzünüzü kara etsinler, daha önce girdikleri gibi yine mescide (Beyt-i Makdis'e) girsinler ve ellerine geçirdikleri her şeyi yerle bir etsinler diye (üzerinize yine düşmanlarınızı gönderdik.)"
+  },
+  {
+    "id": 84,
+    "sure_no": 2,
+    "ayet_no": 4,
+    "arabic_text": "وَٱلَّذِينَ يُؤْمِنُونَ بِمَآ أُنزِلَ إِلَيْكَ وَمَآ أُنزِلَ مِن قَبْلِكَ وَبِٱلْءَاخِرَةِ هُمْ يُوقِنُونَ",
+    "turkish_text": "Onlar sana indirilene de, senden önce indirilenlere de inanırlar. Ahirete de kesin olarak inanırlar."
+  },
+  {
+    "id": 85,
+    "sure_no": 2,
+    "ayet_no": 5,
+    "arabic_text": "أُو۟لَٰٓئِكَ عَلَىٰ هُدًۭى مِّن رَّبِّهِمْ ۖ وَأُو۟لَٰٓئِكَ هُمُ ٱلْمُفْلِحُونَ",
+    "turkish_text": "İşte onlar Rab'lerinden (gelen) bir doğru yol üzeredirler ve kurtuluşa erenler de işte onlardır."
   }
 ]

@@ -78,7 +78,7 @@ export function usePrayerReminder() {
     }, []);
 
     return {
-        isActive: isActive && !isMuted, // Enforce mute
+        isActive, // Allow manual activation to bypass mute
         activate,
         dismiss,
         snooze,

@@ -15,7 +15,7 @@ export const QiblaService = {
     async getQiblaDirection(latitude: number, longitude: number): Promise<number | null> {
         try {
             const response = await axios.get<QiblaResponse>(
-                `http://api.aladhan.com/v1/qibla/${latitude}/${longitude}`
+                `https://api.aladhan.com/v1/qibla/${latitude}/${longitude}`
             );
 
             if (response.data.code === 200) {

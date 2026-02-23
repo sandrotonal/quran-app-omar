@@ -98,44 +98,63 @@ export function QiblaCompass({ onClose }: QiblaCompassProps) {
                 <div className="relative w-72 h-72">
                     {/* Rotating Compass Dial */}
                     <div
-                        className="w-full h-full rounded-full border-4 border-theme-border bg-theme-surface shadow-2xl relative transition-transform duration-75 ease-linear will-change-transform"
+                        className="w-full h-full rounded-full border-4 border-slate-200 dark:border-theme-border bg-slate-50 dark:bg-theme-surface shadow-2xl relative transition-transform duration-75 ease-linear will-change-transform"
                         style={{ transform: `rotate(${-compassHeading}deg)` }}
                     >
+                        {/* Degree marks */}
+                        {[...Array(72)].map((_, i) => (
+                            <div key={i} className="absolute top-1/2 left-1/2 origin-[0_0]" style={{ transform: `rotate(${i * 5}deg)` }}>
+                                <div className={`absolute -translate-x-1/2 ${i % 6 === 0 ? 'w-[1.5px] h-3 bg-slate-400 dark:bg-white/25' : 'w-px h-1.5 bg-slate-300 dark:bg-white/10'}`}
+                                    style={{ top: '-140px' }} />
+                            </div>
+                        ))}
+
                         {/* Cardinals */}
                         <div className="absolute top-2 left-1/2 -translate-x-1/2 flex flex-col items-center">
-                            <span className="text-red-500 font-bold text-lg">N</span>
+                            <span className="text-red-500 font-bold text-lg drop-shadow">N</span>
                             <div className="w-1 h-3 bg-red-500 rounded-full"></div>
                         </div>
-                        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-theme-muted text-xs font-bold">S</div>
-                        <div className="absolute top-1/2 right-4 -translate-y-1/2 text-theme-muted text-xs font-bold">E</div>
-                        <div className="absolute top-1/2 left-4 -translate-y-1/2 text-theme-muted text-xs font-bold">W</div>
+                        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-slate-500 dark:text-theme-muted text-xs font-bold">S</div>
+                        <div className="absolute top-1/2 right-4 -translate-y-1/2 text-slate-500 dark:text-theme-muted text-xs font-bold">E</div>
+                        <div className="absolute top-1/2 left-4 -translate-y-1/2 text-slate-500 dark:text-theme-muted text-xs font-bold">W</div>
 
-                        {/* Qibla Indicator (Fixed relative to North on the dial) */}
+                        {/* Qibla Indicator */}
                         {qiblaAngle !== null && (
                             <div
                                 className="absolute top-1/2 left-1/2 w-1 h-[50%] origin-bottom"
                                 style={{ transform: `translateX(-50%) rotate(${qiblaAngle}deg) translateY(-100%)` }}
                             >
-                                <div className="absolute top-8 left-1/2 -translate-x-1/2 flex flex-col items-center">
-                                    <div className="w-8 h-8 relative animate-pulse">
-                                        <div className="absolute inset-0 bg-emerald-500 blur-md opacity-40 rounded-full"></div>
-                                        <svg className="w-8 h-8 text-emerald-600 relative z-10 drop-shadow-lg" viewBox="0 0 24 24" fill="currentColor">
+                                <div className="absolute top-6 left-1/2 -translate-x-1/2 flex flex-col items-center">
+                                    {/* Pulsing outer ring — visible in both modes */}
+                                    <div className="absolute -inset-2 rounded-full animate-ping opacity-20 bg-emerald-500 dark:bg-emerald-400" />
+                                    <div className="absolute -inset-3 rounded-full animate-pulse bg-emerald-400/20 dark:bg-emerald-500/15 blur-sm" />
+
+                                    {/* Kabe icon with strong glow */}
+                                    <div className="w-10 h-10 relative animate-pulse">
+                                        <div className="absolute inset-0 bg-emerald-500 dark:bg-emerald-400 blur-lg opacity-50 dark:opacity-40 rounded-full" />
+                                        <div className="absolute -inset-1 bg-emerald-400/30 dark:bg-emerald-500/20 rounded-full blur-md" />
+                                        <svg className="w-10 h-10 text-emerald-600 dark:text-emerald-400 relative z-10 drop-shadow-[0_0_8px_rgba(16,185,129,0.5)]" viewBox="0 0 24 24" fill="currentColor">
                                             <path d="M4 4h16v16H4z" />
-                                            <path d="M4 8h16M4 12h16M10 4v16" stroke="white" strokeWidth="0.5" strokeOpacity="0.5" />
+                                            <path d="M4 8h16M4 12h16M10 4v16" stroke="white" strokeWidth="0.5" strokeOpacity="0.6" />
                                         </svg>
                                     </div>
+
+                                    {/* Small label */}
+                                    <span className="mt-1 text-[7px] font-black tracking-[0.15em] uppercase text-emerald-700 dark:text-emerald-300 bg-white/80 dark:bg-emerald-900/60 px-1.5 py-0.5 rounded-full shadow-sm whitespace-nowrap">
+                                        KABE
+                                    </span>
                                 </div>
                             </div>
                         )}
 
                         {/* Center Point */}
-                        <div className="absolute top-1/2 left-1/2 w-2 h-2 bg-theme-text rounded-full -translate-x-1/2 -translate-y-1/2 z-20"></div>
+                        <div className="absolute top-1/2 left-1/2 w-3 h-3 bg-slate-700 dark:bg-white rounded-full -translate-x-1/2 -translate-y-1/2 z-20 shadow-md"></div>
                     </div>
 
                     {/* Static Phone Indicator */}
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-8 pointer-events-none">
-                        <div className={`transition-all duration-300 ${isAligned ? 'scale-110 opacity-100' : 'scale-100 opacity-20'}`}>
-                            <div className="w-1 h-6 bg-emerald-500 mx-auto rounded-full mb-1"></div>
+                        <div className={`transition-all duration-300 ${isAligned ? 'scale-110 opacity-100' : 'scale-100 opacity-30'}`}>
+                            <div className="w-1.5 h-7 bg-emerald-500 mx-auto rounded-full mb-1 shadow-[0_0_8px_rgba(16,185,129,0.4)]"></div>
                         </div>
                     </div>
                 </div>

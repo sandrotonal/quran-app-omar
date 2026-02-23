@@ -52,8 +52,8 @@ export function PrayerTimesCard({ onNavigate }: PrayerTimesCardProps) {
             const currentTimeStr = now.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' });
             const currentPrayer = times.find(t => t.time === currentTimeStr);
             if (currentPrayer && notifPermission) {
-                triggerReminder();
                 if (!isMuted) {
+                    triggerReminder();
                     const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3');
                     audio.volume = 0.5;
                     audio.play().catch(() => { });
@@ -127,8 +127,8 @@ export function PrayerTimesCard({ onNavigate }: PrayerTimesCardProps) {
                         title={notifPermission ? "Bildirimler Açık" : "Bildirimleri Aç"}
                         className={`relative w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-300 border
                             ${notifPermission
-                                ? 'bg-emerald-50 dark:bg-emerald-500/15 border-emerald-300 dark:border-emerald-500/40 text-emerald-600 dark:text-emerald-300'
-                                : 'bg-slate-100 dark:bg-white/8 border-slate-300 dark:border-white/15 text-slate-500 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-white/15'
+                                ? 'bg-emerald-500/10 dark:bg-emerald-500/15 border-emerald-500/30 dark:border-emerald-500/40 text-emerald-600 dark:text-emerald-400'
+                                : 'bg-slate-50 dark:bg-white/5 border-slate-200 dark:border-white/10 text-slate-500 dark:text-slate-400 hover:bg-emerald-50 dark:hover:bg-emerald-500/10 hover:border-emerald-500/30 hover:text-emerald-600 dark:hover:text-emerald-400'
                             }`}
                     >
                         {notifPermission && (
@@ -147,10 +147,11 @@ export function PrayerTimesCard({ onNavigate }: PrayerTimesCardProps) {
                         onClick={() => setIsManualFocusActive(true)}
                         title="Odak Modu"
                         className="relative w-9 h-9 rounded-xl flex items-center justify-center
-                            bg-indigo-100 dark:bg-indigo-500/15
-                            border border-indigo-300 dark:border-indigo-400/40
-                            text-indigo-600 dark:text-indigo-300
-                            hover:bg-indigo-200 dark:hover:bg-indigo-500/25
+                            bg-slate-50 dark:bg-white/5 
+                            border border-slate-200 dark:border-white/10 
+                            text-slate-500 dark:text-slate-400
+                            hover:bg-emerald-50 dark:hover:bg-emerald-500/10 
+                            hover:border-emerald-500/30 hover:text-emerald-600 dark:hover:text-emerald-400
                             hover:scale-105 active:scale-95 transition-all duration-200"
                     >
                         <svg className="w-[18px] h-[18px]" fill="currentColor" viewBox="0 0 24 24">
@@ -163,10 +164,11 @@ export function PrayerTimesCard({ onNavigate }: PrayerTimesCardProps) {
                         onClick={triggerReminder}
                         title="Namaz Modu"
                         className="relative w-9 h-9 rounded-xl flex items-center justify-center
-                            bg-amber-100 dark:bg-amber-500/15
-                            border border-amber-300 dark:border-amber-400/40
-                            text-amber-600 dark:text-amber-300
-                            hover:bg-amber-200 dark:hover:bg-amber-500/25
+                            bg-slate-50 dark:bg-white/5 
+                            border border-slate-200 dark:border-white/10 
+                            text-slate-500 dark:text-slate-400
+                            hover:bg-emerald-50 dark:hover:bg-emerald-500/10 
+                            hover:border-emerald-500/30 hover:text-emerald-600 dark:hover:text-emerald-400
                             hover:scale-105 active:scale-95 transition-all duration-200"
                     >
                         <svg className="w-[17px] h-[17px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
