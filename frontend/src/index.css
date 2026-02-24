@@ -60,6 +60,10 @@ body {
   scrollbar-gutter: stable;
   background-color: #f8fafc;
   /* Light mode bg fallback */
+
+  /* V4 Premium Polish: Native Mobile Rubber-band (Bouncing) Effect */
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 

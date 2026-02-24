@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
 import { hapticFeedback } from '../../lib/constants';
+import { DailyContentService } from '../../lib/DailyContentService';
 
 export function RamadanOzelView({ onClose }: { onClose: () => void }) {
     const [teravih, setTeravih] = useState(false);
     const [mission, setMission] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
+
+    const dailyMission = DailyContentService.getDailyMission();
 
     useEffect(() => {
         requestAnimationFrame(() => requestAnimationFrame(() => setIsVisible(true)));
@@ -128,8 +131,8 @@ export function RamadanOzelView({ onClose }: { onClose: () => void }) {
                                 <span className="inline-block px-3 py-1.5 bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 text-[10px] font-bold uppercase tracking-widest rounded-lg mb-4 shadow-sm">
                                     Günün İyiliği
                                 </span>
-                                <h4 className="font-bold text-xl font-serif text-slate-900 dark:text-white mb-2">Sadaka Ver</h4>
-                                <p className="text-[13px] font-medium text-slate-500 dark:text-slate-400 leading-relaxed">Miktarı hiç önemli değil; bugün bir ihtiyaç sahibine veya kuruma bağışta bulun.</p>
+                                <h4 className="font-bold text-xl font-serif text-slate-900 dark:text-white mb-2">{dailyMission.title}</h4>
+                                <p className="text-[13px] font-medium text-slate-500 dark:text-slate-400 leading-relaxed">{dailyMission.description}</p>
                             </div>
                             <button
                                 onClick={toggleMission}

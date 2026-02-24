@@ -1,9 +1,16 @@
 import { useEffect, useState } from 'react';
 import { hapticFeedback } from '../../lib/constants';
+import { DailyContentService } from '../../lib/DailyContentService';
 
 export function ManeviAkisView({ onClose }: { onClose: () => void }) {
     const [actionDone, setActionDone] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
+
+    // Get today's dynamic contents
+    const dailyVerse = DailyContentService.getDailyVerse();
+    const dailyHadith = DailyContentService.getDailyHadith();
+    const dailyEsma = DailyContentService.getDailyEsma();
+    const dailyTefekkur = DailyContentService.getDailyTefekkur();
 
     useEffect(() => {
         // Mount transition
@@ -81,13 +88,13 @@ export function ManeviAkisView({ onClose }: { onClose: () => void }) {
                                     </div>
                                 </div>
                                 <p className="text-lg md:text-xl font-serif font-medium text-slate-800 dark:text-slate-200 leading-relaxed mb-4 pl-4 border-l-2 border-emerald-500/50">
-                                    "Rabbin seni terk etmedi ve sana darılmadı."
+                                    "{dailyVerse.text}"
                                 </p>
-                                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest pl-4">Duha Suresi, 3. Ayet</p>
+                                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest pl-4">{dailyVerse.source}</p>
                             </div>
                             <div className="w-full md:w-1/2 flex justify-end">
-                                <p className="text-3xl md:text-4xl font-arabic text-emerald-700 dark:text-emerald-500 opacity-90 leading-tight text-right md:-mt-1" dir="rtl" style={{ lineHeight: '1.6' }}>
-                                    مَا وَدَّعَكَ رَبُّكَ وَمَا قَلَىٰ
+                                <p className="text-2xl md:text-3xl font-arabic text-emerald-700 dark:text-emerald-500 opacity-90 leading-tight text-right md:-mt-1" dir="rtl" style={{ lineHeight: '1.6' }}>
+                                    {dailyVerse.arabic}
                                 </p>
                             </div>
                         </div>
@@ -105,10 +112,10 @@ export function ManeviAkisView({ onClose }: { onClose: () => void }) {
                                     </div>
                                 </div>
                                 <p className="text-base md:text-lg font-serif font-medium text-slate-800 dark:text-slate-200 leading-relaxed italic mb-4">
-                                    "Müminlerin iman yönünden en kâmil olanı, ahlâkı en güzel olanıdır."
+                                    "{dailyHadith.text}"
                                 </p>
                             </div>
-                            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest text-right">Müslim, İman 95</p>
+                            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest text-right">{dailyHadith.source}</p>
                         </div>
 
                         {/* Esma Card - Refined Elegant (Theme Matched) */}
@@ -118,10 +125,10 @@ export function ManeviAkisView({ onClose }: { onClose: () => void }) {
                             </span>
 
                             <h3 className="text-5xl font-arabic text-emerald-700 dark:text-emerald-500 mt-10 mb-3 transition-transform duration-500 group-hover:scale-110">
-                                اَلْوَدُودُ
+                                {dailyEsma.arabic}
                             </h3>
-                            <h4 className="text-xl font-bold font-serif text-slate-900 dark:text-white">El-Vedûd</h4>
-                            <p className="text-xs font-medium text-slate-500 dark:text-slate-400 mt-1">Çok seven ve çok sevilen</p>
+                            <h4 className="text-xl font-bold font-serif text-slate-900 dark:text-white">{dailyEsma.turkish}</h4>
+                            <p className="text-xs font-medium text-slate-500 dark:text-slate-400 mt-1">{dailyEsma.meaning}</p>
                         </div>
                     </div>
 
@@ -135,9 +142,9 @@ export function ManeviAkisView({ onClose }: { onClose: () => void }) {
                             <div className="inline-flex px-3 py-1.5 bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/10 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold uppercase tracking-widest rounded-lg mb-4 shadow-sm">
                                 Günün Meyvesi • 1 Dk Tefekkür
                             </div>
-                            <h4 className="font-bold font-serif text-xl sm:text-2xl mb-2 text-slate-900 dark:text-white">Zamanın Bereketi</h4>
+                            <h4 className="font-bold font-serif text-xl sm:text-2xl mb-2 text-slate-900 dark:text-white">{dailyTefekkur.title}</h4>
                             <p className="text-sm font-medium text-slate-600 dark:text-slate-400 leading-relaxed max-w-xl mx-auto md:mx-0">
-                                Sadece bir an için dur. Aldığın nefesin, görebildiğin renklerin bir lütuf olduğunu hatırla. Bugün en son ne zaman içtenlikle "Elhamdülillah" dedin?
+                                {dailyTefekkur.text}
                             </p>
                         </div>
 

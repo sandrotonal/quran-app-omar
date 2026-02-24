@@ -17,26 +17,31 @@ export function IstatistikPaneliView({ onClose }: { onClose: () => void }) {
         const n = localStorage.getItem('namaz_asistani');
         const d = localStorage.getItem('dua_defteri');
 
-        if (z) setZikir(parseInt(z) || 0);
-        else setZikir(0);
+        let zCount = 0;
+        let nCount = 0;
+        let dCount = 0;
 
+        if (z) zCount = parseInt(z) || 0;
         if (n) {
             try {
                 const parsed = JSON.parse(n);
-                setNamaz(parsed.filter((p: any) => p.isDone).length);
-            } catch (e) { setNamaz(0); }
-        } else {
-            setNamaz(0);
+                nCount = parsed.filter((p: any) => p.isDone).length;
+            } catch (e) { }
         }
-
         if (d) {
             try {
                 const parsed = JSON.parse(d);
-                setDualar(parsed.length);
-            } catch (e) { setDualar(0); }
-        } else {
-            setDualar(0);
+                dCount = parsed.length;
+            } catch (e) { }
         }
+
+        // State update
+        setZikir(zCount);
+        setNamaz(nCount);
+        setDualar(dCount);
+
+        // Pre-calculate target for the animation to read updated values instead of stale 0 state
+        const calculatedTarget = Math.min(100, Math.floor((nCount * 10) + (zCount / 50) + (dCount * 5)));
 
         // Animate score counter
         const duration = 1500;
@@ -49,7 +54,7 @@ export function IstatistikPaneliView({ onClose }: { onClose: () => void }) {
             // easeOutQuart
             const easeOut = 1 - Math.pow(1 - progress, 4);
 
-            setAnimatedScore(Math.floor(easeOut * TARGET_SCORE));
+            setAnimatedScore(Math.floor(easeOut * calculatedTarget));
 
             if (progress < 1) {
                 requestAnimationFrame(animate);

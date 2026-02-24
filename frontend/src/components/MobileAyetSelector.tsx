@@ -43,9 +43,9 @@ export function MobileAyetSelector({ onSearch, isLoading, activeSure, activeAyet
     };
 
     return (
-        <div className="mb-6 relative z-30 mx-3">
+        <div className="mb-6 mx-3">
             {/* Card container */}
-            <div className="relative overflow-hidden rounded-2xl bg-white dark:bg-[#0D1526] border border-slate-100 dark:border-white/[0.07] shadow-xl transition-colors duration-300">
+            <div className="relative z-30 overflow-hidden rounded-2xl bg-white dark:bg-[#0D1526] border border-slate-100 dark:border-white/[0.07] shadow-xl transition-colors duration-300">
 
                 {/* Subtle ambient glow */}
                 <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 bg-emerald-400/10 dark:bg-emerald-500/[0.06] rounded-full blur-[50px]"></div>
