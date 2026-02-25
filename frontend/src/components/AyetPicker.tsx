@@ -1,4 +1,5 @@
 import { hapticFeedback } from '../lib/constants';
+import { createPortal } from 'react-dom';
 
 interface AyetPickerProps {
     isOpen: boolean;
@@ -18,16 +19,16 @@ export function AyetPicker({ isOpen, onClose, onSelect, maxAyet, selectedAyet = 
 
     const ayets = Array.from({ length: maxAyet }, (_, i) => i + 1);
 
-    return (
+    return createPortal(
         <>
             {/* Backdrop */}
             <div
-                className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 animate-fadeIn"
+                className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] animate-fadeIn"
                 onClick={onClose}
             />
 
             {/* Bottom Sheet */}
-            <div className="fixed inset-x-0 bottom-0 z-50 animate-slideUp">
+            <div className="fixed inset-x-0 bottom-0 z-[70] animate-slideUp">
                 <div className="bg-white dark:bg-[#0D1526] rounded-t-[2rem] shadow-2xl border-t border-slate-100 dark:border-white/[0.07] overflow-hidden">
 
                     {/* Handle */}
@@ -81,6 +82,7 @@ export function AyetPicker({ isOpen, onClose, onSelect, maxAyet, selectedAyet = 
                     </div>
                 </div>
             </div>
-        </>
+        </>,
+        document.body
     );
 }

@@ -167,7 +167,7 @@ function AppContent() {
                     </div>
                 </header>
 
-                <main className="max-w-7xl mx-auto px-4 md:px-6 py-6 md:py-8 relative z-10 min-h-[calc(100vh-200px)]">
+                <main className="max-w-7xl mx-auto px-4 md:px-6 py-6 pb-28 md:py-8 relative z-10 min-h-[calc(100vh-200px)]">
                     {/* Conditional Selector */}
                     {isMobile ? (
                         <MobileAyetSelector
@@ -427,11 +427,102 @@ function AppContent() {
                             {/* Version & year */}
                             <div className="mt-6 text-[9px] font-mono tracking-wider
                                 text-slate-300 dark:text-slate-700">
-                                v2.0 · 2026
                             </div>
                         </div>
                     </div>
                 </footer>
+            </div>
+
+            {/* FLOATING BOTTOM NAVIGATION BAR (Mobil) - Pürüzsüz Liquid Style */}
+            <div className="fixed bottom-6 left-6 right-6 z-50 md:hidden flex justify-center">
+                <div className="bg-white/95 dark:bg-[#151c2a]/95 backdrop-blur-2xl w-full max-w-sm h-[4.25rem] rounded-[2rem] shadow-[0_0_40px_rgba(0,0,0,0.15)] dark:shadow-[0_0_50px_rgba(0,0,0,0.6)] ring-1 ring-slate-900/5 dark:ring-white/10 relative flex items-center px-1">
+
+                    {/* Liquid Indicator Bubble (Grid/Flex Yüzdesi Bazlı) */}
+                    <div
+                        className="absolute top-0 bottom-0 left-1 w-[calc((100%-0.5rem)/5)] flex items-center justify-center transition-transform duration-[450ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] pointer-events-none z-0"
+                        style={{
+                            transform: `translateX(${(!searchParams && !showZikirmatik && !showQibla && !isMenuOpen) ? 0 :
+                                    showZikirmatik ? 100 :
+                                        isMenuOpen ? 200 :
+                                            showQibla ? 300 :
+                                                0
+                                }%)`
+                        }}
+                    >
+                        {/* The Actual Green Bubble Element Tam Ortalanmış */}
+                        <div className="h-[3.5rem] w-[3.5rem] bg-gradient-to-tr from-emerald-600 to-emerald-400 rounded-full shadow-[0_8px_25px_rgba(16,185,129,0.4)] dark:shadow-[0_0_20px_rgba(16,185,129,0.3)]"></div>
+                    </div>
+
+                    {/* 1. Home */}
+                    <button
+                        onClick={() => {
+                            setSearchParams(null);
+                            setSelectedNode(null);
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                            setIsMenuOpen(false);
+                            setShowZikirmatik(false);
+                            setShowQibla(false);
+                        }}
+                        className="flex-1 h-full flex items-center justify-center relative z-10 group"
+                    >
+                        <svg className={`w-6 h-6 transition-all duration-[450ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] ${(!searchParams && !showZikirmatik && !showQibla && !isMenuOpen) ? 'text-white scale-[1.15] drop-shadow-md' : 'text-slate-400 group-hover:text-emerald-500 group-hover:scale-110 group-active:scale-95'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={(!searchParams && !showZikirmatik && !showQibla && !isMenuOpen) ? 2.2 : 1.8} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+                    </button>
+
+                    {/* 2. Zikirmatik */}
+                    <button
+                        onClick={() => {
+                            setShowZikirmatik(true);
+                            setIsMenuOpen(false);
+                            setShowQibla(false);
+                            setSearchParams(null);
+                            setSelectedNode(null);
+                        }}
+                        className="flex-1 h-full flex items-center justify-center relative z-10 group"
+                    >
+                        <svg className={`w-6 h-6 transition-all duration-[450ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] ${showZikirmatik && !isMenuOpen ? 'text-white scale-[1.15] drop-shadow-md' : 'text-slate-400 group-hover:text-emerald-500 group-hover:scale-110 group-active:scale-95'}`} fill="none" stroke="currentColor" strokeWidth={showZikirmatik && !isMenuOpen ? 2.2 : 1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-1.066 2.573c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                    </button>
+
+                    {/* 3. Menü/Keşfet */}
+                    <button
+                        onClick={() => {
+                            setIsMenuOpen(true);
+                            setShowZikirmatik(false);
+                            setShowQibla(false);
+                            setSearchParams(null);
+                            setSelectedNode(null);
+                        }}
+                        className="flex-1 h-full flex items-center justify-center relative z-10 group"
+                    >
+                        <svg className={`w-6 h-6 transition-all duration-[450ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] ${isMenuOpen ? 'text-white scale-[1.15] drop-shadow-md' : 'text-slate-400 group-hover:text-emerald-500 group-hover:scale-110 group-active:scale-95'}`} fill="none" stroke="currentColor" strokeWidth={isMenuOpen ? 2.2 : 1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
+                    </button>
+
+                    {/* 4. Kıble */}
+                    <button
+                        onClick={() => {
+                            setShowQibla(true);
+                            setIsMenuOpen(false);
+                            setShowZikirmatik(false);
+                            setSearchParams(null);
+                            setSelectedNode(null);
+                        }}
+                        className="flex-1 h-full flex items-center justify-center relative z-10 group"
+                    >
+                        <svg className={`w-6 h-6 transition-all duration-[450ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] ${(!isMenuOpen && showQibla) ? 'text-white scale-[1.15] drop-shadow-md' : 'text-slate-400 group-hover:text-emerald-500 group-hover:scale-110 group-active:scale-95'}`} fill="none" stroke="currentColor" strokeWidth={(!isMenuOpen && showQibla) ? 2.2 : 1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
+                    </button>
+
+                    {/* 5. Tema (Dark/Light) */}
+                    <button
+                        onClick={toggleDarkMode}
+                        className="flex-1 h-full flex items-center justify-center relative z-10 group"
+                    >
+                        {isDark ? (
+                            <svg className="w-6 h-6 transition-all duration-[450ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] text-slate-400 group-hover:text-emerald-500 group-hover:scale-110 group-active:scale-95" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                        ) : (
+                            <svg className="w-6 h-6 transition-all duration-[450ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] text-slate-400 group-hover:text-emerald-500 group-hover:scale-110 group-active:scale-95" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+                        )}
+                    </button>
+
+                </div>
             </div>
 
             {/* Menu Drawer */}
