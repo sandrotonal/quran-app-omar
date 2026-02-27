@@ -83,6 +83,27 @@ export function PrayerFocusMode({ isActive, onExit, currentPrayer, suggestion }:
         return () => clearInterval(id);
     }, [isActive]);
 
+    useEffect(() => {
+        if (!isActive) return;
+
+        const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+        const originalContent = metaThemeColor?.getAttribute('content');
+
+        // Odak modunun o anki dark/light modu rengi
+        const focusBgColor = dark ? '#070f1a' : '#f0fdf4';
+
+        if (metaThemeColor) {
+            metaThemeColor.setAttribute('content', focusBgColor);
+        }
+
+        return () => {
+            if (metaThemeColor && originalContent) {
+                // Modül kapanırken eski orjinal renge geri dön
+                metaThemeColor.setAttribute('content', originalContent);
+            }
+        };
+    }, [isActive, dark]);
+
     const handleExit = () => {
         setPhase('out');
         setTimeout(onExit, 600);

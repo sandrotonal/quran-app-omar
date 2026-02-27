@@ -54,34 +54,34 @@ export function PrayerDebtTracker({ onClose }: PrayerDebtTrackerProps) {
     const totalDebt = getTotalDebt();
 
     return (
-        <div className={`fixed inset-0 z-[60] bg-[#0D1526] flex flex-col font-sans select-none overflow-hidden transition-opacity duration-500 ${mounted ? 'opacity-100' : 'opacity-0'}`}>
+        <div className={`fixed inset-0 z-[60] bg-[#fdfbf7] dark:bg-slate-900 text-slate-900 dark:text-slate-50 flex flex-col font-sans select-none overflow-hidden transition-all duration-700 ${mounted ? 'opacity-100' : 'opacity-0'}`}>
 
             {/* ─── Motivation Toast ─── */}
             {showMotivation && (
                 <div className="fixed top-6 left-0 right-0 z-[90] pointer-events-none flex justify-center animate-slideDown">
-                    <div className="bg-[#141f35]/95 backdrop-blur-xl text-emerald-400 px-6 py-3 rounded-2xl shadow-2xl shadow-emerald-900/30 border border-emerald-500/20 font-semibold text-sm flex items-center gap-2.5">
+                    <div className="bg-white/95 dark:bg-slate-800/95 backdrop-blur-xl text-emerald-600 dark:text-emerald-400 px-6 py-3 rounded-2xl shadow-2xl shadow-emerald-500/10 dark:shadow-emerald-900/30 border border-emerald-500/20 font-semibold text-sm flex items-center gap-2.5">
                         <CheckCircle2 className="w-4.5 h-4.5 text-emerald-400" />
                         <span>{showMotivation}</span>
                     </div>
                 </div>
             )}
 
-            {/* Ambient glow blobs */}
-            <div className="pointer-events-none fixed top-0 left-1/2 -translate-x-1/2 w-80 h-40 bg-emerald-500/[0.07] rounded-full blur-[80px]" />
-            <div className="pointer-events-none fixed bottom-20 right-0 w-48 h-48 bg-emerald-500/[0.05] rounded-full blur-[60px]" />
+            {/* Ambient glow blobs - GPU Optimized */}
+            <div className="pointer-events-none fixed top-0 left-1/2 -translate-x-1/2 w-80 h-40 bg-[radial-gradient(ellipse_at_top,_rgba(16,185,129,0.15)_0%,_transparent_70%)]" />
+            <div className="pointer-events-none fixed bottom-20 right-0 w-48 h-48 bg-[radial-gradient(circle_at_center,_rgba(16,185,129,0.1)_0%,_transparent_70%)]" />
 
             {/* ─── Header ─── */}
             <div className="relative px-5 pt-5 pb-4 flex items-center justify-between shrink-0 z-10">
                 <button
                     onClick={onClose}
-                    className="w-9 h-9 flex items-center justify-center rounded-xl bg-white/[0.04] border border-white/[0.07] text-slate-400 hover:text-emerald-400 hover:border-emerald-500/30 transition-all active:scale-95"
+                    className="w-9 h-9 flex items-center justify-center rounded-xl bg-white/50 dark:bg-slate-800/50 border border-slate-300/50 dark:border-slate-700/50 text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:border-emerald-500/30 transition-all active:scale-95"
                 >
                     <ChevronLeft className="w-5 h-5" />
                 </button>
 
                 <div className="text-center">
-                    <p className="text-[9px] font-black text-emerald-500/70 uppercase tracking-[0.3em]">İbadet</p>
-                    <h2 className="text-sm font-bold text-white/80 tracking-widest uppercase">Kaza Takip</h2>
+                    <p className="text-[9px] font-black text-emerald-600/70 dark:text-emerald-500/70 uppercase tracking-[0.3em]">İbadet</p>
+                    <h2 className="text-sm font-bold text-slate-900 dark:text-slate-50 tracking-widest uppercase">Kaza Takip</h2>
                 </div>
 
                 <div className="w-9" />
@@ -91,7 +91,7 @@ export function PrayerDebtTracker({ onClose }: PrayerDebtTrackerProps) {
             <div className="flex-1 overflow-y-auto px-5 pb-20 custom-scrollbar space-y-4">
 
                 {/* HERO COUNTER */}
-                <div className="relative overflow-hidden bg-[#141f35] border border-white/[0.06] rounded-3xl p-7 text-center">
+                <div className="relative overflow-hidden bg-white dark:bg-slate-800 border border-slate-300/40 dark:border-slate-700/40 rounded-3xl p-7 text-center transition-colors duration-500">
                     {/* BG chart */}
                     <div className="absolute inset-0 opacity-[0.08] pointer-events-none text-emerald-500 translate-y-4 scale-x-150">
                         <svg viewBox="0 0 100 40" preserveAspectRatio="none" className="w-full h-full">
@@ -108,16 +108,16 @@ export function PrayerDebtTracker({ onClose }: PrayerDebtTrackerProps) {
 
                     <div className="relative z-10">
                         <div className="mb-1">
-                            <span className={`font-light tracking-tighter text-white font-mono ${totalDebt >= 1000 ? 'text-5xl' : 'text-7xl'}`}>
+                            <span className={`font-light tracking-tighter text-slate-900 dark:text-slate-50 font-mono transition-colors duration-500 ${totalDebt >= 1000 ? 'text-5xl' : 'text-7xl'}`}>
                                 {totalDebt.toLocaleString()}
                             </span>
                         </div>
-                        <div className="text-[10px] font-black uppercase tracking-[0.35em] text-slate-500 mb-5">
+                        <div className="text-[10px] font-black uppercase tracking-[0.35em] text-slate-600 dark:text-slate-400 mb-5 transition-colors duration-500">
                             Vakit Borç
                         </div>
 
                         {/* Progress bar */}
-                        <div className="w-full h-1.5 bg-white/[0.06] rounded-full overflow-hidden mb-4 mx-auto max-w-[220px]">
+                        <div className="w-full h-1.5 bg-slate-200 dark:bg-slate-700/50 rounded-full overflow-hidden mb-4 mx-auto max-w-[220px]">
                             <div
                                 className="h-full bg-gradient-to-r from-emerald-500 to-emerald-400 rounded-full animate-pulse"
                                 style={{ width: totalDebt === 0 ? '100%' : '20%', transition: 'width 1s ease-out' }}
@@ -125,9 +125,9 @@ export function PrayerDebtTracker({ onClose }: PrayerDebtTrackerProps) {
                         </div>
 
                         <div className="flex items-center justify-center gap-2 text-sm">
-                            <TrendingDown className="w-4 h-4 text-emerald-500" />
-                            <span className="text-slate-400">Tahmini Bitiş:</span>
-                            <span className="text-emerald-400 font-bold">{getEstimatedFinishTime()}</span>
+                            <TrendingDown className="w-4 h-4 text-emerald-600 dark:text-emerald-500" />
+                            <span className="text-slate-600 dark:text-slate-400 transition-colors duration-500">Tahmini Bitiş:</span>
+                            <span className="text-emerald-600 dark:text-emerald-400 font-bold">{getEstimatedFinishTime()}</span>
                         </div>
 
                         {totalDebt === 0 && (
@@ -141,28 +141,28 @@ export function PrayerDebtTracker({ onClose }: PrayerDebtTrackerProps) {
 
                 {/* DAILY TARGET */}
                 <div className="flex justify-center">
-                    <div className="relative overflow-hidden flex items-center gap-1 bg-[#141f35] border border-white/[0.07] rounded-2xl p-1.5 shadow-xl">
+                    <div className="relative overflow-hidden flex items-center gap-1 bg-white dark:bg-slate-800 border border-slate-300/40 dark:border-slate-700/40 rounded-2xl p-1.5 shadow-xl transition-colors duration-500">
                         {/* Shimmer */}
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-emerald-500/[0.04] to-transparent -translate-x-full animate-[shimmer_3s_infinite] pointer-events-none rounded-2xl" />
 
                         <button
                             onClick={() => setDailyTarget(Math.max(1, dailyTarget - 1))}
-                            className="w-10 h-10 flex items-center justify-center rounded-xl text-slate-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-all active:scale-90"
+                            className="w-10 h-10 flex items-center justify-center rounded-xl text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-500/10 transition-all active:scale-90"
                         >
                             <Minus className="w-4 h-4" />
                         </button>
 
                         <div className="px-5 flex flex-col items-center min-w-[130px]">
-                            <span className="text-[9px] uppercase tracking-[0.25em] text-slate-500 font-black">Günlük Hedef</span>
+                            <span className="text-[9px] uppercase tracking-[0.25em] text-slate-600 dark:text-slate-400 font-black transition-colors duration-500">Günlük Hedef</span>
                             <div className="flex items-baseline gap-1 mt-0.5">
-                                <span className="text-2xl font-bold text-white">{dailyTarget}</span>
-                                <span className="text-xs text-slate-400">Vakit</span>
+                                <span className="text-2xl font-bold text-slate-900 dark:text-slate-50 transition-colors duration-500">{dailyTarget}</span>
+                                <span className="text-xs text-slate-600 dark:text-slate-400 transition-colors duration-500">Vakit</span>
                             </div>
                         </div>
 
                         <button
                             onClick={() => setDailyTarget(dailyTarget + 1)}
-                            className="w-10 h-10 flex items-center justify-center rounded-xl text-slate-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-all active:scale-90"
+                            className="w-10 h-10 flex items-center justify-center rounded-xl text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-500/10 transition-all active:scale-90"
                         >
                             <Plus className="w-4 h-4" />
                         </button>
@@ -174,7 +174,7 @@ export function PrayerDebtTracker({ onClose }: PrayerDebtTrackerProps) {
                     {/* Section label */}
                     <div className="flex items-center gap-2 px-1">
                         <span className="w-4 h-px bg-gradient-to-r from-transparent to-emerald-400/50" />
-                        <p className="text-[9px] font-black text-emerald-500/70 uppercase tracking-[0.25em]">Namaz Vakitleri</p>
+                        <p className="text-[9px] font-black text-emerald-600/70 dark:text-emerald-500/70 uppercase tracking-[0.25em]">Namaz Vakitleri</p>
                         <span className="flex-1 h-px bg-gradient-to-r from-emerald-400/20 to-transparent" />
                     </div>
 
@@ -186,8 +186,8 @@ export function PrayerDebtTracker({ onClose }: PrayerDebtTrackerProps) {
                                 key={debt.type}
                                 className={`group relative flex items-center gap-3.5 px-4 py-3.5 rounded-2xl border overflow-hidden transition-all duration-300
                                     ${isZero
-                                        ? 'bg-emerald-500/[0.06] border-emerald-500/20'
-                                        : 'bg-[#141f35] border-white/[0.05] hover:border-white/[0.10]'
+                                        ? 'bg-emerald-50 dark:bg-emerald-500/[0.06] border-emerald-500/20'
+                                        : 'bg-white dark:bg-slate-800 border-slate-300/50 dark:border-slate-700/50 hover:border-emerald-500/40'
                                     }`}
                                 style={{ animationDelay: `${0.1 + index * 0.05}s` }}
                             >
@@ -207,10 +207,10 @@ export function PrayerDebtTracker({ onClose }: PrayerDebtTrackerProps) {
                                 </div>
 
                                 {/* Status icon */}
-                                <div className={`relative z-10 w-10 h-10 rounded-full flex items-center justify-center border shrink-0 transition-all duration-300
+                                <div className={`relative z-10 w-10 h-10 rounded-full flex items-center justify-center border shrink-0 transition-colors duration-500
                                     ${isZero
-                                        ? 'border-emerald-500/40 bg-emerald-500/10 text-emerald-400'
-                                        : 'border-slate-700 text-slate-600 group-hover:border-slate-600'
+                                        ? 'border-emerald-500/40 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
+                                        : 'border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-400 group-hover:border-emerald-500/50'
                                     }`}>
                                     {isZero
                                         ? <CheckCircle2 className="w-5 h-5" />
@@ -219,12 +219,12 @@ export function PrayerDebtTracker({ onClose }: PrayerDebtTrackerProps) {
                                 </div>
 
                                 {/* Label */}
-                                <div className="relative z-10 flex-1 min-w-0">
+                                <div className="relative z-10 flex-1 min-w-0 transition-colors duration-500">
                                     <div className={`text-[15px] font-bold leading-tight capitalize
-                                        ${isZero ? 'text-emerald-400' : 'text-white'}`}>
+                                        ${isZero ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-900 dark:text-slate-50'}`}>
                                         {PrayerDebtService.getLabel(debt.type)}
                                     </div>
-                                    <div className="text-[11px] text-slate-500 mt-0.5">
+                                    <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
                                         {isZero ? 'Tamamlandı ✓' : `${debt.count} borç`}
                                     </div>
                                 </div>
@@ -236,21 +236,21 @@ export function PrayerDebtTracker({ onClose }: PrayerDebtTrackerProps) {
                                         disabled={isZero}
                                         className={`w-9 h-9 flex items-center justify-center rounded-xl transition-all active:scale-90
                                             ${isZero
-                                                ? 'bg-white/[0.03] text-slate-700 cursor-not-allowed'
-                                                : 'bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500 hover:text-white border border-emerald-500/20 hover:border-emerald-500 hover:shadow-md hover:shadow-emerald-500/20'
+                                                ? 'bg-white dark:bg-slate-800 border border-slate-300/50 dark:border-slate-700/50 text-slate-300 dark:text-slate-600 cursor-not-allowed'
+                                                : 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500 hover:text-white border border-emerald-500/20 hover:border-emerald-500 hover:shadow-md hover:shadow-emerald-500/20'
                                             }`}
                                     >
                                         <Minus className="w-3.5 h-3.5" />
                                     </button>
 
-                                    <span className={`font-mono text-lg font-bold w-10 text-center
-                                        ${isZero ? 'text-emerald-400/60' : 'text-white'}`}>
+                                    <span className={`font-mono text-lg font-bold w-10 text-center transition-colors duration-500
+                                        ${isZero ? 'text-emerald-600/60 dark:text-emerald-400/60' : 'text-slate-800 dark:text-slate-100'}`}>
                                         {debt.count}
                                     </span>
 
                                     <button
                                         onClick={() => handleUpdate(debt.type, 1)}
-                                        className="w-9 h-9 flex items-center justify-center rounded-xl bg-white/[0.05] border border-white/[0.07] text-slate-400 hover:text-white hover:bg-white/[0.10] hover:border-white/[0.15] transition-all active:scale-90"
+                                        className="w-9 h-9 flex items-center justify-center rounded-xl bg-white/50 dark:bg-slate-800/50 border border-slate-300/50 dark:border-slate-700/50 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50 hover:bg-white dark:hover:bg-slate-800 hover:border-slate-300 dark:hover:border-slate-600 transition-all active:scale-90"
                                     >
                                         <Plus className="w-3.5 h-3.5" />
                                     </button>

@@ -20,6 +20,24 @@ export function SplashScreen({ onFinish }: SplashScreenProps) {
         return () => ts.forEach(clearTimeout);
     }, [onFinish]);
 
+    // Handle theme color change for PWA/Browser Titlebar during Splash Screen
+    useEffect(() => {
+        const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+        const originalContent = metaThemeColor?.getAttribute('content');
+
+        // Splash ekranı her zaman karanlık, bu rengi koruyoruz
+        if (metaThemeColor) {
+            metaThemeColor.setAttribute('content', '#070f1a');
+        }
+
+        return () => {
+            if (metaThemeColor && originalContent) {
+                // Splash bittiğinde tarayıcı title bar eski orjinal renge geri dön
+                metaThemeColor.setAttribute('content', originalContent);
+            }
+        };
+    }, []);
+
     const exiting = stage >= 5;
 
     return (

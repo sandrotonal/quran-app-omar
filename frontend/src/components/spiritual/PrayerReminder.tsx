@@ -109,6 +109,27 @@ export function PrayerReminder({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isActive]);
 
+    // Handle theme color change for PWA/Browser Titlebar
+    useEffect(() => {
+        if (!isActive) return;
+
+        const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+        const originalContent = metaThemeColor?.getAttribute('content');
+
+        // Namaz Modu (PrayerReminder) background colors
+        const modalBgColor = dark ? '#06101e' : '#f0fdf4';
+
+        if (metaThemeColor) {
+            metaThemeColor.setAttribute('content', modalBgColor);
+        }
+
+        return () => {
+            if (metaThemeColor && originalContent) {
+                metaThemeColor.setAttribute('content', originalContent);
+            }
+        };
+    }, [isActive, dark]);
+
     const dismiss = (action: () => void) => {
         setPhase('out');
         setTimeout(() => { setVisible(false); document.body.style.overflow = ''; action(); }, 500);

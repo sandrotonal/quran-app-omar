@@ -621,5 +621,26 @@
     "ayet_no": 6,
     "arabic_text": "ٱهْدِنَا ٱلصِّرَٰطَ ٱلْمُسْتَقِيمَ",
     "turkish_text": "(6-7) Bizi doğru yola, kendilerine nimet verdiklerinin yoluna ilet; gazaba uğrayanlarınkine ve sapıklarınkine değil."
+  },
+  {
+    "id": 90,
+    "sure_no": 12,
+    "ayet_no": 2,
+    "arabic_text": "إِنَّآ أَنزَلْنَٰهُ قُرْءَٰنًا عَرَبِيًّۭا لَّعَلَّكُمْ تَعْقِلُونَ",
+    "turkish_text": "Biz onu, akıl erdiresiniz diye Arapça bir Kur'an olarak indirdik."
+  },
+  {
+    "id": 91,
+    "sure_no": 2,
+    "ayet_no": 14,
+    "arabic_text": "وَإِذَا لَقُوا۟ ٱلَّذِينَ ءَامَنُوا۟ قَالُوٓا۟ ءَامَنَّا وَإِذَا خَلَوْا۟ إِلَىٰ شَيَٰطِينِهِمْ قَالُوٓا۟ إِنَّا مَعَكُمْ إِنَّمَا نَحْنُ مُسْتَهْزِءُونَ",
+    "turkish_text": "İman edenlerle karşılaştıkları zaman, \"İnandık\" derler. Fakat şeytanlarıyla (münafık dostlarıyla) yalnız kaldıkları zaman, \"Şüphesiz, biz sizinle beraberiz. Biz ancak onlarla alay ediyoruz\" derler."
+  },
+  {
+    "id": 92,
+    "sure_no": 14,
+    "ayet_no": 4,
+    "arabic_text": "وَمَآ أَرْسَلْنَا مِن رَّسُولٍ إِلَّا بِلِسَانِ قَوْمِهِۦ لِيُبَيِّنَ لَهُمْ ۖ فَيُضِلُّ ٱللَّهُ مَن يَشَآءُ وَيَهْدِى مَن يَشَآءُ ۚ وَهُوَ ٱلْعَزِيزُ ٱلْحَكِيمُ",
+    "turkish_text": "Biz her peygamberi, ancak kendi kavminin diliyle gönderdik ki, onlara (Allah'ın emirlerini) iyice açıklasın. Allah, dilediğini saptırır, dilediğini de doğru yola iletir. O, mutlak güç sahibidir, hüküm ve hikmet sahibidir."
   }
 ]
