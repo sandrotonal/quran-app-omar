@@ -1,5 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { hapticFeedback } from '../../lib/constants';
+
+// --- RAMAZAN GÜNLÜK İÇERİKLERİ ---
+const RAMADAN_DUAS = [
+    { arabic: "اللَّهُمَّ إِنِّي لَكَ صُمْتُ وَبِكَ آمَنْتُ وَعَلَيْكَ تَوَكَّلْتُ وَعَلَى رِزْقِكَ أَفْطَرْتُ", tr: "Allah'ım! Senin rızan için oruç tuttum, sana inandım, sana güvendim ve senin verdiğin rızıkla orucumu açtım." },
+    { arabic: "ذَهَبَ الظَّمَأُ وَابْتَلَّتِ الْعُرُوقُ وَثَبَتَ الأَجْرُ إِنْ شَاءَ اللَّهُ", tr: "Susuzluk gitti, damarlar ıslandı ve inşallah mükafat sabit oldu." },
+    { arabic: "اللَّهُمَّ لَكَ صُمْنَا وَعَلَى رِزْقِكَ أَفْطَرْنَا فَتَقَبَّلْ مِنَّا إِنَّكَ أَنْتَ السَّمِيعُ الْعَلِيمُ", tr: "Allah'ım! Senin için oruç tuttuk, senin verdiğin rızıkla iftar ettik. Bizden kabul buyur. Şüphesiz Sen, hakkıyla işiten, hakkıyla bilensin." }
+];
+
+const RAMADAN_MISSIONS = [
+    { title: "Sadaka Ver", desc: "Miktarı hiç önemli değil; bugün bir ihtiyaç sahibine veya kuruma bağışta bulun." },
+    { title: "Sıla-i Rahim", desc: "Bugün uzun zamandır görüşmediğin bir akrabanı veya dostunu arayıp halini hatırını sor." },
+    { title: "Tebessüm Et", desc: "Bugün karşılaştığın insanlara içten bir tebessüm et, selamlaş. Tebessüm sadakadır." },
+    { title: "Kuşlara Su Ver", desc: "Pencerene veya sokağına kuşlar/kediler için bir kap su koy. Yaradılanı Yaradandan ötürü sev." },
+    { title: "Kur'an ile Başbaşa", desc: "Bugün televizyondan, sosyal medyadan uzak kalıp en az 10 sayfa ekstra Kur'an oku." }
+];
 
 export function RamadanOzelView({ onClose }: { onClose: () => void }) {
     const [teravih, setTeravih] = useState(false);
@@ -14,6 +29,14 @@ export function RamadanOzelView({ onClose }: { onClose: () => void }) {
         const m = localStorage.getItem('ramadan_mission_' + today);
         if (t === 'true') setTeravih(true);
         if (m === 'true') setMission(true);
+    }, []);
+
+    const dailyContent = useMemo(() => {
+        const dayOfMonth = new Date().getDate();
+        return {
+            dua: RAMADAN_DUAS[dayOfMonth % RAMADAN_DUAS.length],
+            mission: RAMADAN_MISSIONS[dayOfMonth % RAMADAN_MISSIONS.length]
+        };
     }, []);
 
     const handleClose = () => {
@@ -86,10 +109,10 @@ export function RamadanOzelView({ onClose }: { onClose: () => void }) {
                         </div>
                         <div className="space-y-6 relative z-10 w-full">
                             <p className="text-3xl md:text-5xl font-arabic text-emerald-800 dark:text-emerald-500 text-right md:text-center opacity-90 leading-relaxed md:leading-loose drop-shadow-sm transition-transform duration-700 group-hover:scale-[1.02]" dir="rtl">
-                                اللَّهُمَّ إِنِّي لَكَ صُمْتُ وَبِكَ آمَنْتُ وَعَلَيْكَ تَوَكَّلْتُ وَعَلَى رِزْقِكَ أَفْطَرْتُ
+                                {dailyContent.dua.arabic}
                             </p>
                             <p className="text-sm md:text-base font-serif font-semibold text-slate-600 dark:text-slate-400 leading-relaxed text-center max-w-2xl mx-auto italic">
-                                "Allah'ım! Senin rızan için oruç tuttum, sana inandım, sana güvendim ve senin verdiğin rızıkla orucumu açtım."
+                                "{dailyContent.dua.tr}"
                             </p>
                         </div>
                     </div>
@@ -128,8 +151,8 @@ export function RamadanOzelView({ onClose }: { onClose: () => void }) {
                                 <span className="inline-block px-3 py-1.5 bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 text-[10px] font-bold uppercase tracking-widest rounded-lg mb-4 shadow-sm">
                                     Günün İyiliği
                                 </span>
-                                <h4 className="font-bold text-xl font-serif text-slate-900 dark:text-white mb-2">Sadaka Ver</h4>
-                                <p className="text-[13px] font-medium text-slate-500 dark:text-slate-400 leading-relaxed">Miktarı hiç önemli değil; bugün bir ihtiyaç sahibine veya kuruma bağışta bulun.</p>
+                                <h4 className="font-bold text-xl font-serif text-slate-900 dark:text-white mb-2">{dailyContent.mission.title}</h4>
+                                <p className="text-[13px] font-medium text-slate-500 dark:text-slate-400 leading-relaxed">{dailyContent.mission.desc}</p>
                             </div>
                             <button
                                 onClick={toggleMission}
