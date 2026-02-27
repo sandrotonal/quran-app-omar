@@ -147,8 +147,9 @@ export const PrayerTimesService = {
         };
 
         const list = suggestions[prayerId] || suggestions['other'];
-        // Günlük/Anlık rastgele seçim (Basit random)
-        const randomIndex = Math.floor(Math.random() * list.length);
-        return list[randomIndex];
+        // Günlük sabit seçim (Ayın gününe göre)
+        const dayOfMonth = new Date().getDate();
+        const dailyIndex = dayOfMonth % list.length;
+        return list[dailyIndex];
     }
 };

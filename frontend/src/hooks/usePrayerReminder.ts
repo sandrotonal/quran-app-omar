@@ -16,10 +16,11 @@ export function usePrayerReminder() {
     const [content, setContent] = useState(SPIRITUAL_CONTENT[0]);
     const [timeLeft, setTimeLeft] = useState(20); // Auto-close timer
 
-    // Select random content when activated
+    // Select daily content when activated (based on day of month)
     const activate = useCallback(() => {
-        const randomIndex = Math.floor(Math.random() * SPIRITUAL_CONTENT.length);
-        setContent(SPIRITUAL_CONTENT[randomIndex]);
+        const dayOfMonth = new Date().getDate();
+        const dailyIndex = dayOfMonth % SPIRITUAL_CONTENT.length;
+        setContent(SPIRITUAL_CONTENT[dailyIndex]);
         setTimeLeft(20);
         setIsActive(true);
     }, []);
