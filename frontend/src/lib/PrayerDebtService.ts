@@ -1,5 +1,7 @@
 export type PrayerType = 'sabah' | 'ogle' | 'ikindi' | 'aksam' | 'yatsi' | 'vitir';
 
+import { SecureStorage } from '../utils/SecureStorage';
+
 export interface PrayerDebt {
     type: PrayerType;
     count: number;
@@ -17,14 +19,19 @@ const DEFAULT_DEBTS: PrayerDebt[] = [
 ];
 
 export const PrayerDebtService = {
+    // Add a helper method to get default debts, as the new getDebts logic uses it
+    getDefaultDebts(): PrayerDebt[] {
+        return DEFAULT_DEBTS;
+    },
+
     getDebts(): PrayerDebt[] {
         try {
-            const stored = localStorage.getItem(STORAGE_KEY);
+            // Use SecureStorage.getItem, no JSON.parse needed as SecureStorage handles serialization
+            const stored = SecureStorage.getItem<PrayerDebt[]>(STORAGE_KEY);
             if (stored) {
-                const parsed = JSON.parse(stored);
                 // Merge with defaults to ensure all types exist if schema changes
                 return DEFAULT_DEBTS.map(def => {
-                    const found = parsed.find((p: PrayerDebt) => p.type === def.type);
+                    const found = stored.find((p: PrayerDebt) => p.type === def.type);
                     return found ? found : def;
                 });
             }
@@ -36,7 +43,8 @@ export const PrayerDebtService = {
 
     saveDebts(debts: PrayerDebt[]) {
         try {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(debts));
+            // Use SecureStorage.setItem, no JSON.stringify needed as SecureStorage handles serialization
+            SecureStorage.setItem(STORAGE_KEY, debts);
             // Trigger a custom event so other components can update if needed
             window.dispatchEvent(new Event('prayer-debt-update'));
         } catch (error) {

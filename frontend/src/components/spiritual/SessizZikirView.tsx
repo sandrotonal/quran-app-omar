@@ -8,6 +8,21 @@ export function SessizZikirView({ onClose }: { onClose: () => void }) {
 
     useEffect(() => {
         requestAnimationFrame(() => requestAnimationFrame(() => setIsVisible(true)));
+
+        // PWA & Browser Title Bar Tema Rengini Siyah Yapma
+        const metaThemeColor = document.getElementById('meta-theme-color') as HTMLMetaElement | null;
+        let originalColor = '#070f1a'; // Fallback
+
+        if (metaThemeColor) {
+            originalColor = metaThemeColor.content;
+            metaThemeColor.content = '#000000';
+        }
+
+        return () => {
+            if (metaThemeColor) {
+                metaThemeColor.content = originalColor;
+            }
+        };
     }, []);
 
     const handleClose = () => {

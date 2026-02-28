@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { hapticFeedback } from '../../lib/constants';
 
 // --- RAMAZAN GÜNLÜK İÇERİKLERİ ---
@@ -16,7 +16,7 @@ const RAMADAN_MISSIONS = [
     { title: "Kur'an ile Başbaşa", desc: "Bugün televizyondan, sosyal medyadan uzak kalıp en az 10 sayfa ekstra Kur'an oku." }
 ];
 
-export function RamadanOzelView({ onClose }: { onClose: () => void }) {
+export const RamadanOzelView = React.memo(function RamadanOzelView({ onClose }: { onClose: () => void }) {
     const [teravih, setTeravih] = useState(false);
     const [mission, setMission] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
@@ -177,4 +177,4 @@ export function RamadanOzelView({ onClose }: { onClose: () => void }) {
             </div>
         </div>
     );
-}
+});

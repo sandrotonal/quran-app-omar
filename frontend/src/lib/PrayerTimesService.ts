@@ -1,5 +1,5 @@
-
 import { Coordinates, CalculationMethod, PrayerTimes } from 'adhan';
+import { SecureStorage } from '../utils/SecureStorage';
 
 export interface PrayerTimeInfo {
     name: string;
@@ -16,9 +16,9 @@ export const PrayerTimesService = {
     async getUserLocation(): Promise<{ lat: number, lng: number }> {
         // 1. Try Cache First (Instant Load)
         try {
-            const cached = localStorage.getItem('userLocation');
+            const cached = SecureStorage.getItem<{ lat: number, lng: number }>('userLocation');
             if (cached) {
-                return JSON.parse(cached);
+                return cached;
             }
         } catch (e) {
             console.error("Cache read error", e);
@@ -37,7 +37,7 @@ export const PrayerTimesService = {
                         lat: position.coords.latitude,
                         lng: position.coords.longitude
                     };
-                    localStorage.setItem('userLocation', JSON.stringify(loc)); // Save for next time
+                    SecureStorage.setItem('userLocation', loc); // Save for next time
                     resolve(loc);
                 },
                 (error) => {

@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { SecureStorage } from '../utils/SecureStorage';
 
 const STORAGE_PREFIX = 'kuran_app_note_';
 
@@ -10,7 +11,7 @@ export function usePrivateNotes(sure: number, ayet: number) {
 
     // Load initial note
     useEffect(() => {
-        const saved = localStorage.getItem(key);
+        const saved = SecureStorage.getItem<string>(key);
         if (saved) {
             setNote(saved);
         } else {
@@ -21,7 +22,7 @@ export function usePrivateNotes(sure: number, ayet: number) {
     // Debounced save function
     const saveNote = useCallback((text: string) => {
         setIsSaving(true);
-        localStorage.setItem(key, text);
+        SecureStorage.setItem(key, text);
 
         // Improve UX by showing "Saved" briefly
         setTimeout(() => {

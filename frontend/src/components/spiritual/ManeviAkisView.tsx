@@ -1,5 +1,10 @@
-import { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
+import { Sparkles, Heart, Quote, ArrowRight, BookOpen, Clock, Activity } from 'lucide-react';
 import { hapticFeedback } from '../../lib/constants';
+
+interface ManeviAkisViewProps {
+    onClose: () => void;
+}
 
 // --- GÜNLÜK DEĞİŞEN VERİ HAVUZLARI ---
 const DAILY_AYETS = [
@@ -35,7 +40,7 @@ const DAILY_REFLECTIONS = [
     { title: "Affetmenin Hafifliği", text: "Kırgınlıklar, sırtta taşınan ağır yüklerdir. Allah affedicidir, affedenleri sever. Sen seni yoran o yükten kurtulup bugün birini affedebilir misin?" }
 ];
 
-export function ManeviAkisView({ onClose }: { onClose: () => void }) {
+export const ManeviAkisView = React.memo(function ManeviAkisView({ onClose }: ManeviAkisViewProps) {
     const [actionDone, setActionDone] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
 
@@ -215,4 +220,4 @@ export function ManeviAkisView({ onClose }: { onClose: () => void }) {
             </div>
         </div>
     );
-}
+});

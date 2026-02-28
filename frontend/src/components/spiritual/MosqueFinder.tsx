@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Mosque, MosqueService } from '../../lib/MosqueService';
 import { MosqueMap } from './MosqueMap';
 import { Locate, Map as MapIcon, List, Navigation } from 'lucide-react';
@@ -7,7 +7,7 @@ interface MosqueFinderProps {
     onClose: () => void;
 }
 
-export function MosqueFinder({ onClose }: MosqueFinderProps) {
+export const MosqueFinder = React.memo(function MosqueFinder({ onClose }: MosqueFinderProps) {
     const [viewMode, setViewMode] = useState<'list' | 'map'>('list');
     const [mosques, setMosques] = useState<Mosque[]>([]);
     const [loading, setLoading] = useState(true);
@@ -86,8 +86,8 @@ export function MosqueFinder({ onClose }: MosqueFinderProps) {
                                 key={mode}
                                 onClick={() => setViewMode(mode)}
                                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${viewMode === mode
-                                        ? 'bg-emerald-500 text-white shadow-md shadow-emerald-500/25'
-                                        : 'text-slate-400 dark:text-slate-600 hover:text-slate-700 dark:hover:text-slate-400'
+                                    ? 'bg-emerald-500 text-white shadow-md shadow-emerald-500/25'
+                                    : 'text-slate-400 dark:text-slate-600 hover:text-slate-700 dark:hover:text-slate-400'
                                     }`}
                             >
                                 {icon}
@@ -292,4 +292,4 @@ export function MosqueFinder({ onClose }: MosqueFinderProps) {
             </div>
         </div>
     );
-}
+});

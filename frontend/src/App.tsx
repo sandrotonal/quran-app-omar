@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
+import { GlobalErrorBoundary } from './components/GlobalErrorBoundary';
 import { AyetSelector } from './components/AyetSelector';
 import { MobileAyetSelector } from './components/MobileAyetSelector';
 import { SemanticGraph } from './components/SemanticGraph';
@@ -15,7 +16,6 @@ import { AyetContextSection } from './components/AyetContextSection';
 import { PrayerTimesCard } from './components/spiritual/PrayerTimesCard';
 import { QiblaCompass } from './components/spiritual/QiblaCompass';
 import { EsmaulHusnaView } from './components/spiritual/EsmaulHusnaView';
-import { MosqueFinder } from './components/spiritual/MosqueFinder';
 import { PrayerDebtTracker } from './components/spiritual/PrayerDebtTracker';
 import { ReligiousDaysView } from './components/spiritual/ReligiousDaysView';
 import { ZikirmatikView } from './components/spiritual/ZikirmatikView';
@@ -23,16 +23,21 @@ import { ReligiousDayAlert } from './components/spiritual/ReligiousDayAlert';
 import { NotificationManager } from './components/spiritual/NotificationManager';
 import { RamadanCountdown } from './components/spiritual/RamadanCountdown';
 import { KabeLiveStream } from './components/spiritual/KabeLiveStream';
-import { ManeviAkisView } from './components/spiritual/ManeviAkisView';
 import { NamazAsistaniView } from './components/spiritual/NamazAsistaniView';
-import { RamadanOzelView } from './components/spiritual/RamadanOzelView';
 import { HatimTakipView } from './components/spiritual/HatimTakipView';
 import { DuaDefteriView } from './components/spiritual/DuaDefteriView';
 import { KuranDinlemeView } from './components/spiritual/KuranDinlemeView';
 import { SessizZikirView } from './components/spiritual/SessizZikirView';
-import { IstatistikPaneliView } from './components/spiritual/IstatistikPaneliView';
 import { AudioProvider } from './context/AudioContext';
 import { AudioMiniPlayer } from './components/spiritual/AudioMiniPlayer';
+
+// Lazy Loaded Modal and Heavy Views (Code Splitting)
+const IstatistikPaneliView = lazy(() => import('./components/spiritual/IstatistikPaneliView').then(m => ({ default: m.IstatistikPaneliView })));
+const PremiumSupportView = lazy(() => import('./components/PremiumSupportView').then(m => ({ default: m.PremiumSupportView })));
+const ManeviAkisView = lazy(() => import('./components/spiritual/ManeviAkisView').then(m => ({ default: m.ManeviAkisView })));
+const RamadanOzelView = lazy(() => import('./components/spiritual/RamadanOzelView').then(m => ({ default: m.RamadanOzelView })));
+const MosqueFinder = lazy(() => import('./components/spiritual/MosqueFinder').then(m => ({ default: m.MosqueFinder })));
+
 
 const queryClient = new QueryClient();
 
@@ -57,6 +62,8 @@ function AppContent() {
     const [showKuranDinleme, setShowKuranDinleme] = useState(false);
     const [showSessizZikir, setShowSessizZikir] = useState(false);
     const [showIstatistik, setShowIstatistik] = useState(false);
+    const [showPremium, setShowPremium] = useState(false);
+
 
     const { isMobile } = useResponsive();
 
@@ -101,7 +108,7 @@ function AppContent() {
     };
 
     return (
-        <>
+        <GlobalErrorBoundary>
             {showSplash && <SplashScreen onFinish={() => setShowSplash(false)} />}
             <div className={isDark ? 'dark' : ''}>
                 <div className="min-h-screen bg-theme-bg text-theme-text transition-colors duration-500 animate-fadeIn relative overflow-x-hidden">
@@ -551,6 +558,7 @@ function AppContent() {
                     onOpenKuranDinleme={() => { setIsMenuOpen(false); setShowKuranDinleme(true); }}
                     onOpenSessizZikir={() => { setIsMenuOpen(false); setShowSessizZikir(true); }}
                     onOpenIstatistik={() => { setIsMenuOpen(false); setShowIstatistik(true); }}
+                    onOpenPremium={() => { setIsMenuOpen(false); setShowPremium(true); }}
                 />
 
                 {/* Qibla Compass Overlay */}
@@ -565,7 +573,9 @@ function AppContent() {
 
                 {/* Mosque Finder Overlay */}
                 {showMosqueFinder && (
-                    <MosqueFinder onClose={() => setShowMosqueFinder(false)} />
+                    <Suspense fallback={null}>
+                        <MosqueFinder onClose={() => setShowMosqueFinder(false)} />
+                    </Suspense>
                 )}
 
                 {/* Prayer Debt Tracker Overlay */}
@@ -590,7 +600,9 @@ function AppContent() {
 
                 {/* Manevi Akış Overlay */}
                 {showManeviAkis && (
-                    <ManeviAkisView onClose={() => setShowManeviAkis(false)} />
+                    <Suspense fallback={null}>
+                        <ManeviAkisView onClose={() => setShowManeviAkis(false)} />
+                    </Suspense>
                 )}
 
                 {/* Namaz Asistanı Overlay */}
@@ -600,7 +612,9 @@ function AppContent() {
 
                 {/* Ramazan Özel Overlay */}
                 {showRamadanOzel && (
-                    <RamadanOzelView onClose={() => setShowRamadanOzel(false)} />
+                    <Suspense fallback={null}>
+                        <RamadanOzelView onClose={() => setShowRamadanOzel(false)} />
+                    </Suspense>
                 )}
 
                 {/* Hatim Takip Overlay */}
@@ -624,14 +638,23 @@ function AppContent() {
                 )}
 
                 {/* İstatistik Paneli Overlay */}
-                {showIstatistik && (
-                    <IstatistikPaneliView onClose={() => setShowIstatistik(false)} />
-                )}
+                <Suspense fallback={null}>
+                    {showIstatistik && (
+                        <IstatistikPaneliView onClose={() => setShowIstatistik(false)} />
+                    )}
+                </Suspense>
+
+                {/* Premium & Support Overlay */}
+                <Suspense fallback={null}>
+                    {showPremium && (
+                        <PremiumSupportView onClose={() => setShowPremium(false)} />
+                    )}
+                </Suspense>
 
                 {/* Global Mini Player */}
                 <AudioMiniPlayer onExpand={() => setShowKuranDinleme(true)} />
             </div>
-        </>
+        </GlobalErrorBoundary>
     );
 }
 

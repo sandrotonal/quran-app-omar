@@ -100,9 +100,6 @@ export function MobileAyetSelector({ onSearch, isLoading, activeSure, activeAyet
                     ) : (
                         <>
                             <span className="text-[11px] font-black text-emerald-500 dark:text-emerald-400 uppercase tracking-[0.2em] group-hover:tracking-[0.28em] transition-all duration-300">KEŞFET & OKU</span>
-                            <svg className="w-4 h-4 text-emerald-400 group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                            </svg>
                             {/* Sheen sweep */}
                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-emerald-500/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out pointer-events-none"></div>
                         </>

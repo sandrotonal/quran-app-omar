@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { SecureStorage } from '../utils/SecureStorage';
 
 // Collection of short, impactful spiritual content (Ayat/Hadith/Dua)
 const SPIRITUAL_CONTENT = [
@@ -58,13 +59,15 @@ export function usePrayerReminder() {
 
     // Mute Logic (Persist to localStorage)
     const [isMuted, setIsMuted] = useState(() => {
-        return localStorage.getItem('prayer_reminder_muted') === 'true';
+        // SecureStorage.getItem directly returns the parsed value (e.g., boolean true/false)
+        return SecureStorage.getItem('prayer_reminder_muted') === true;
     });
 
     const toggleMute = useCallback(() => {
         setIsMuted(prev => {
             const newState = !prev;
-            localStorage.setItem('prayer_reminder_muted', String(newState));
+            // SecureStorage.setItem stores the actual boolean value
+            SecureStorage.setItem('prayer_reminder_muted', newState);
             if (newState) setIsActive(false); // Close if muting
             return newState;
         });

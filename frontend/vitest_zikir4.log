@@ -1,0 +1,304 @@
+
+[1m[46m RUN [49m[22m [36mv4.0.18 [39m[90mC:/Users/ACER NİTRO/kuran/frontend[39m
+
+ [31m❯[39m src/components/spiritual/ZikirmatikView.test.tsx [2m([22m[2m4 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[33m 1170[2mms[22m[39m
+     [32m✓[39m should render initial state correctly (Count: 0, Target: 33)[32m 54[2mms[22m[39m
+     [32m✓[39m should increment count when the large interaction area is clicked and trigger storage save[32m 24[2mms[22m[39m
+     [32m✓[39m should reset the count when the refresh button is clicked[32m 11[2mms[22m[39m
+[31m     [31m×[31m should show completion modal when target is reached[39m[33m 1078[2mms[22m[39m
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m3 passed[39m[22m[90m (4)[39m
+[2m   Start at [22m 17:08:52
+[2m   Duration [22m 3.38s[2m (transform 231ms, setup 269ms, import 425ms, tests 1.17s, environment 1.04s)[22m
+
+
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 1 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/components/spiritual/ZikirmatikView.test.tsx[2m > [22mZikirmatikView Component[2m > [22mshould show completion modal when target is reached
+[31m[1mTestingLibraryElementError[22m[39m: Unable to find an element with the text: Hedefe Ulaşıldı!. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"fixed inset-0 z-[60] bg-theme-bg/95 backdrop-blur-3xl flex flex-col animate-fadeIn overflow-hidden text-theme-text h-full"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"px-6 py-6 flex items-center justify-between shrink-0 relative z-20"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-3"[39m
+        [36m>[39m
+          [36m<button[39m
+            [33mclass[39m=[32m"p-3 -ml-2 rounded-full hover:bg-theme-surface/50 text-theme-text transition-all active:scale-95 group"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33mclass[39m=[32m"w-6 h-6 group-hover:-translate-x-1 transition-transform"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M15 19l-7-7 7-7"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"1.5"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+          [36m</button>[39m
+          [36m<h2[39m
+            [33mclass[39m=[32m"text-xl font-bold font-serif tracking-wide opacity-0 animate-slideRight"[39m
+            [33mstyle[39m=[32m"animation-delay: 0.1s; animation-fill-mode: forwards;"[39m
+          [36m>[39m
+            [0mZikirmatik[0m
+          [36m</h2>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex gap-2"[39m
+        [36m>[39m
+          [36m<button[39m
+            [33mclass[39m=[32m"p-2.5 rounded-full border transition-colors bg-emerald-50 text-emerald-600 border-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/30"[39m
+            [33mtitle[39m=[32m"Sesi Kapat"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33mclass[39m=[32m"w-5 h-5"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"1.5"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+          [36m</button>[39m
+          [36m<button[39m
+            [33mclass[39m=[32m"p-2.5 rounded-full bg-theme-surface border border-theme-border/50 text-theme-muted hover:text-emerald-500 transition-colors"[39m
+            [33mtitle[39m=[32m"Hedef Belirle"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33mclass[39m=[32m"w-5 h-5"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-1.066 2.573c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"1.5"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M15 12a3 3 0 11-6 0 3 3 0 016 0z"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"1.5"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+          [36m</button>[39m
+          [36m<button[39m
+            [33mclass[39m=[32m"p-2.5 rounded-full bg-theme-surface border border-theme-border/50 text-theme-muted hover:text-red-500 transition-colors"[39m
+            [33mtitle[39m=[32m"Sıfırla"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33mclass[39m=[32m"w-5 h-5"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"1.5"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+          [36m</button>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"flex-1 flex flex-col items-center justify-center relative p-6 cursor-pointer select-none"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"relative w-72 h-72 sm:w-80 sm:h-80 mx-auto flex items-center justify-center"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"absolute inset-0 rounded-full border-8 border-theme-border/30"[39m
+          [36m/>[39m
+          [36m<svg[39m
+            [33mclass[39m=[32m"w-full h-full -rotate-90 transform absolute inset-0 pointer-events-none"[39m
+          [36m>[39m
+            [36m<defs>[39m
+              [36m<lineargradient[39m
+                [33mid[39m=[32m"zikirGradient"[39m
+                [33mx1[39m=[32m"0%"[39m
+                [33mx2[39m=[32m"100%"[39m
+                [33my1[39m=[32m"0%"[39m
+                [33my2[39m=[32m"100%"[39m
+              [36m>[39m
+                [36m<stop[39m
+                  [33moffset[39m=[32m"0%"[39m
+                  [33mstop-color[39m=[32m"#10B981"[39m
+                [36m/>[39m
+                [36m<stop[39m
+                  [33moffset[39m=[32m"100%"[39m
+                  [33mstop-color[39m=[32m"#34D399"[39m
+                [36m/>[39m
+              [36m</lineargradient>[39m
+            [36m</defs>[39m
+            [36m<circle[39m
+              [33mclass[39m=[32m"text-theme-border/20"[39m
+              [33mcx[39m=[32m"50%"[39m
+              [33mcy[39m=...
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"fixed inset-0 z-[60] bg-theme-bg/95 backdrop-blur-3xl flex flex-col animate-fadeIn overflow-hidden text-theme-text h-full"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"px-6 py-6 flex items-center justify-between shrink-0 relative z-20"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-3"[39m
+        [36m>[39m
+          [36m<button[39m
+            [33mclass[39m=[32m"p-3 -ml-2 rounded-full hover:bg-theme-surface/50 text-theme-text transition-all active:scale-95 group"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33mclass[39m=[32m"w-6 h-6 group-hover:-translate-x-1 transition-transform"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M15 19l-7-7 7-7"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"1.5"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+          [36m</button>[39m
+          [36m<h2[39m
+            [33mclass[39m=[32m"text-xl font-bold font-serif tracking-wide opacity-0 animate-slideRight"[39m
+            [33mstyle[39m=[32m"animation-delay: 0.1s; animation-fill-mode: forwards;"[39m
+          [36m>[39m
+            [0mZikirmatik[0m
+          [36m</h2>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex gap-2"[39m
+        [36m>[39m
+          [36m<button[39m
+            [33mclass[39m=[32m"p-2.5 rounded-full border transition-colors bg-emerald-50 text-emerald-600 border-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/30"[39m
+            [33mtitle[39m=[32m"Sesi Kapat"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33mclass[39m=[32m"w-5 h-5"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"1.5"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+          [36m</button>[39m
+          [36m<button[39m
+            [33mclass[39m=[32m"p-2.5 rounded-full bg-theme-surface border border-theme-border/50 text-theme-muted hover:text-emerald-500 transition-colors"[39m
+            [33mtitle[39m=[32m"Hedef Belirle"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33mclass[39m=[32m"w-5 h-5"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-1.066 2.573c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"1.5"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M15 12a3 3 0 11-6 0 3 3 0 016 0z"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"1.5"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+          [36m</button>[39m
+          [36m<button[39m
+            [33mclass[39m=[32m"p-2.5 rounded-full bg-theme-surface border border-theme-border/50 text-theme-muted hover:text-red-500 transition-colors"[39m
+            [33mtitle[39m=[32m"Sıfırla"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33mclass[39m=[32m"w-5 h-5"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"1.5"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+          [36m</button>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"flex-1 flex flex-col items-center justify-center relative p-6 cursor-pointer select-none"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"relative w-72 h-72 sm:w-80 sm:h-80 mx-auto flex items-center justify-center"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"absolute inset-0 rounded-full border-8 border-theme-border/30"[39m
+          [36m/>[39m
+          [36m<svg[39m
+            [33mclass[39m=[32m"w-full h-full -rotate-90 transform absolute inset-0 pointer-events-none"[39m
+          [36m>[39m
+            [36m<defs>[39m
+              [36m<lineargradient[39m
+                [33mid[39m=[32m"zikirGradient"[39m
+                [33mx1[39m=[32m"0%"[39m
+                [33mx2[39m=[32m"100%"[39m
+                [33my1[39m=[32m"0%"[39m
+                [33my2[39m=[32m"100%"[39m
+              [36m>[39m
+                [36m<stop[39m
+                  [33moffset[39m=[32m"0%"[39m
+                  [33mstop-color[39m=[32m"#10B981"[39m
+                [36m/>[39m
+                [36m<stop[39m
+                  [33moffset[39m=[32m"100%"[39m
+                  [33mstop-color[39m=[32m"#34D399"[39m
+                [36m/>[39m
+              [36m</lineargradient>[39m
+            [36m</defs>[39m
+            [36m<circle[39m
+              [33mclass[39m=[32m"text-theme-border/20"[39m
+              [33mcx[39m=[32m"50%"[39m
+              [33mcy[39m=...
+[90m [2m❯[22m waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:[2m163:27[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m86:33[22m[39m
+[36m [2m❯[22m src/components/spiritual/ZikirmatikView.test.tsx:[2m125:29[22m[39m
+    [90m123| [39m
+    [90m124| [39m        [90m// Success text should popup asynchronously[39m
+    [90m125| [39m        expect(await screen.findByText('Hedefe Ulaşıldı!')).toBeInTheD…
+    [90m   | [39m                            [31m^[39m
+    [90m126| [39m    })[33m;[39m
+    [90m127| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯[22m[39m
+

@@ -20,6 +20,7 @@ interface MenuDrawerProps {
     onOpenKuranDinleme?: () => void;
     onOpenSessizZikir?: () => void;
     onOpenIstatistik?: () => void;
+    onOpenPremium?: () => void;
 }
 
 type TabType = 'surah' | 'juz' | 'favorites' | 'discover';
@@ -167,6 +168,12 @@ const IconIstatistik = () => (
     </svg>
 );
 
+const IconPremium = () => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7">
+        <path d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+    </svg>
+);
+
 /* ─────────────────────────────── DISCOVER DATA ─────────────────────────────── */
 interface DiscoverItem {
     key: string;
@@ -246,6 +253,17 @@ const DISCOVER_GRID: DiscoverGridItem[] = [
         arabic: 'ختم',
         iconColor: 'text-teal-400',
         iconBg: 'bg-teal-500/15 border-teal-500/30',
+    },
+    {
+        key: 'premium',
+        label: 'Quran Premium',
+        desc: 'Projeye destek ol, ayrıcalıkları yakala',
+        icon: <IconPremium />,
+        gradient: '', glow: '',
+        arabic: 'دعم',
+        badge: 'Destek',
+        iconColor: 'text-amber-500',
+        iconBg: 'bg-amber-500/15 border-amber-500/30',
     },
     {
         key: 'kuran_dinleme',
@@ -442,9 +460,6 @@ function HeroCard({ item, onAction }: { item: DiscoverItem; onAction: (key: stri
             {/* CTA */}
             <div className="relative z-10 mt-4 flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400/70 group-hover:text-emerald-700 dark:group-hover:text-emerald-300 transition-colors duration-200">
                 <span className="text-[11px] font-black tracking-[0.2em] uppercase">Aç</span>
-                <svg className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
             </div>
         </button>
     );
@@ -505,13 +520,6 @@ function ListCard({ item, onAction }: { item: DiscoverGridItem; onAction: (key: 
                 </p>
             </div>
 
-            {/* Chevron */}
-            <svg
-                className={`relative z-10 shrink-0 w-4 h-4 text-slate-600 ${item.iconColor.replace('text-', 'group-hover:text-')} group-hover:translate-x-0.5 transition-all duration-200`}
-                fill="none" stroke="currentColor" viewBox="0 0 24 24"
-            >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-            </svg>
         </button>
     );
 }
@@ -521,7 +529,7 @@ export function MenuDrawer({
     isOpen, onClose, onNavigate,
     onOpenQibla, onOpenEsmaulHusna, onOpenMosqueFinder,
     onOpenPrayerDebt, onOpenReligiousDays, onOpenZikirmatik, onOpenKabeLive,
-    onOpenManeviAkis, onOpenNamazAsistani, onOpenRamadanKarti, onOpenHatimTakip, onOpenDuaDefteri, onOpenKuranDinleme, onOpenSessizZikir, onOpenIstatistik
+    onOpenManeviAkis, onOpenNamazAsistani, onOpenRamadanKarti, onOpenHatimTakip, onOpenDuaDefteri, onOpenKuranDinleme, onOpenSessizZikir, onOpenIstatistik, onOpenPremium
 }: MenuDrawerProps) {
     const [activeTab, setActiveTab] = useState<TabType>('surah');
     const [searchTerm, setSearchTerm] = useState('');
@@ -581,6 +589,7 @@ export function MenuDrawer({
         else if (key === 'kuran_dinleme') onOpenKuranDinleme?.();
         else if (key === 'sessiz_zikir') onOpenSessizZikir?.();
         else if (key === 'istatistik') onOpenIstatistik?.();
+        else if (key === 'premium') onOpenPremium?.();
     };
 
     if (!render) return null;

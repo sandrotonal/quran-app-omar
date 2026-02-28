@@ -2,7 +2,7 @@ Bismillahirahmanirahim
 
 # Quran Semantic Graph & Spiritual Compass
 
-Modern NLP (Dogal Dil Isleme) teknikleri ve graph (ag) gorsellestirme algoritmalari kullanilarak Kur'an-i Kerim ayetleri arasindaki anlamsal iliskileri haritalandiran, aynizamanda zenginlestirilmis Islami araclar ile donatilmis full-stack web uygulamasidir.
+Modern NLP (Dogal Dil Isleme) teknikleri ve graph (ag) gorsellestirme algoritmalari kullanilarak Kur'an-i Kerim ayetleri arasindaki anlamsal iliskileri haritalandiran, ayni zamanda zenginlestirilmis Islami araclar ile donatilmis full-stack web / android uygulamasidir. 
 
 Uygulama, "Glassmorphism" (cam efekti) tabanli premium bir arayuz tasarimina sahip olup, kullanici deneyimini puruzsuz animasyonlar ve karanlik/aydinlik mod destekleriyle ust seviyeye tasimaktadir.
 
@@ -13,20 +13,24 @@ Uygulama, "Glassmorphism" (cam efekti) tabanli premium bir arayuz tasarimina sah
 - **Benzerlik Algoritmasi:** Cosine similarity (Kosinus Benzerligi) yaklasimi ile ayetler arasi derin baglam iliskilerinin saptanmasi.
 - **Node Graph:** React Flow entegrasyonu ile anlamsal iliskilerin interaktif ag haritasi uzerinde gorsellestirilmesi.
 
-### Islami Araclar (Kesfet Modulu)
-Uygulamanin sol menusunde yer alan "Kesfet" bolumu altina entegre edilmis birbirine bagli moduller:
+### İslami Araçlar (Keşfet Modülü)
+Uygulamanın sol menüsünde veya mobil görünümde yer alan kapsamlı PWA modülleri:
 
-- **Gunun Akisi:** Ayet, hadis, esma ve tefekkur planlarini barindiran gunluk manevi program.
-- **Namaz Asistani:** Cemaat takibi, vakit istatistikleri ve namaz esnasinda sessiz mod yonetimi.
-- **Kaza Borcu Takibi:** Kaza namazlarinin loglanmasi ve erimesinin takip edilmesi.
-- **Ramazan Iklimi:** Iftar duasina kalan sureyi saniye saniye sayan fener efektli gorsel sayac ve fitre hesaplamalari.
-- **Hatim Takip Sistemi:** Cuz bazli isaretleme ve kalan hedeflerin radial progress (dairesel ilerleme) grafikleriyle takibi.
-- **Dua Defteri:** Gizli (Private) mod destekli, kilit animasyonlu kisisel not ve dua gunlugu.
-- **Kuran Dinleme Modu:** Apple Music tarzi arkaplan glow efektleriyle desteklenen, Arapca filigranli sure dinleme oynaticisi.
-- **Sessiz Zikir Modu:** AMOLED/OLED siyah arkaplan uzerinde, dokunma titresimli (haptic feedback) ripple efektli zikirmatik.
-- **Dini Gunler ve Manevi Takvim:** Kandillerin ve ozel islam gunlerinin tarihi onemi, ilgili hadisler ve yapilmasi tavsiye edilen ibadetlerle detaylandirilmis hali.
-- **Akilli Bildirim Sistemi:** Uygulama icinde (in-app) suzulerek gelen ozel gun uyarilari (Toast/Alert) ve vakit girdiginde tetiklenen isletim sistemi seviyesinde push bildirimleri.
-- **Esmaul Husna ve Kible Pusulasi:** 99 ismin anlami detaylari ve cihazin konum servislerini kullanarak yon tayini yapan pusula sistemi.
+- **Günün Akışı:** Ayet, hadis, esma ve tefekkür planlarını barındıran günlük manevi program.
+- **Ramazan İklimi:** İftar ve sahur sayacı, fitre hesaplamaları, teravih vb. özel sezonluk takipçi.
+- **Namaz Asistanı:** Cemaatle namaz skoru, istatistik analizi ve namazdayken kullanılabilecek telefon sessiz modu hatırlatıcısı.
+- **Kaza Borcu Takibi:** Geçmiş namaz borçlarının uçtan uca senkron halinde eksiltilerek takip edilmesi.
+- **Hatim Takip Sistemi:** Cüz bazlı liste işareti, radial ilerleme arayüzü ve akıllı hatim asistanı.
+- **Kuran Dinleme Modu:** Spotify/Apple Music tarzı glow (glow) animasyonlarıyla bezeli Arapça okuyuculu müzikçalar.
+- **Dua Defteri:** Sadece kendinizin erişebileceği manevi notların kilit efektiyle şifreli bir depoda tutulması.
+- **Zikirmatik:** Tıklama, hedef tayin etme, günlük çizgi (streak) ve ilerleme takip edilebilen premium bir UI sayacı.
+- **Sessiz Zikir Modu:** OLED ekranlara özel derin siyahlar barındıran, PWA title (üst çerçeve) rengine kadar ekranı siyahlaştıran, sadece titreşim odaklı ve dikkati dağıtmayan minimal zikir deneyimi.
+- **Esmâü'l Hüsnâ:** Allah'ın 99 isminin anlam derinliklerinin harita/liste formunda sunulması.
+- **Dini Günler ve Kandiller:** Geri sayım widget'ları, o güne özel hadis ve ibadet önerileri barındıran İslami takvim okuyucusu.
+- **Yakın Camiler:** Cihaz GPS bağlantısı kullanarak kullanıcının etrafındaki namazgah/camileri harita ikonografi biçiminde interaktif çıkarma.
+- **Kıble Pusulası:** Gerçek zamanlı jiroskop verisiyle Mekke istikametini bulmanızı sağlayan pusula aracı.
+- **Kabe Canlı Yayın:** Mescid-i Haram'dan 7/24 aralıksız YouTube tabanlı canlı yayın oynatıcı.
+- **İstatistik (Manevi Pano):** Kullanıcının Kur'an, namaz ve zikirde harcadığı vakit/odak grafiklerini gösteren gösterge paneli.
 
 ## Proje Mimarisi
 

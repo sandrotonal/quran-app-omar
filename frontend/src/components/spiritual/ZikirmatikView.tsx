@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { hapticFeedback } from '../../lib/constants';
+import { SecureStorage } from '../../utils/SecureStorage';
 
 // Gecikmesiz, sıfır ağ yükü yaratan Sentetik Tık sesi (Yumuşak Tesbih/Su Damlası efekti)
 let audioCtx: any = null;
@@ -43,31 +44,43 @@ interface ZikirmatikViewProps {
 }
 
 export function ZikirmatikView({ onClose }: ZikirmatikViewProps) {
-    const [count, setCount] = useState(0);
-    const [target, setTarget] = useState(33);
+    const [count, setCount] = useState(() => {
+        const savedCount = SecureStorage.getItem<number>('zikir_count');
+        return savedCount || 0;
+    });
+    const [target, setTarget] = useState(() => {
+        const savedTarget = SecureStorage.getItem<number>('zikir_target');
+        return savedTarget || 33;
+    });
     const [isTargetModalOpen, setIsTargetModalOpen] = useState(false);
     const [isCompleted, setIsCompleted] = useState(false);
 
     // Ses (Mute/Unmute) State
-    const [isSoundEnabled, setIsSoundEnabled] = useState(true);
+    const [isSoundEnabled, setIsSoundEnabled] = useState(() => {
+        const savedSound = SecureStorage.getItem<boolean>('zikir_sound_enabled');
+        return savedSound !== null ? savedSound : true;
+    });
 
     // Stats State
-    const [totalZikir, setTotalZikir] = useState(0);
+    const [totalZikir, setTotalZikir] = useState(() => {
+        const savedTotal = SecureStorage.getItem<number | string>('zikir_total_count');
+        return Number(savedTotal) || 0;
+    });
     const [streak, setStreak] = useState(1);
 
     // Load state from localStorage on mount
     useEffect(() => {
-        const savedCount = localStorage.getItem('zikir_count');
-        const savedTarget = localStorage.getItem('zikir_target');
-        const savedTotal = localStorage.getItem('zikir_total_count');
-        const savedStreak = localStorage.getItem('zikir_streak');
-        const lastDate = localStorage.getItem('zikir_last_date');
-        const savedSound = localStorage.getItem('zikir_sound_enabled');
+        const savedCount = SecureStorage.getItem<number | string>('zikir_count');
+        const savedTarget = SecureStorage.getItem<number | string>('zikir_target');
+        const savedTotal = SecureStorage.getItem<number | string>('zikir_total_count');
+        const savedStreak = SecureStorage.getItem<number | string>('zikir_streak');
+        const lastDate = SecureStorage.getItem<string>('zikir_last_date');
+        const savedSound = SecureStorage.getItem<boolean>('zikir_sound_enabled');
 
-        if (savedSound !== null) setIsSoundEnabled(savedSound === 'true');
-        if (savedCount) setCount(parseInt(savedCount));
-        if (savedTarget) setTarget(parseInt(savedTarget));
-        if (savedTotal) setTotalZikir(parseInt(savedTotal));
+        if (savedSound !== null) setIsSoundEnabled(savedSound);
+        if (savedCount) setCount(Number(savedCount));
+        if (savedTarget) setTarget(Number(savedTarget));
+        if (savedTotal) setTotalZikir(Number(savedTotal));
 
         // Basic Streak Logic
         const today = new Date().toDateString();
@@ -76,9 +89,9 @@ export function ZikirmatikView({ onClose }: ZikirmatikViewProps) {
             yesterday.setDate(yesterday.getDate() - 1);
 
             if (lastDate === today) {
-                setStreak(parseInt(savedStreak));
+                setStreak(Number(savedStreak));
             } else if (lastDate === yesterday.toDateString()) {
-                setStreak(parseInt(savedStreak)); // Streak continues today but don't increment yet until action? 
+                setStreak(Number(savedStreak)); // Streak continues today but don't increment yet until action? 
                 // actually if they open it today, streak is potentially active. 
                 // Let's toggle it when they actually increment.
             } else {
@@ -91,36 +104,37 @@ export function ZikirmatikView({ onClose }: ZikirmatikViewProps) {
 
     // Save state on change
     useEffect(() => {
-        localStorage.setItem('zikir_count', count.toString());
-        localStorage.setItem('zikir_target', target.toString());
-        localStorage.setItem('zikir_sound_enabled', isSoundEnabled.toString());
+        SecureStorage.setItem('zikir_count', count);
+        SecureStorage.setItem('zikir_target', target);
+        SecureStorage.setItem('zikir_sound_enabled', isSoundEnabled);
     }, [count, target, isSoundEnabled]);
 
     const updateStats = () => {
         const newTotal = totalZikir + 1;
         setTotalZikir(newTotal);
-        localStorage.setItem('zikir_total_count', newTotal.toString());
+        SecureStorage.setItem('zikir_total_count', newTotal);
 
         const today = new Date().toDateString();
-        const lastDate = localStorage.getItem('zikir_last_date');
+        const lastDate = SecureStorage.getItem<string>('zikir_last_date');
 
         if (lastDate !== today) {
-            let newStreak = 1;
-            if (lastDate) {
-                const yesterday = new Date();
-                yesterday.setDate(yesterday.getDate() - 1);
-                if (lastDate === yesterday.toDateString()) {
-                    const currentStreak = parseInt(localStorage.getItem('zikir_streak') || '0');
-                    newStreak = currentStreak + 1;
-                }
+            let newStreak = streak;
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+
+            if (lastDate === yesterday.toDateString()) {
+                newStreak += 1;
+            } else {
+                newStreak = 1;
             }
+
             setStreak(newStreak);
-            localStorage.setItem('zikir_streak', newStreak.toString());
-            localStorage.setItem('zikir_last_date', today);
+            SecureStorage.setItem('zikir_streak', newStreak);
+            SecureStorage.setItem('zikir_last_date', today);
         } else {
             // Ensure today's streak is persisted if not already
-            localStorage.setItem('zikir_last_date', today);
-            localStorage.setItem('zikir_streak', streak.toString());
+            SecureStorage.setItem('zikir_last_date', today);
+            SecureStorage.setItem('zikir_streak', streak);
         }
     };
 
@@ -142,12 +156,11 @@ export function ZikirmatikView({ onClose }: ZikirmatikViewProps) {
         }
     };
 
-    const handleReset = () => {
-        if (confirm('Zikirmatiği sıfırlamak istiyor musunuz?')) {
-            setCount(0);
-            setIsCompleted(false);
-            hapticFeedback(20);
-        }
+    const handleReset = (e?: React.MouseEvent) => {
+        if (e) e.stopPropagation();
+        setCount(0);
+        setIsCompleted(false);
+        hapticFeedback(20);
     };
 
     const handleCompletionAction = (action: 'new-target' | 'continue') => {
@@ -199,8 +212,8 @@ export function ZikirmatikView({ onClose }: ZikirmatikViewProps) {
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-1.066 2.573c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                     </button>
                     <button
-                        onClick={handleReset}
-                        className="p-2.5 rounded-full bg-theme-surface border border-theme-border/50 text-theme-muted hover:text-red-500 transition-colors"
+                        onClick={(e) => handleReset(e)}
+                        className="p-2.5 rounded-full bg-theme-surface border border-theme-border/50 text-theme-muted hover:text-red-500 transition-colors z-50 relative"
                         title="Sıfırla"
                     >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
@@ -389,10 +402,9 @@ export function ZikirmatikView({ onClose }: ZikirmatikViewProps) {
                         <div className="w-full space-y-3 animate-in slide-in-from-bottom-2 duration-500 delay-500">
                             <button
                                 onClick={() => handleCompletionAction('new-target')}
-                                className="w-full py-4 bg-emerald-500 hover:bg-emerald-400 text-white rounded-2xl font-bold tracking-wide transition-all shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] active:scale-[0.98] group flex items-center justify-center gap-2"
+                                className="w-full py-4 bg-emerald-500 hover:bg-emerald-400 text-white rounded-2xl font-bold tracking-wide transition-all shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] active:scale-[0.98] flex items-center justify-center"
                             >
                                 <span>Yeni Hedef Belirle</span>
-                                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
                             </button>
 
                             <button
