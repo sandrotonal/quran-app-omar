@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { hapticFeedback } from '../../lib/constants';
 import { SecureStorage } from '../../utils/SecureStorage';
+import { NativeSyncService } from '../../services/NativeSyncService';
 
 // Gecikmesiz, sıfır ağ yükü yaratan Sentetik Tık sesi (Yumuşak Tesbih/Su Damlası efekti)
 let audioCtx: any = null;
@@ -100,6 +101,12 @@ export function ZikirmatikView({ onClose }: ZikirmatikViewProps) {
         } else {
             setStreak(1);
         }
+
+        // Açılışta (Mount) güncel seriyi Android Widget'a fırlat
+        setTimeout(() => {
+            const currentStreak = Number(SecureStorage.getItem('zikir_streak')) || 1;
+            NativeSyncService.syncStreak(currentStreak);
+        }, 1000);
     }, []);
 
     // Save state on change
@@ -107,6 +114,9 @@ export function ZikirmatikView({ onClose }: ZikirmatikViewProps) {
         SecureStorage.setItem('zikir_count', count);
         SecureStorage.setItem('zikir_target', target);
         SecureStorage.setItem('zikir_sound_enabled', isSoundEnabled);
+
+        // Android Widget ve Akıllı Saat (Wear OS) Senkronizasyonu
+        NativeSyncService.syncZikirData(count, target, "Zikir");
     }, [count, target, isSoundEnabled]);
 
     const updateStats = () => {
@@ -131,6 +141,9 @@ export function ZikirmatikView({ onClose }: ZikirmatikViewProps) {
             setStreak(newStreak);
             SecureStorage.setItem('zikir_streak', newStreak);
             SecureStorage.setItem('zikir_last_date', today);
+
+            // Android Widget'a Fırlat
+            NativeSyncService.syncStreak(newStreak);
         } else {
             // Ensure today's streak is persisted if not already
             SecureStorage.setItem('zikir_last_date', today);

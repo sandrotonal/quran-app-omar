@@ -1,0 +1,2 @@
+akın camıller kısmı var acılan sayfada  harıtalar cıkıyor onun tasarımda ıyılestırme yenılık olsun dıye  bu repoyu 
+@originalankur/maptoposter kullanmak ısterım sen ne dıyorsun bu ışe olur mu olmaz mı   

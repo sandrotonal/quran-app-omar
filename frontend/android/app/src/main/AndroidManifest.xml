@@ -27,9 +27,39 @@
             android:grantUriPermissions="true">
             <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_paths" />
         </provider>
+
+        <!-- Native Widget Provider -->
+        <receiver android:name=".SpiritualWidgetProvider" android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/spiritual_widget_info" />
+        </receiver>
+
+        <!-- Akıllı Saat (Wear OS) & Background Sync Receiver -->
+        <receiver android:name=".SyncBroadcastReceiver" android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="com.kuran.app.SYNC_WEAR_OS_DATA" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
     <!-- Permissions -->
 
     <uses-permission android:name="android.permission.INTERNET" />
+    
+    <!-- Akıllı Saat & Widget Gerçek Zamanlı (Background) Senkronizasyon İzinleri -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    
+    <!-- Akıllı Saat & Telefon Namaz Bildirimleri İçin Tam Zamanlı Alarm İzinleri -->
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 </manifest>

@@ -30,6 +30,7 @@ import { KuranDinlemeView } from './components/spiritual/KuranDinlemeView';
 import { SessizZikirView } from './components/spiritual/SessizZikirView';
 import { AudioProvider } from './context/AudioContext';
 import { AudioMiniPlayer } from './components/spiritual/AudioMiniPlayer';
+import { NotificationService } from './services/NotificationService';
 
 // Lazy Loaded Modal and Heavy Views (Code Splitting)
 const IstatistikPaneliView = lazy(() => import('./components/spiritual/IstatistikPaneliView').then(m => ({ default: m.IstatistikPaneliView })));
@@ -78,6 +79,12 @@ function AppContent() {
             document.querySelector('meta[name="theme-color"]')?.setAttribute('content', isDark ? '#0f172a' : '#fdfbf7');
         }
     }, [isMobile, showSplash, isDark]);
+
+    // Native (Akıllı Saat ve Sistem) Bildirim Butonları (Sustur vb.) Dinleyicisi
+    useEffect(() => {
+        NotificationService.registerActions();
+        NotificationService.setupListeners();
+    }, []);
 
     const { data, isLoading, isError } = useQuery({
         queryKey: ['similarAyets', searchParams],
@@ -279,6 +286,7 @@ function AppContent() {
                             </div>
                         ) : (
                             <div className="mt-8 md:mt-20 px-4 max-w-5xl mx-auto">
+
                                 {/* Dashboard Prayer Times */}
                                 <div className="mb-12 max-w-2xl mx-auto">
                                     <ReligiousDayAlert onClick={() => setShowReligiousDays(true)} />

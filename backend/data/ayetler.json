@@ -642,5 +642,19 @@
     "ayet_no": 4,
     "arabic_text": "وَمَآ أَرْسَلْنَا مِن رَّسُولٍ إِلَّا بِلِسَانِ قَوْمِهِۦ لِيُبَيِّنَ لَهُمْ ۖ فَيُضِلُّ ٱللَّهُ مَن يَشَآءُ وَيَهْدِى مَن يَشَآءُ ۚ وَهُوَ ٱلْعَزِيزُ ٱلْحَكِيمُ",
     "turkish_text": "Biz her peygamberi, ancak kendi kavminin diliyle gönderdik ki, onlara (Allah'ın emirlerini) iyice açıklasın. Allah, dilediğini saptırır, dilediğini de doğru yola iletir. O, mutlak güç sahibidir, hüküm ve hikmet sahibidir."
+  },
+  {
+    "id": 93,
+    "sure_no": 4,
+    "ayet_no": 3,
+    "arabic_text": "وَإِنْ خِفْتُمْ أَلَّا تُقْسِطُوا۟ فِى ٱلْيَتَٰمَىٰ فَٱنكِحُوا۟ مَا طَابَ لَكُم مِّنَ ٱلنِّسَآءِ مَثْنَىٰ وَثُلَٰثَ وَرُبَٰعَ ۖ فَإِنْ خِفْتُمْ أَلَّا تَعْدِلُوا۟ فَوَٰحِدَةً أَوْ مَا مَلَكَتْ أَيْمَٰنُكُمْ ۚ ذَٰلِكَ أَدْنَىٰٓ أَلَّا تَعُولُوا۟",
+    "turkish_text": "Eğer, (velisi olduğunuz) yetim kızlar (ile evlenip onlar) hakkında adaletsizlik etmekten korkarsanız, (onları değil), size helal olan (başka) kadınlardan ikişer, üçer, dörder olmak üzere nikahlayın. Eğer (o kadınlar arasında da) adaletli davranmayacağınızdan korkarsanız, o taktirde bir tane alın veya sahip olduğunuz (cariyeler) ile yetinin. Bu, adaletten ayrılmamanız için daha uygundur."
+  },
+  {
+    "id": 94,
+    "sure_no": 94,
+    "ayet_no": 2,
+    "arabic_text": "وَوَضَعْنَا عَنكَ وِزْرَكَ",
+    "turkish_text": "(2-3) Belini büken yükünü üzerinden kaldırmadık mı?"
   }
 ]

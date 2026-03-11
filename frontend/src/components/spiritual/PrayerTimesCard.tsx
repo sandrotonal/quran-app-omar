@@ -3,6 +3,8 @@ import { PrayerTimesService, PrayerTimeInfo } from '../../lib/PrayerTimesService
 import { PrayerReminder } from './PrayerReminder';
 import { PrayerFocusMode } from './PrayerFocusMode';
 import { usePrayerReminder } from '../../hooks/usePrayerReminder';
+import { NativeSyncService } from '../../services/NativeSyncService';
+import { NotificationService } from '../../services/NotificationService';
 
 interface PrayerTimesCardProps {
     onNavigate?: (sure: number, ayet: number) => void;
@@ -34,9 +36,35 @@ export function PrayerTimesCard({ onNavigate }: PrayerTimesCardProps) {
                 const loc = await PrayerTimesService.getUserLocation();
                 const todayTimes = PrayerTimesService.getTimes(loc.lat, loc.lng);
                 setTimes(todayTimes);
+
+                // Tam Zamanlı (Exact) Akıllı Saat ve Telefon Bildirimleri Kur
+                const notificationsToSchedule = todayTimes.map((t, idx) => {
+                    const [hours, minutes] = t.time.split(':').map(Number);
+                    const fireDate = new Date();
+                    fireDate.setHours(hours, minutes, 0, 0);
+                    return {
+                        id: 100 + idx, // Eşsiz ID
+                        title: "Vakit Geldi 🕌",
+                        body: `${t.name} vakti girdi. Huzura davetlisiniz.`,
+                        fireDate: fireDate
+                    };
+                });
+
+                // Arka plan bildirimlerini Push et
+                NotificationService.schedulePrayerAlarms(notificationsToSchedule);
                 const next = todayTimes.find(t => t.isNext);
                 const key = next?.name === 'İmsak' ? 'fajr' : next?.name === 'Güneş' ? 'sunrise' : next?.name === 'Öğle' ? 'dhuhr' : next?.name === 'İkindi' ? 'asr' : next?.name === 'Akşam' ? 'maghrib' : next?.name === 'Yatsı' ? 'isha' : 'other';
-                setSuggestion(PrayerTimesService.getContextualSuggestion(next ? key : 'isha'));
+
+                const currentSuggestion = PrayerTimesService.getContextualSuggestion(next ? key : 'isha');
+                setSuggestion(currentSuggestion);
+
+                // Senkronizasyon (Widget ve Saatler için)
+                if (next) {
+                    NativeSyncService.syncPrayerCountdown(next.time, next.name);
+                }
+                if (currentSuggestion) {
+                    NativeSyncService.syncDailyQuran("Manevi Odak", 1, currentSuggestion.topic);
+                }
             } catch (e) {
                 console.error("Failed to load prayer times", e);
             } finally {
