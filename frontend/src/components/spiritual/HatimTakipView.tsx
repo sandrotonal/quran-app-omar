@@ -6,7 +6,8 @@ export function HatimTakipView({ onClose }: { onClose: () => void }) {
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
-        requestAnimationFrame(() => requestAnimationFrame(() => setIsVisible(true)));
+        // Mount edilirken DOM'un 30 öğeyi ve SVG'yi çizmesi için kısa bir gecikme tanıyoruz (takılmayı önler)
+        const tnt = setTimeout(() => setIsVisible(true), 50);
 
         const saved = localStorage.getItem('hatim_takip');
         if (saved) {
@@ -14,6 +15,8 @@ export function HatimTakipView({ onClose }: { onClose: () => void }) {
                 setJuzler(JSON.parse(saved));
             } catch (e) { }
         }
+
+        return () => clearTimeout(tnt);
     }, []);
 
     const toggleJuz = (index: number) => {
@@ -47,10 +50,10 @@ export function HatimTakipView({ onClose }: { onClose: () => void }) {
             />
 
             <div className={`relative w-full max-w-5xl h-[95vh] md:h-auto md:max-h-[95vh] flex flex-col rounded-[2.5rem] overflow-hidden
-                bg-teal-50/90 dark:bg-[#042f2e]/90 backdrop-blur-3xl
+                bg-teal-50/90 dark:bg-[#042f2e]/90 backdrop-blur-xl
                 border border-teal-200/50 dark:border-teal-500/20
                 shadow-2xl shadow-teal-900/20 dark:shadow-teal-900/50 z-10
-                transform transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1)
+                transition-all duration-300 ease-out will-change-transform
                 ${isVisible ? 'translate-y-0 scale-100 opacity-100' : 'translate-y-16 scale-95 opacity-0'}
             `}>
 

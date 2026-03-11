@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { Sparkles, Heart, Quote, ArrowRight, BookOpen, Clock, Activity } from 'lucide-react';
 import { hapticFeedback } from '../../lib/constants';
+import { DailyContentService } from '../../lib/DailyContentService';
 
 interface ManeviAkisViewProps {
     onClose: () => void;
@@ -44,6 +45,7 @@ export const ManeviAkisView = React.memo(function ManeviAkisView({ onClose }: Ma
     const [actionDone, setActionDone] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
 
+<<<<<<< HEAD
     // Günün indeksini seç (Ayın gününe göre dönen yapı)
     const dailyContent = useMemo(() => {
         const dayOfMonth = new Date().getDate();
@@ -54,6 +56,13 @@ export const ManeviAkisView = React.memo(function ManeviAkisView({ onClose }: Ma
             reflection: DAILY_REFLECTIONS[dayOfMonth % DAILY_REFLECTIONS.length]
         };
     }, []);
+=======
+    // Get today's dynamic contents
+    const dailyVerse = DailyContentService.getDailyVerse();
+    const dailyHadith = DailyContentService.getDailyHadith();
+    const dailyEsma = DailyContentService.getDailyEsma();
+    const dailyTefekkur = DailyContentService.getDailyTefekkur();
+>>>>>>> 5f348047ef567a4aca102ff6647db01db05ac532
 
     useEffect(() => {
         // Mount transition
@@ -131,6 +140,7 @@ export const ManeviAkisView = React.memo(function ManeviAkisView({ onClose }: Ma
                                     </div>
                                 </div>
                                 <p className="text-lg md:text-xl font-serif font-medium text-slate-800 dark:text-slate-200 leading-relaxed mb-4 pl-4 border-l-2 border-emerald-500/50">
+<<<<<<< HEAD
                                     "{dailyContent.ayet.text}"
                                 </p>
                                 <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest pl-4">{dailyContent.ayet.source}</p>
@@ -138,6 +148,15 @@ export const ManeviAkisView = React.memo(function ManeviAkisView({ onClose }: Ma
                             <div className="w-full md:w-1/2 flex justify-end">
                                 <p className="text-3xl md:text-4xl font-arabic text-emerald-700 dark:text-emerald-500 opacity-90 leading-tight text-right md:-mt-1" dir="rtl" style={{ lineHeight: '1.6' }}>
                                     {dailyContent.ayet.arabic}
+=======
+                                    "{dailyVerse.text}"
+                                </p>
+                                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest pl-4">{dailyVerse.source}</p>
+                            </div>
+                            <div className="w-full md:w-1/2 flex justify-end">
+                                <p className="text-2xl md:text-3xl font-arabic text-emerald-700 dark:text-emerald-500 opacity-90 leading-tight text-right md:-mt-1" dir="rtl" style={{ lineHeight: '1.6' }}>
+                                    {dailyVerse.arabic}
+>>>>>>> 5f348047ef567a4aca102ff6647db01db05ac532
                                 </p>
                             </div>
                         </div>
@@ -155,10 +174,17 @@ export const ManeviAkisView = React.memo(function ManeviAkisView({ onClose }: Ma
                                     </div>
                                 </div>
                                 <p className="text-base md:text-lg font-serif font-medium text-slate-800 dark:text-slate-200 leading-relaxed italic mb-4">
+<<<<<<< HEAD
                                     "{dailyContent.hadis.text}"
                                 </p>
                             </div>
                             <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest text-right">{dailyContent.hadis.source}</p>
+=======
+                                    "{dailyHadith.text}"
+                                </p>
+                            </div>
+                            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest text-right">{dailyHadith.source}</p>
+>>>>>>> 5f348047ef567a4aca102ff6647db01db05ac532
                         </div>
 
                         {/* Esma Card - Refined Elegant (Theme Matched) */}
@@ -168,10 +194,17 @@ export const ManeviAkisView = React.memo(function ManeviAkisView({ onClose }: Ma
                             </span>
 
                             <h3 className="text-5xl font-arabic text-emerald-700 dark:text-emerald-500 mt-10 mb-3 transition-transform duration-500 group-hover:scale-110">
+<<<<<<< HEAD
                                 {dailyContent.esma.arabic}
                             </h3>
                             <h4 className="text-xl font-bold font-serif text-slate-900 dark:text-white">{dailyContent.esma.name}</h4>
                             <p className="text-xs font-medium text-slate-500 dark:text-slate-400 mt-1">{dailyContent.esma.meaning}</p>
+=======
+                                {dailyEsma.arabic}
+                            </h3>
+                            <h4 className="text-xl font-bold font-serif text-slate-900 dark:text-white">{dailyEsma.turkish}</h4>
+                            <p className="text-xs font-medium text-slate-500 dark:text-slate-400 mt-1">{dailyEsma.meaning}</p>
+>>>>>>> 5f348047ef567a4aca102ff6647db01db05ac532
                         </div>
                     </div>
 
@@ -185,9 +218,15 @@ export const ManeviAkisView = React.memo(function ManeviAkisView({ onClose }: Ma
                             <div className="inline-flex px-3 py-1.5 bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/10 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold uppercase tracking-widest rounded-lg mb-4 shadow-sm">
                                 Günün Meyvesi • 1 Dk Tefekkür
                             </div>
+<<<<<<< HEAD
                             <h4 className="font-bold font-serif text-xl sm:text-2xl mb-2 text-slate-900 dark:text-white">{dailyContent.reflection.title}</h4>
                             <p className="text-sm font-medium text-slate-600 dark:text-slate-400 leading-relaxed max-w-xl mx-auto md:mx-0">
                                 {dailyContent.reflection.text}
+=======
+                            <h4 className="font-bold font-serif text-xl sm:text-2xl mb-2 text-slate-900 dark:text-white">{dailyTefekkur.title}</h4>
+                            <p className="text-sm font-medium text-slate-600 dark:text-slate-400 leading-relaxed max-w-xl mx-auto md:mx-0">
+                                {dailyTefekkur.text}
+>>>>>>> 5f348047ef567a4aca102ff6647db01db05ac532
                             </p>
                         </div>
 

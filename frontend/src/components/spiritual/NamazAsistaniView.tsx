@@ -32,7 +32,8 @@ export function NamazAsistaniView({ onClose }: { onClose: () => void }) {
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
-        requestAnimationFrame(() => requestAnimationFrame(() => setIsVisible(true)));
+        // DOM'un render olabilmesi için kısa bir nefes payı bırakıyoruz, bu sayede takılmaz.
+        const tnt = setTimeout(() => setIsVisible(true), 50);
 
         const saved = localStorage.getItem('namaz_asistani');
         if (saved) {
@@ -53,6 +54,8 @@ export function NamazAsistaniView({ onClose }: { onClose: () => void }) {
         } else {
             localStorage.setItem('namaz_date', new Date().toDateString());
         }
+
+        return () => clearTimeout(tnt);
     }, []);
 
     const handleClose = () => {
@@ -85,10 +88,10 @@ export function NamazAsistaniView({ onClose }: { onClose: () => void }) {
             />
 
             <div className={`relative w-full max-w-2xl h-[95vh] md:h-auto md:max-h-[90vh] flex flex-col rounded-[2.5rem] overflow-hidden
-                bg-white/90 dark:bg-[#0c0a09]/90 backdrop-blur-3xl
+                bg-white/90 dark:bg-[#0c0a09]/90 backdrop-blur-xl
                 border border-emerald-200/50 dark:border-emerald-500/20
                 shadow-2xl shadow-emerald-900/10 dark:shadow-emerald-900/40 z-10
-                transform transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1)
+                transition-all duration-300 ease-out will-change-transform
                 ${isVisible ? 'translate-y-0 scale-100 opacity-100' : 'translate-y-16 scale-95 opacity-0'}
             `}>
 

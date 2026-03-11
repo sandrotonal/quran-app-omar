@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { PrayerTimesService } from '../../lib/PrayerTimesService';
 import { PrayerDebtService, PrayerType } from '../../lib/PrayerDebtService';
 import { ReligiousDaysService } from '../../lib/ReligiousDaysService';
+import { DailyContentService } from '../../lib/DailyContentService';
 
 // Map PrayerTimesService Names (Turkish) to PrayerDebtService Types
 const PRAYER_MAP: Record<string, PrayerType> = {
@@ -11,18 +12,6 @@ const PRAYER_MAP: Record<string, PrayerType> = {
     'Akşam': 'aksam',
     'Yatsı': 'yatsi'
 };
-
-// Curated Daily Verses
-const DAILY_VERSES = [
-    { text: "Rabbin, kendisinden başkasına asla ibadet etmemenizi, anaya-babaya iyi davranmanızı kesin olarak emretti.", source: "İsra, 23" },
-    { text: "Şüphesiz Allah, adaleti, iyilik yapmayı, yakınlara yardım etmeyi emreder.", source: "Nahl, 90" },
-    { text: "Ey iman edenler! Sabır ve namazla (Allah'tan) yardım dileyin.", source: "Bakara, 153" },
-    { text: "Kim zerre ağırlığınca bir hayır işlerse, onun mükâfatını görecektir.", source: "Zilzal, 7" },
-    { text: "Kalpler ancak Allah'ı anmakla huzur bulur.", source: "Ra'd, 28" },
-    { text: "Allah, sabredenlerle beraberdir.", source: "Bakara, 153" },
-    { text: "Bilsin ki insan için kendi çalışmasından başka bir şey yoktur.", source: "Necm, 39" },
-    { text: "O, hanginizin daha güzel amel yapacağını sınamak için ölümü ve hayatı yaratandır.", source: "Mülk, 2" }
-];
 
 export function NotificationManager() {
     const lastNotifiedTime = useRef<string>('');
@@ -54,10 +43,10 @@ export function NotificationManager() {
 
                 if (lastDailyDate !== todayStr) {
                     // Send Daily Verse
-                    const randomVerse = DAILY_VERSES[Math.floor(Math.random() * DAILY_VERSES.length)];
+                    const dailyVerse = DailyContentService.getDailyVerse();
                     PrayerTimesService.sendNotification(
                         "Günün Ayeti 🌿",
-                        `"${randomVerse.text}" (${randomVerse.source})`
+                        `"${dailyVerse.text}" (${dailyVerse.source})`
                     );
                     localStorage.setItem('last_daily_verse_date', todayStr);
                 }

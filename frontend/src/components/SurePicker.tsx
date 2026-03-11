@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { SURAHS, hapticFeedback } from '../lib/constants';
 import { createPortal } from 'react-dom';
 
@@ -28,7 +29,11 @@ export function SurePicker({ isOpen, onClose, onSelect }: SurePickerProps) {
     if (!isOpen) return null;
 
     return createPortal(
+<<<<<<< HEAD
         <>
+=======
+        <div className="portal-root">
+>>>>>>> 5f348047ef567a4aca102ff6647db01db05ac532
             {/* Backdrop */}
             <div
                 className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] animate-fadeIn"
@@ -106,7 +111,11 @@ export function SurePicker({ isOpen, onClose, onSelect }: SurePickerProps) {
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
         </>,
+=======
+        </div>,
+>>>>>>> 5f348047ef567a4aca102ff6647db01db05ac532
         document.body
     );
 }
