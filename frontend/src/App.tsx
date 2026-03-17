@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense, lazy } from 'react';
+import { useState, useEffect, Suspense, lazy } from 'react';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { GlobalErrorBoundary } from './components/GlobalErrorBoundary';
 import { AyetSelector } from './components/AyetSelector';

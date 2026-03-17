@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Mosque, MosqueService } from '../../lib/MosqueService';
 import { MosqueMap } from './MosqueMap';
-import { Locate, Map as MapIcon, List, Navigation } from 'lucide-react';
+import { Locate, Map as MapIcon, List, Navigation, Layers } from 'lucide-react';
 
 interface MosqueFinderProps {
     onClose: () => void;
@@ -9,6 +9,7 @@ interface MosqueFinderProps {
 
 export const MosqueFinder = React.memo(function MosqueFinder({ onClose }: MosqueFinderProps) {
     const [viewMode, setViewMode] = useState<'list' | 'map'>('list');
+    const [mapStyle, setMapStyle] = useState<'classic' | 'poster' | 'darknavy'>('darknavy');
     const [mosques, setMosques] = useState<Mosque[]>([]);
     const [loading, setLoading] = useState(true);
     const [userLocation, setUserLocation] = useState<{ lat: number; lon: number } | null>(null);
@@ -79,21 +80,45 @@ export const MosqueFinder = React.memo(function MosqueFinder({ onClose }: Mosque
                         </div>
                     </div>
 
-                    {/* View Toggle */}
-                    <div className="flex bg-slate-100 dark:bg-white/[0.04] p-1 rounded-xl border border-slate-200 dark:border-white/[0.07] gap-0.5">
-                        {([['list', <List key="l" className="w-3.5 h-3.5" />, 'Liste'], ['map', <MapIcon key="m" className="w-3.5 h-3.5" />, 'Harita']] as const).map(([mode, icon, label]) => (
-                            <button
-                                key={mode}
-                                onClick={() => setViewMode(mode)}
-                                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${viewMode === mode
-                                    ? 'bg-emerald-500 text-white shadow-md shadow-emerald-500/25'
-                                    : 'text-slate-400 dark:text-slate-600 hover:text-slate-700 dark:hover:text-slate-400'
-                                    }`}
-                            >
-                                {icon}
-                                <span className="hidden sm:inline">{label}</span>
-                            </button>
-                        ))}
+                    {/* Control Bar (View & Style) */}
+                    <div className="flex items-center gap-2">
+                        {/* Style Selector */}
+                        <div className="flex bg-slate-100 dark:bg-white/[0.04] p-1 rounded-xl border border-slate-200 dark:border-white/[0.07] gap-0.5 relative group">
+                            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold text-slate-500 dark:text-slate-400 cursor-pointer hover:bg-white dark:hover:bg-white/5 transition-all">
+                                <Layers className="w-3.5 h-3.5" />
+                                <span className="hidden sm:inline">Stil</span>
+                            </span>
+
+                            {/* Dropdown Menu (Hover ile açılır) */}
+                            <div className="absolute top-full left-0 mt-2 w-32 bg-white dark:bg-[#1A233A] rounded-xl shadow-xl border border-slate-100 dark:border-white/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 overflow-hidden flex flex-col py-1">
+                                {([['darknavy', 'Ana Tema'], ['poster', 'Poster'], ['classic', 'Klasik']] as const).map(([val, label]) => (
+                                    <button
+                                        key={val}
+                                        onClick={() => setMapStyle(val)}
+                                        className={`px-4 py-2 text-xs font-bold text-left transition-colors ${mapStyle === val ? 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' : 'text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-white/5'}`}
+                                    >
+                                        {label}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* View Toggle */}
+                        <div className="flex bg-slate-100 dark:bg-white/[0.04] p-1 rounded-xl border border-slate-200 dark:border-white/[0.07] gap-0.5">
+                            {([['list', <List key="l" className="w-3.5 h-3.5" />, 'Liste'], ['map', <MapIcon key="m" className="w-3.5 h-3.5" />, 'Harita']] as const).map(([mode, icon, label]) => (
+                                <button
+                                    key={mode}
+                                    onClick={() => setViewMode(mode)}
+                                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${viewMode === mode
+                                        ? 'bg-emerald-500 text-white shadow-md shadow-emerald-500/25'
+                                        : 'text-slate-400 dark:text-slate-600 hover:text-slate-700 dark:hover:text-slate-400'
+                                        }`}
+                                >
+                                    {icon}
+                                    <span className="hidden sm:inline">{label}</span>
+                                </button>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -274,6 +299,7 @@ export const MosqueFinder = React.memo(function MosqueFinder({ onClose }: Mosque
                                     mosques={mosques}
                                     selectedMosqueId={selectedMosque?.id}
                                     onSelectMosque={(m) => setSelectedMosque(m)}
+                                    mapStyle={mapStyle}
                                 />
                             )}
 

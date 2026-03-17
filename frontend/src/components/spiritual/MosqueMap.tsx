@@ -40,9 +40,10 @@ interface MosqueMapProps {
     mosques: Mosque[];
     selectedMosqueId?: number | null;
     onSelectMosque: (mosque: Mosque) => void;
+    mapStyle?: 'classic' | 'poster' | 'darknavy';
 }
 
-export function MosqueMap({ userLat, userLon, mosques, selectedMosqueId, onSelectMosque }: MosqueMapProps) {
+export function MosqueMap({ userLat, userLon, mosques, selectedMosqueId, onSelectMosque, mapStyle = 'darknavy' }: MosqueMapProps) {
     const mapContainerRef = useRef<HTMLDivElement>(null);
     const mapRef = useRef<L.Map | null>(null);
     const markersRef = useRef<L.Marker[]>([]);
@@ -55,13 +56,64 @@ export function MosqueMap({ userLat, userLon, mosques, selectedMosqueId, onSelec
         // If map already exists, just return (React 18 double-mount protection)
         if (mapRef.current) return;
 
-        const map = L.map(mapContainerRef.current).setView([userLat, userLon], 15);
+        const map = L.map(mapContainerRef.current, {
+            zoomControl: false // Zoom kontrolünü gizleyip daha temiz bir poster görünümü yaratır
+        }).setView([userLat, userLon], 15);
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
 
+
+        // 2. Harita URL ve CSS Filtresi belirle
+        const isDark = document.documentElement.classList.contains('dark');
+        let tileUrl = '';
+        let filterStyle = '';
+
+        if (mapStyle === 'classic') {
+            tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+        } else if (mapStyle === 'poster') {
+            tileUrl = isDark
+                ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png' // Saf Siyah / Gri (Maptoposter)
+                : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+        } else if (mapStyle === 'darknavy') { // Uygulama Teması (Gece Mavisi / Zümrüt uyumu)
+            tileUrl = isDark
+                ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
+                : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+            if (isDark) {
+                // Siyah haritayı Lacivert tonlarına çeviren CSS sihirbazı (hue-rotate)
+                filterStyle = 'sepia(100%) hue-rotate(180deg) saturate(200%) brightness(0.6) contrast(1.2)';
+            }
+        }
+
+        // Harita elemanının filter (CSS) stilini güncelle
+        const leafletContainer = mapContainerRef.current?.querySelector('.leaflet-layer') as HTMLElement;
+        if (leafletContainer) {
+            leafletContainer.style.filter = filterStyle;
+        }
+
+        // 3. Yeni kaplamayı ekle
+        const newTileLayer = L.tileLayer(tileUrl, {
+            attribution: '&copy; Maptoposter & OSM',
+            maxZoom: 19,
+            keepBuffer: 8, // Ekran dışı fazladan daha fazla kareyi hafızada tutarak geri dönüşlerde tekrar beyazlamayı önler
+            updateWhenIdle: false, // Kaydırırken haritanın yüklenmesini durdurma, hemen fetch et
+            updateWhenZooming: false, // Zoom yaparken yüklemeyi bekleme, anlık göster
+            updateInterval: 50 // Daha hızlı harita çizimi yapar (milisaniye cinsinden tetiklenme)
+        });
+
+        // CSS filtrelerinin yeni layer'a anında uygulanabilmesi için olay (event) ataması
+        newTileLayer.on('add', (e) => {
+            const layerObj = e.target as any;
+            const container = layerObj._container as HTMLElement;
+            if (container) {
+                container.style.filter = filterStyle;
+                // Transition (Geçiş Animasyonu) map'in render edilmesini yavaşlattığı için geçici olarak devre dışı bırakıyoruz.
+                // container.style.transition = "filter 0.5s ease";
+            }
+        });
+
+        // HATA ÇÖZÜMÜ: Referansı tileLayer yüklenmeden önce atamalıyız.
         mapRef.current = map;
+        newTileLayer.addTo(map); // mapRef.current yerine map nesnesine doğrudan ekle
+
 
         // Container her boyutlandığında harita parçalanmasını önlemek için Leaflet'e yenilenme emri ver.
         const resizeObserver = new ResizeObserver(() => {
@@ -79,7 +131,7 @@ export function MosqueMap({ userLat, userLon, mosques, selectedMosqueId, onSelec
                 mapRef.current = null;
             }
         };
-    }, []); // Run once on mount (or rely on ref to prevent double init)
+    }, [userLat, userLon, mapStyle]); // Re-run when style changes
 
     // 2. Update Map Center & User Marker when user location changes
     useEffect(() => {
@@ -100,7 +152,6 @@ export function MosqueMap({ userLat, userLon, mosques, selectedMosqueId, onSelec
         }
 
     }, [userLat, userLon, selectedMosqueId]); // selectedMosqueId dependency handled below
-
     // 3. Update Markers & FlyTo Selected
     useEffect(() => {
         if (!mapRef.current) return;

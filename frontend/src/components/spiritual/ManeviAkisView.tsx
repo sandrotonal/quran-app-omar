@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
-import { Sparkles, Heart, Quote, ArrowRight, BookOpen, Clock, Activity } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
 import { hapticFeedback } from '../../lib/constants';
 import { DailyContentService } from '../../lib/DailyContentService';
 
@@ -7,62 +6,16 @@ interface ManeviAkisViewProps {
     onClose: () => void;
 }
 
-// --- GÜNLÜK DEĞİŞEN VERİ HAVUZLARI ---
-const DAILY_AYETS = [
-    { text: "Rabbin seni terk etmedi ve sana darılmadı.", arabic: "مَا وَدَّعَكَ رَبُّكَ وَمَا قَلَىٰ", source: "Duha Suresi, 3. Ayet" },
-    { text: "Şüphesiz zorlukla beraber bir kolaylık vardır.", arabic: "فَإِنَّ مَعَ الْعُسْرِ يُسْرًا", source: "İnşirah Suresi, 5. Ayet" },
-    { text: "Allah, sizin ne yaptığınızı çok iyi bilendir.", arabic: "وَاللَّهُ بِمَا تَعْمَلُونَ خَبِيرٌ", source: "Hucurat Suresi, 8. Ayet" },
-    { text: "Sabredenlere mükafatları hesapsız verilecektir.", arabic: "إِنَّمَا يُوَفَّى الصَّابِرُونَ أَجْرَهُمْ بِغَيْرِ حِسَابٍ", source: "Zümer Suresi, 10. Ayet" },
-    { text: "Beni anın ki ben de sizi anayım.", arabic: "فَاذْكُرُونِي أَذْكُرْكُمْ", source: "Bakara Suresi, 152. Ayet" },
-    { text: "Allah, sabredenlerle beraberdir.", arabic: "إِنَّ اللَّهَ مَعَ الصَّابِرِينَ", source: "Bakara Suresi, 153. Ayet" },
-    { text: "Doğrusu Allah, kendisine güvenip dayananları sever.", arabic: "إِنَّ اللَّهَ يُحِبُّ الْمُتَوَكِّلِينَ", source: "Âl-i İmrân Suresi, 159. Ayet" }
-];
-
-const DAILY_HADITHS = [
-    { text: "Müminlerin iman yönünden en kâmil olanı, ahlâkı en güzel olanıdır.", source: "Müslim, İman 95" },
-    { text: "Kolaylaştırınız, zorlaştırmayınız, müjdeleyiniz, nefret ettirmeyiniz.", source: "Buhârî, İlm 11" },
-    { text: "Sizin en hayırlınız, Kur'an'ı öğrenen ve öğretendir.", source: "Tirmizî, Fedâilü'l-Kur'an 15" },
-    { text: "İki nimet vardır ki, insanların çoğu bunda aldanmıştır: Sıhhat ve boş vakit.", source: "Buhârî, Rikak 1" },
-    { text: "Kim bir musibete uğramış olanı teselli ederse, ona onun sevabı kadar sevap verilir.", source: "İbni Mâce, Cenâiz 56" }
-];
-
-const DAILY_ESMAS = [
-    { arabic: "اَلْوَدُودُ", name: "El-Vedûd", meaning: "Çok seven ve çok sevilen" },
-    { arabic: "اَلرَّحْمَـٰنُ", name: "Er-Rahmân", meaning: "Dünyada bütün yaratılmışlara merhamet eden" },
-    { arabic: "اَللَّطِيفُ", name: "El-Latîf", meaning: "Lütuf ve keremi bol olan" },
-    { arabic: "اَلشَّافِي", name: "Eş-Şâfî", meaning: "Şifa veren" },
-    { arabic: "اَلْوَكِيلُ", name: "El-Vekîl", meaning: "Kendisine tevekkül edenlerin işlerini en iyi yoluna koyan" }
-];
-
-const DAILY_REFLECTIONS = [
-    { title: "Zamanın Bereketi", text: "Sadece bir an için dur. Aldığın nefesin, görebildiğin renklerin bir lütuf olduğunu hatırla. Bugün en son ne zaman içtenlikle 'Elhamdülillah' dedin?" },
-    { title: "Kalbin Sükuneti", text: "Endişelerini bir kenara bırak. Her şeyin bir vakti, her düğümün bir çözücü eli vardır. Tevekkül et, derin bir nefes al ve O'na güven." },
-    { title: "Merhametin Ayak İzleri", text: "Bugün etrafına bir bak. Küçücük bir tebessüm, içten bir selam dahi sadakadadır. Sen bugün kimin kalbine merhametle dokundun?" },
-    { title: "Affetmenin Hafifliği", text: "Kırgınlıklar, sırtta taşınan ağır yüklerdir. Allah affedicidir, affedenleri sever. Sen seni yoran o yükten kurtulup bugün birini affedebilir misin?" }
-];
 
 export const ManeviAkisView = React.memo(function ManeviAkisView({ onClose }: ManeviAkisViewProps) {
     const [actionDone, setActionDone] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
 
-<<<<<<< HEAD
-    // Günün indeksini seç (Ayın gününe göre dönen yapı)
-    const dailyContent = useMemo(() => {
-        const dayOfMonth = new Date().getDate();
-        return {
-            ayet: DAILY_AYETS[dayOfMonth % DAILY_AYETS.length],
-            hadis: DAILY_HADITHS[dayOfMonth % DAILY_HADITHS.length],
-            esma: DAILY_ESMAS[dayOfMonth % DAILY_ESMAS.length],
-            reflection: DAILY_REFLECTIONS[dayOfMonth % DAILY_REFLECTIONS.length]
-        };
-    }, []);
-=======
     // Get today's dynamic contents
     const dailyVerse = DailyContentService.getDailyVerse();
     const dailyHadith = DailyContentService.getDailyHadith();
     const dailyEsma = DailyContentService.getDailyEsma();
     const dailyTefekkur = DailyContentService.getDailyTefekkur();
->>>>>>> 5f348047ef567a4aca102ff6647db01db05ac532
 
     useEffect(() => {
         // Mount transition
@@ -140,15 +93,6 @@ export const ManeviAkisView = React.memo(function ManeviAkisView({ onClose }: Ma
                                     </div>
                                 </div>
                                 <p className="text-lg md:text-xl font-serif font-medium text-slate-800 dark:text-slate-200 leading-relaxed mb-4 pl-4 border-l-2 border-emerald-500/50">
-<<<<<<< HEAD
-                                    "{dailyContent.ayet.text}"
-                                </p>
-                                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest pl-4">{dailyContent.ayet.source}</p>
-                            </div>
-                            <div className="w-full md:w-1/2 flex justify-end">
-                                <p className="text-3xl md:text-4xl font-arabic text-emerald-700 dark:text-emerald-500 opacity-90 leading-tight text-right md:-mt-1" dir="rtl" style={{ lineHeight: '1.6' }}>
-                                    {dailyContent.ayet.arabic}
-=======
                                     "{dailyVerse.text}"
                                 </p>
                                 <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest pl-4">{dailyVerse.source}</p>
@@ -156,7 +100,6 @@ export const ManeviAkisView = React.memo(function ManeviAkisView({ onClose }: Ma
                             <div className="w-full md:w-1/2 flex justify-end">
                                 <p className="text-2xl md:text-3xl font-arabic text-emerald-700 dark:text-emerald-500 opacity-90 leading-tight text-right md:-mt-1" dir="rtl" style={{ lineHeight: '1.6' }}>
                                     {dailyVerse.arabic}
->>>>>>> 5f348047ef567a4aca102ff6647db01db05ac532
                                 </p>
                             </div>
                         </div>
@@ -174,17 +117,10 @@ export const ManeviAkisView = React.memo(function ManeviAkisView({ onClose }: Ma
                                     </div>
                                 </div>
                                 <p className="text-base md:text-lg font-serif font-medium text-slate-800 dark:text-slate-200 leading-relaxed italic mb-4">
-<<<<<<< HEAD
-                                    "{dailyContent.hadis.text}"
-                                </p>
-                            </div>
-                            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest text-right">{dailyContent.hadis.source}</p>
-=======
                                     "{dailyHadith.text}"
                                 </p>
                             </div>
                             <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest text-right">{dailyHadith.source}</p>
->>>>>>> 5f348047ef567a4aca102ff6647db01db05ac532
                         </div>
 
                         {/* Esma Card - Refined Elegant (Theme Matched) */}
@@ -194,17 +130,10 @@ export const ManeviAkisView = React.memo(function ManeviAkisView({ onClose }: Ma
                             </span>
 
                             <h3 className="text-5xl font-arabic text-emerald-700 dark:text-emerald-500 mt-10 mb-3 transition-transform duration-500 group-hover:scale-110">
-<<<<<<< HEAD
-                                {dailyContent.esma.arabic}
-                            </h3>
-                            <h4 className="text-xl font-bold font-serif text-slate-900 dark:text-white">{dailyContent.esma.name}</h4>
-                            <p className="text-xs font-medium text-slate-500 dark:text-slate-400 mt-1">{dailyContent.esma.meaning}</p>
-=======
                                 {dailyEsma.arabic}
                             </h3>
                             <h4 className="text-xl font-bold font-serif text-slate-900 dark:text-white">{dailyEsma.turkish}</h4>
                             <p className="text-xs font-medium text-slate-500 dark:text-slate-400 mt-1">{dailyEsma.meaning}</p>
->>>>>>> 5f348047ef567a4aca102ff6647db01db05ac532
                         </div>
                     </div>
 
@@ -218,15 +147,9 @@ export const ManeviAkisView = React.memo(function ManeviAkisView({ onClose }: Ma
                             <div className="inline-flex px-3 py-1.5 bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/10 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold uppercase tracking-widest rounded-lg mb-4 shadow-sm">
                                 Günün Meyvesi • 1 Dk Tefekkür
                             </div>
-<<<<<<< HEAD
-                            <h4 className="font-bold font-serif text-xl sm:text-2xl mb-2 text-slate-900 dark:text-white">{dailyContent.reflection.title}</h4>
-                            <p className="text-sm font-medium text-slate-600 dark:text-slate-400 leading-relaxed max-w-xl mx-auto md:mx-0">
-                                {dailyContent.reflection.text}
-=======
                             <h4 className="font-bold font-serif text-xl sm:text-2xl mb-2 text-slate-900 dark:text-white">{dailyTefekkur.title}</h4>
                             <p className="text-sm font-medium text-slate-600 dark:text-slate-400 leading-relaxed max-w-xl mx-auto md:mx-0">
                                 {dailyTefekkur.text}
->>>>>>> 5f348047ef567a4aca102ff6647db01db05ac532
                             </p>
                         </div>
 
